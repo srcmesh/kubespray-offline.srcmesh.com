@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Project Documentation</title>
+    <link>/zh-hant/</link>
+    <description>Recent content on Project Documentation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-Hant</language>
+    <lastBuildDate>Fri, 25 Aug 2023 15:52:21 +0100</lastBuildDate>
+    <atom:link href="/zh-hant/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>準備部署環境</title>
+      <link>/zh-hant/docs/deployment/setup-deploy-enviroment/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/deployment/setup-deploy-enviroment/</guid>
+      <description>notifications 除「創建部署用帳號」需在全部主機操作外，以下指令皆請於部署主機上進行操作 環境初步設置 link名詞解釋 link 部署主機：執行 Kubespray 腳本的主機 目標主機：欲安裝 Kubernetes 的主機 部署主機安裝 link部署主機將用來執行 Kubespray 的環境，建議專機專用避免受其他外部因素影響。&#xA;系統要求 link Linux 主機 (VM 即可) 腳本執行環境已經全面容器化，可為 Ubuntu、Debian、RHEL，如希望萬無一失則建議採用與目標主機相同之系統 設定過程中會自動安裝 containerd 與 nerdctl 等容器執行環境，若部署主機上已有安裝相關套件，建議移除避免異常 由於套件與鏡像容量較大，建議硬碟空間需 &amp;gt; 100GB 創建部署用帳號 link需要在每台目標機器建立帳號以供 Kubespray 腳本用來安裝，且該帳號需滿足以下條件&#xA;擁有 sudo 權限 開啟能以 Public Key 登入 產生 SSH Public Key Pair link在部署主機上產生 RSA Key Pair&#xA;if [[ ! -e ~/.ssh/id_rsa.pub &amp;amp;&amp;amp; ! -e ~/.ssh/id_rsa ]]; then ssh-keygen -N &amp;#34;&amp;#34; -t rsa fi 散佈 Public Key link把剛產生的 Public Key 安裝到所有目標主機上</description>
+    </item>
+    <item>
+      <title>啟動 Kubespray 執行環境</title>
+      <link>/zh-hant/docs/deployment/enter-kubespray-exe-env/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/deployment/enter-kubespray-exe-env/</guid>
+      <description>notifications 以下指令皆請於部署主機上進行操作 啟動安裝環境 link以下指令將解壓部署腳本，並以容器方式啟動所有安裝過程中所需的服務容器&#xA;cd ${HOME}/outputs/ &amp;amp;&amp;amp; ./extract-kubespray.sh (Optional) 如需手動移除舊有資料 sudo /usr/local/bin/nerdctl rm -f $(sudo /usr/local/bin/nerdctl ps -a -q) sudo /usr/local/bin/nerdctl rmi -f $(sudo /usr/local/bin/nerdctl images -a -q) sudo /usr/local/bin/nerdctl ps -a sudo /usr/local/bin/nerdctl images -a sudo rm -rf ${HOME}/mycluster/ ${HOME}/outputs/ 設定離線安裝之部署 Package Repo 與 Container Registry&#xA;report 以下指令會將套件與鏡像進行解壓縮將佔用大量硬碟空間，請務必確保主機上有至少 30GB 以上之空間 cd ${HOME}/outputs/ &amp;amp;&amp;amp; ./setup-all.sh 自動化腳本內的流程驟說明 (無需手動執行) 設定防火牆 (RHEL)&#xA;sudo firewall-cmd &amp;ndash;zone=public &amp;ndash;add-port=35000/tcp &amp;ndash;permanent sudo firewall-cmd &amp;ndash;zone=public &amp;ndash;add-service=http &amp;ndash;permanent sudo firewall-cmd &amp;ndash;reload 安裝 containerd</description>
+    </item>
+    <item>
+      <title>部署參數調整</title>
+      <link>/zh-hant/docs/deployment/config-adjustment/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/deployment/config-adjustment/</guid>
+      <description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境&#xA;notifications 設定檔只需要在第一次建置時修改同時寫回部署主機上，未來只要執行 ${HOME}/outputs/start-kubespray.sh 就可以自動載入先前所有設定 OS 設定 link請根據目標主機的 OS 選擇對應設定調整&#xA;RHEL Debian 12 進入容器後，RHEL 因為預設的設定問題會造成ssh超時，建議執行下列指令&#xA;cat &amp;gt; ~/.ssh/config &amp;lt;&amp;lt; EOF GSSAPIAuthentication no GSSAPIDelegateCredentials yes EOF 修正 Kubespray 官方設定，補上套件支援&#xA;cat &amp;gt; /kubespray/roles/kubernetes/preinstall/vars/debian-12.yml &amp;lt;&amp;lt; EOF --- required_pkgs: - python3-apt - gnupg - apt-transport-https - software-properties-common - conntrack - iptables - apparmor - libseccomp2 - mergerfs EOF 生成 Inventory 檔 (Optional) link此處我們使用工具來自動生成 Inventory 檔案 (YAML 格式)，如已經有既定的 Inventory 檔亦可使用</description>
+    </item>
+    <item>
+      <title>安裝 Kubernetes</title>
+      <link>/zh-hant/docs/deployment/installation/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/deployment/installation/</guid>
+      <description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境&#xA;/inventory/hosts.yml 為剛剛生成的部署節點設定檔，如你的檔名有變換請調整下面指令 設定安裝日誌紀錄路徑 link預設安裝日誌只出現在 Console 上，考慮到安裝時間過長 IT 人員無法時刻關注安裝過程，我們需要開啟相關日誌設定&#xA;echo &amp;#34;log_path=/inventory/playbook.log&amp;#34; &amp;gt;&amp;gt; /kubespray/ansible.cfg 後面查詢日誌或錯誤時，可以在 /inventory/playbook.log 查詢所有安裝日誌&#xA;修改目標主機 APT/YUM Repository &amp;amp; Firewall 設定 link安裝過程中會需要從部署主機下載安裝套件，需要暫時將節點的套件下載位置指向前面步驟啟動的服務，並暫時關閉防火牆。&#xA;cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa /playbook/offline-repo.yml -v -K -K 等同於 --ask-become-pass，執行時跳出視窗詢問目標節點的 sudo 密碼。 開始安裝 Kubernetes link cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa cluster.yml -v -b -K 舊版本 (i.e v2.21) Kubespary 調整為非 Calico 的 CNI 會出現異常，請加上 --skip-tags=multus</description>
+    </item>
+    <item>
+      <title>故障排除</title>
+      <link>/zh-hant/docs/deployment/troubleshooting/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/deployment/troubleshooting/</guid>
+      <description>kubectl 指令找不到 link sudo su -c &amp;#34;echo &amp;#39;export PATH=\${PATH}:/usr/local/bin&amp;#39; &amp;gt;&amp;gt; /root/.bashrc&amp;#34; 目標節點下載失敗 link 下載第一個檔案就失敗 在目標主機上執行 curl [http://&amp;lt;部署主機 IP&amp;gt;/ --output /tmp/trash.bin 檢查 佈署主機 防火牆是否有開通 Port : 80 &amp;amp; 35000 檢查 佈署主機 Nginx &amp;amp; Registry 服務是否有起來 檢查 佈署主機 資料目錄內是否有此對應的檔案 中間某個檔案單獨失敗 檢查檔案是否存在 到 ${HOME}/outputs/files/ 下確認此檔案是否存在，以及版本等資訊是否一致 檢查檔案 Hash 值是否正確 執行 Ansible-playbook 時加上 -v, -vvv, -vvvvvv 檢視詳細的 debug資訊，確認比對的 hash 值 移除 ${kubespray_project}/roles/download/tasks/download_file.yml 內，get_url module 內的 nolog 項目 Hash 值存放的位置：${kubespray_project}/roles/download/defaults/main.yml 推薦的修復方式：新增 ${kubespray_inventory_dir}/group_vars/all/patch.yml，並且在裡面設定一樣的變數名稱來取代錯誤的 hash 值。此方式新增的變數優先權比 roles/download/defaults/main.yml 高，所以執行時會自動替代掉舊值。 NodeLocalDNS CrashLoopBackOff 問題 link現階段可行目前解法如下</description>
+    </item>
+    <item>
+      <title>Kubernetes 埠號</title>
+      <link>/zh-hant/docs/deployment/kubernetes-ports/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/deployment/kubernetes-ports/</guid>
+      <description>Control Plane Node link port explain 2379/tcp Client =&amp;gt; ETCD Server 2380/tcp ETCD &amp;lt;=&amp;gt; ETCD 資料互相同步使用 6443/tcp Client =&amp;gt; Client =&amp;gt; Kube Api Server : The Kubernetes API server validates and configures data for the api objects which include pods, services, replicationcontrollers, and others. 10252/tcp Kube Controller Manager : The Kubernetes controller manager is a daemon that embeds the core control loops shipped with Kubernetes. 10251/tcp Kubernetes Scheduler : The Kubernetes scheduler is a policy-rich, topology-aware, workload-specific function that significantly impacts availability, performance, and capacity.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,83 @@
+.docs-content .main-content p code {
+    padding: 1px 5px 1px 5px;
+}
+
+.docs-content {
+    padding-right: 1rem;
+}
+
+.back-to-top {
+    background-color: #e8e8e8e8;
+}
+
+.radio-emoji input[type="radio"]:checked + label {
+    color: white;
+}
+
+.docs-content .main-content a {
+    color: #50a3f7;
+}
+
+#edit-this-page a {
+    color: var(--body-color) !important;
+}
+
+#toc .badge {
+    font-size: 0rem !important;
+    margin: 0rem !important;
+    line-height: 2px;
+    width: 1px;
+}
+
+#toc .align-middle {
+    vertical-align: super !important;
+}
+
+.badge {
+    border-radius: 1rem;
+    font-weight: 600;
+    letter-spacing: 0px;
+}
+
+.badge-community {
+    background-color: #e1d8f9 !important;
+    color: #5943b6 !important;
+}
+
+.badge-enterprise {
+    background-color: #cbe2f9 !important;
+    color: #0b5cad !important;
+}
+
+.line-highlight {
+    background: linear-gradient(to right, hsla(0, 0%, 100%, .1) 70%, hsla(0, 0%, 100%, 0.1)) !important;
+}
+
+.line-highlight:before,
+.line-highlight[data-end]:after {
+    padding: 0 !important;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+    font-size: 1rem !important;
+}
+
+.docs-content .main-content .prism-codeblock pre,
+.docs-content .main-content .prism-shortcode pre {
+    background-color: var(--prism-code-bg) !important;
+}
+
+/* select blockquote */
+.docs-content .main-content pre {
+    code:not([class*="language-"]) {
+        padding: 1.2rem !important;
+        font-size: 1rem;
+    }
+}
+
+.docs-content .main-content .prism-codeblock pre {
+    code {
+        padding: 0 2.5rem 1.25rem 2.5rem !important;
+    }
+}

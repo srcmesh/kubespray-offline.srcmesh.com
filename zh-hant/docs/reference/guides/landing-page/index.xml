@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Landing Page on Project Documentation</title>
+    <link>/zh-hant/docs/reference/guides/landing-page/</link>
+    <description>Recent content in Landing Page on Project Documentation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-Hant</language>
+    <lastBuildDate>Thu, 08 Dec 2022 19:14:15 +0000</lastBuildDate>
+    <atom:link href="/zh-hant/docs/reference/guides/landing-page/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Overview</title>
+      <link>/zh-hant/docs/reference/guides/landing-page/overview/</link>
+      <pubDate>Thu, 16 Nov 2023 19:49:34 +0000</pubDate>
+      <guid>/zh-hant/docs/reference/guides/landing-page/overview/</guid>
+      <description>The Lotus Docs theme features a built-in landing page that&amp;rsquo;s easy to customise and manage.&#xA;The landing page layout is comprised of individual sections, each with their own template. These sections are configured via a data file named landing.yaml in your /data directory.&#xA;Data file configuration linkHere&amp;rsquo;s a screenshot of the hero section from lotusdocs.dev:&#xA;And here&amp;rsquo;s the part of the data file (/data/landing.yaml) used to enable and configure that section:</description>
+    </item>
+    <item>
+      <title>Templates</title>
+      <link>/zh-hant/docs/reference/guides/landing-page/templates/</link>
+      <pubDate>Thu, 08 Dec 2022 19:19:31 +0000</pubDate>
+      <guid>/zh-hant/docs/reference/guides/landing-page/templates/</guid>
+      <description>Introduction linkEach section on the landing page corresponds to a specific template with its own set of parameters for customisation. There are (currently) 4 templates.&#xA;Name Type Description hero hero A basic hero template with text and CTA buttons on the left and an image on the right. Traditionally the first section of a landing page. feature grid grid A multi row, 3 column grid listing features. Each feature consists of an icon, title, and descriptive text.</description>
+    </item>
+  </channel>
+</rss>

@@ -16,9 +16,9 @@
 
 <html lang="zh-Hant"><head>
     <meta charset="utf-8" />
-    <title>故障排除 | Srcmesh</title>
+    <title>升級 Kubernetes | Srcmesh</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="開始安裝 Kubernetes 叢集">
+    <meta name="description" content="開始升級 Kubernetes 叢集">
     <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
     <meta name="author" content="Colin Wilson - Lotus Labs" />
     <meta name="email" content="support@aigis.uk" />
@@ -31,15 +31,15 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" crossorigin="use-credentials" href="/site.webmanifest">
-<meta property="og:title" content="故障排除" />
-<meta property="og:description" content="開始安裝 Kubernetes 叢集" />
+<meta property="og:title" content="升級 Kubernetes" />
+<meta property="og:description" content="開始升級 Kubernetes 叢集" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/zh-hant/docs/deployment/troubleshooting/" /><meta property="og:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_2633474349357577011.png"/><meta property="article:section" content="docs" />
+<meta property="og:url" content="/zh-hant/docs/deployment/upgrade/" /><meta property="og:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_4166945586115848608.png"/><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2023-08-25T15:52:21+01:00" />
-<meta property="article:modified_time" content="2024-01-18T03:36:53+08:00" /><meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_2633474349357577011.png"/>
-<meta name="twitter:title" content="故障排除"/>
-<meta name="twitter:description" content="開始安裝 Kubernetes 叢集"/>
+<meta property="article:modified_time" content="2024-01-18T03:01:31+08:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_4166945586115848608.png"/>
+<meta name="twitter:title" content="升級 Kubernetes"/>
+<meta name="twitter:description" content="開始升級 Kubernetes 叢集"/>
 
     
     
@@ -142,12 +142,12 @@
                                     
                                         
                                         
-                                            <li class=" "><a class="sidebar-nested-link" href="/zh-hant/docs/deployment/upgrade/">升級 Kubernetes</a></li>
+                                            <li class="current "><a class="sidebar-nested-link" href="/zh-hant/docs/deployment/upgrade/">升級 Kubernetes</a></li>
                                         
                                     
                                         
                                         
-                                            <li class="current "><a class="sidebar-nested-link" href="/zh-hant/docs/deployment/troubleshooting/">故障排除</a></li>
+                                            <li class=" "><a class="sidebar-nested-link" href="/zh-hant/docs/deployment/troubleshooting/">故障排除</a></li>
                                         
                                     
                                         
@@ -338,7 +338,7 @@
             
         
             <li class="breadcrumb-item text-capitalize active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <span itemprop="name">故障排除</span>
+                <span itemprop="name">升級 Kubernetes</span>
                 <meta itemprop="position" content='3' />
             </li>
         
@@ -351,12 +351,23 @@
     <div class="fw-bold text-uppercase mb-2">On this page</div>
     <nav id="toc">
   <ul>
-    <li><a href="#kubectl-指令找不到"><code>kubectl</code> 指令找不到</a></li>
-    <li><a href="#目標節點下載失敗"><code>目標節點</code>下載失敗</a></li>
-    <li><a href="#nodelocaldns-crashloopbackoff-問題">NodeLocalDNS CrashLoopBackOff 問題</a></li>
-    <li><a href="#flannel-安裝失敗">Flannel 安裝失敗</a></li>
-    <li><a href="#timeout-12s-waiting-for-privilege-escalation-prompt">Timeout (12s) waiting for privilege escalation prompt</a></li>
-    <li><a href="#dial-tcp-xxxx6443-connect-no-route-to-host">dial tcp x.x.x.x:6443: connect: no route to host</a></li>
+    <li><a href="#升級前重要事項">升級前重要事項</a></li>
+    <li><a href="#kubespray-與-kubernetes-版本關係">kubespray 與 kubernetes 版本關係</a></li>
+    <li><a href="#設定日誌紀錄路徑">設定日誌紀錄路徑</a></li>
+    <li><a href="#設定所需變數">設定所需變數</a></li>
+    <li><a href="#更新叢集方式">更新叢集方式</a>
+      <ul>
+        <li><a href="#全叢集更新">全叢集更新</a></li>
+        <li><a href="#指定節點更新">指定節點更新</a>
+          <ul>
+            <li><a href="#控制平面">控制平面</a></li>
+            <li><a href="#運算節點">運算節點</a></li>
+          </ul>
+        </li>
+        <li><a href="#只更新-kubernetes-版本">只更新 Kubernetes 版本</a></li>
+        <li><a href="#增減替換節點">增減、替換節點</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </toc></div>
@@ -368,12 +379,23 @@
                                             </button>
 <nav id="toc-mobile">
   <ul class="dropdown-menu">
-    <li><a href="#kubectl-指令找不到"><code>kubectl</code> 指令找不到</a></li>
-    <li><a href="#目標節點下載失敗"><code>目標節點</code>下載失敗</a></li>
-    <li><a href="#nodelocaldns-crashloopbackoff-問題">NodeLocalDNS CrashLoopBackOff 問題</a></li>
-    <li><a href="#flannel-安裝失敗">Flannel 安裝失敗</a></li>
-    <li><a href="#timeout-12s-waiting-for-privilege-escalation-prompt">Timeout (12s) waiting for privilege escalation prompt</a></li>
-    <li><a href="#dial-tcp-xxxx6443-connect-no-route-to-host">dial tcp x.x.x.x:6443: connect: no route to host</a></li>
+    <li><a href="#升級前重要事項">升級前重要事項</a></li>
+    <li><a href="#kubespray-與-kubernetes-版本關係">kubespray 與 kubernetes 版本關係</a></li>
+    <li><a href="#設定日誌紀錄路徑">設定日誌紀錄路徑</a></li>
+    <li><a href="#設定所需變數">設定所需變數</a></li>
+    <li><a href="#更新叢集方式">更新叢集方式</a>
+      <ul>
+        <li><a href="#全叢集更新">全叢集更新</a></li>
+        <li><a href="#指定節點更新">指定節點更新</a>
+          <ul>
+            <li><a href="#控制平面">控制平面</a></li>
+            <li><a href="#運算節點">運算節點</a></li>
+          </ul>
+        </li>
+        <li><a href="#只更新-kubernetes-版本">只更新 Kubernetes 版本</a></li>
+        <li><a href="#增減替換節點">增減、替換節點</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
                                         <div class="docs-content col-12 col-xl-9 mt-0">
@@ -388,18 +410,66 @@
                                             <div class="mb-0 d-flex">
                                                 
                                                 <h1 class="content-title mb-0">
-                                                    故障排除
+                                                    升級 Kubernetes
                                                     
                                                 </h1>
                                             </div>
                                             
-                                                <p class="lead mb-3">開始安裝 Kubernetes 叢集</p>
+                                                <p class="lead mb-3">開始升級 Kubernetes 叢集</p>
                                             
                                             <div id="content" class="main-content" data-bs-spy="scroll" data-bs-root-margin="0px 0px -65%" data-bs-target="#toc-mobile">
                                                 
     
     <div data-prismjs-copy="" data-prismjs-copy-success="" data-prismjs-copy-error="">
-        <h1 id="kubectl-指令找不到"><code>kubectl</code> 指令找不到 <a href="#kubectl-%e6%8c%87%e4%bb%a4%e6%89%be%e4%b8%8d%e5%88%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1>
+        
+<div class="alert alert-danger d-flex" role="alert">
+  <div class="flex-shrink-1 alert-icon">
+  
+  <span class="material-icons size-20 me-2">
+  report
+  </span></div>
+  
+  <div class="w-100"><p>以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考<a data-bs-delay="{&#34;hide&#34;:300,&#34;show&#34;:550}" data-bs-html="true" data-bs-title="<a href='/zh-hant/docs/deployment/enter-kubespray-exe-env/'><p>KUBERNETES 叢集建置</p><strong>啟動 Kubespray 執行環境</strong><br>載入所需套件以及啟動 Kubespray 執行環境</a>" data-bs-toggle="tooltip" href="/zh-hant/docs/deployment/enter-kubespray-exe-env/">啟動 Kubespray 執行環境</a></p>
+</div>
+  </div>
+<h1 id="升級前重要事項">升級前重要事項 <a href="#%e5%8d%87%e7%b4%9a%e5%89%8d%e9%87%8d%e8%a6%81%e4%ba%8b%e9%a0%85" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><p>請務必於升級前，按照官方建議備份 etcd 叢集內的資料，避免升級損壞時無法修復</p>
+<ul>
+<li><a href="https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/" rel="external" target="_blank">https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></li>
+</ul>
+<h1 id="kubespray-與-kubernetes-版本關係">kubespray 與 kubernetes 版本關係 <a href="#kubespray-%e8%88%87-kubernetes-%e7%89%88%e6%9c%ac%e9%97%9c%e4%bf%82" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><p><a href="https://github.com/kubernetes-sigs/kubespray" rel="external" target="_blank">官方<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a>分支在下個版本釋出後，先前版本分支即鮮少更新，
+因此 Kubespray 官方安裝腳本所安裝的 Kubernetes 版本通常較舊</p>
+
+
+
+
+
+
+
+<table class="table table-striped table-borderless table-responsive">
+<thead>
+<tr>
+<th>kubespray</th>
+<th>kubernetes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.21.x</td>
+<td>1.25.x</td>
+</tr>
+<tr>
+<td>2.22.x</td>
+<td>1.26.x</td>
+</tr>
+<tr>
+<td>2.23.0</td>
+<td>1.27.x</td>
+</tr>
+</tbody>
+</table>
+
+<p>可以透過以下方式確認交付的離線安裝包版本</p>
+
 
 
   
@@ -414,66 +484,80 @@
   
 
   <div class="prism-codeblock ">
-  <pre id="212dca7" class="language- ">
-  <code>sudo su -c &#34;echo &#39;export PATH=\${PATH}:/usr/local/bin&#39; &gt;&gt; /root/.bashrc&#34;</code>
+  <pre id="577aa5e" class="language-bash ">
+  <code>cat /kubespray/config.sh | grep VERSION</code>
   </pre>
   </div>
-<h1 id="目標節點下載失敗"><code>目標節點</code>下載失敗 <a href="#%e7%9b%ae%e6%a8%99%e7%af%80%e9%bb%9e%e4%b8%8b%e8%bc%89%e5%a4%b1%e6%95%97" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><ol>
-<li>下載第一個檔案就失敗
+<p>會看到類似下面輸出</p>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="c6dcc46" class="language-bash ">
+  <code># 代表基於官方 v2.21.0 分支 (Kubernetes v1.25) 修改後交付的第 1 個版本
+KUBESPRAY_VERSION=v2.21.0-1.25-1
+
+# 代表此離線安裝支援的 Kubernetes 版本為 v1.25.16
+KUBE_VERSION=v1.25.16</code>
+  </pre>
+  </div>
+<p>為避免資安問題，我們提供最新 3 個 Kubernetes 版本的離線安裝包，避免安裝過時或帶有已知 CVE 的程式。</p>
 <ul>
-<li>在目標主機上執行 <code>curl [http://&lt;部署主機 IP&gt;/ --output /tmp/trash.bin</code>
-<ul>
-<li>檢查 <code>佈署主機</code> 防火牆是否有開通 Port : 80 &amp; 35000</li>
-<li>檢查 <code>佈署主機</code> Nginx &amp; Registry 服務是否有起來</li>
-<li>檢查 <code>佈署主機</code> 資料目錄內是否有此對應的檔案</li>
+<li><strong>如需提供大於 3 個版本以上之版本維護，請洽詢業務同仁</strong></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>中間某個檔案單獨失敗
-<ul>
-<li>檢查檔案是否存在
-<ul>
-<li>到 <code>${HOME}/outputs/files/</code> 下確認此檔案是否存在，以及版本等資訊是否一致</li>
-</ul>
-</li>
-<li>檢查檔案 Hash 值是否正確
-<ul>
-<li>執行 Ansible-playbook 時加上 <code>-v</code>, <code>-vvv</code>, <code>-vvvvvv</code> 檢視詳細的 debug資訊，確認比對的 hash 值</li>
-<li>移除 <code>${kubespray_project}/roles/download/tasks/download_file.yml</code> 內，<code>get_url</code> module 內的 <code>nolog</code> 項目</li>
-<li>Hash 值存放的位置：<code>${kubespray_project}/roles/download/defaults/main.yml</code></li>
-<li>推薦的修復方式：新增 <code>${kubespray_inventory_dir}/group_vars/all/patch.yml</code>，並且在裡面設定一樣的變數名稱來取代錯誤的 hash 值。此方式新增的變數優先權比 <code>roles/download/defaults/main.yml</code> 高，所以執行時會自動替代掉舊值。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h1 id="nodelocaldns-crashloopbackoff-問題">NodeLocalDNS CrashLoopBackOff 問題 <a href="#nodelocaldns-crashloopbackoff-%e5%95%8f%e9%a1%8c" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><p>現階段可行目前解法如下</p>
+<h1 id="設定日誌紀錄路徑">設定日誌紀錄路徑 <a href="#%e8%a8%ad%e5%ae%9a%e6%97%a5%e8%aa%8c%e7%b4%80%e9%8c%84%e8%b7%af%e5%be%91" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><p>預設日誌只出現在 Console 上，考慮到安裝時間過長 IT 人員無法時刻關注安裝過程，我們需要開啟相關日誌設定</p>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="762e117" class="language-bash ">
+  <code>export ANSIBLE_LOG_PATH=/inventory/playbook.log</code>
+  </pre>
+  </div>
+<p>後面查詢日誌或錯誤時，可以在 <code>/inventory/playbook.log</code> 查詢所有安裝日誌</p>
+<h1 id="設定所需變數">設定所需變數 <a href="#%e8%a8%ad%e5%ae%9a%e6%89%80%e9%9c%80%e8%ae%8a%e6%95%b8" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1>
+
+
+
+
+
+  
+      <div class="prism-shortcode data-line">
+      <pre id="1088355" class="language-bash" data-line="1,2" data-start="1"
+        ><code class="language-bash"
+        >export HOSTS_FILE=&#34;/inventory/hosts.yml&#34;
+export KUBE_VERSION=$(source config.sh &amp;&amp; echo ${KUBE_VERSION})
+</code></pre>
+      </div>
+  
+
 <ol>
-<li>修改 <code>/inventory/group_vars/ks8_cluster/k8s-cluster.yml</code> 內 <code>resolvconf_mode</code> 成 <code>none</code></li>
-<li>移除 <code>/inventory/group_vars/all/all.yml</code>內<code>upstream_dns_servers</code>前面的註解符號，讓此處的設定指向至少一個 DNS，此處的範例直接沿用官方的範例 <code>8.8.8.8</code> &amp; <code>8.8.4.4</code>。</li>
-<li><a href="https://github.com/kubernetes-sigs/kubespray/issues/9948?fbclid=IwAR0pp6H3RYhLne4pouF8QAZVEa8hwlJYWVpdUXUIklBMI-fSQYb4S68m-tU#issuecomment-1533876540" rel="external" target="_blank">參考來源<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></li>
+<li><code>/inventory/hosts.yml</code> 為<a data-bs-delay="{&#34;hide&#34;:300,&#34;show&#34;:550}" data-bs-html="true" data-bs-title="<a href='/zh-hant/docs/deployment/config-adjustment/'><p>KUBERNETES 叢集建置</p><strong>部署參數調整</strong><br>安裝前的 Kubespray 部署參數調整</a>" data-bs-toggle="tooltip" href="/zh-hant/docs/deployment/config-adjustment/#調整-inventory-設定">參數調整階段</a>所產生的檔案，如有異動請調整成對應的檔名與路徑</li>
+<li>離線包支援的 Kubernetes 版本，亦是此次要升級到的版本</li>
 </ol>
-<p>如果該環境內部並未使用 DNS，可以採取另一個方案</p>
-<ul>
-<li>修改 <code>/inventory/group_vars/ks8_cluster/k8s-cluster.yml</code> 內 <code>enable_nodelocaldns</code> 成 <code>false</code></li>
-</ul>
-<h1 id="flannel-安裝失敗">Flannel 安裝失敗 <a href="#flannel-%e5%ae%89%e8%a3%9d%e5%a4%b1%e6%95%97" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><ul>
-<li>安裝到一半顯示 <code>Timeout when waiting for file /run/flannel/subnet.env</code></li>
-<li><code>subnet.env</code> 為 CNI Pod 啟動時自動產生，需先查明不能啟動的原因</li>
-<li>檢查 nodes 上面是否缺 default route (ex : 0.0.0.0/0)，flannel 啟動時是透過搜尋 default route 為哪張網卡決定他要綁在哪個裝置上。</li>
-<li>查測方式
-<ol>
-<li><code>kubectl get pods -A</code> 取得掛掉的 Pod Name</li>
-<li><code>kubectl logs -n kube-system {Pod Name}</code> 檢視問題</li>
-</ol>
-</li>
-</ul>
-<h1 id="timeout-12s-waiting-for-privilege-escalation-prompt">Timeout (12s) waiting for privilege escalation prompt <a href="#timeout-12s-waiting-for-privilege-escalation-prompt" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><p>如出現 <code>fatal: [node1]: FAILED! =&gt; {&quot;msg&quot;: &quot;Timeout (12s) waiting for privilege escalation prompt: &quot;}</code></p>
-<ul>
-<li>確定是不是 VM 給太少記憶體，造成虛擬基網卡異常。</li>
-<li>進入容器後，RHEL 因為預設的設定問題會造成 SSH 超時，建議執行下列指令</li>
-</ul>
+<p>再次確認是否都有值</p>
 
 
 
@@ -489,36 +573,87 @@
   
 
   <div class="prism-codeblock ">
-  <pre id="55c5f77" class="language- ">
-  <code>cat &gt; ~/.ssh/config &lt;&lt; EOF
-GSSAPIAuthentication no
-GSSAPIDelegateCredentials yes
-EOF</code>
+  <pre id="af535b9" class="language-bash ">
+  <code>echo $HOSTS_FILE
+echo $KUBE_VERSION</code>
+  </pre>
+  </div>
+<h1 id="更新叢集方式">更新叢集方式 <a href="#%e6%9b%b4%e6%96%b0%e5%8f%a2%e9%9b%86%e6%96%b9%e5%bc%8f" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><h2 id="全叢集更新">全叢集更新 <a href="#%e5%85%a8%e5%8f%a2%e9%9b%86%e6%9b%b4%e6%96%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2>
+<nav>
+	<div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+		
+		
+		
+		
+
+		
+
+		<a class="nav-link  active"
+		   id="adecfbTab" data-bs-toggle="tab" data-bs-target="#adecfb"
+		   type="button" role="tab" aria-controls="adecfb" aria-selected="true">RHEL 8/9</a>
+
+		
+
+		<a class="nav-link "
+		   id="becfadTab" data-bs-toggle="tab" data-bs-target="#becfad"
+		   type="button" role="tab" aria-controls="becfad" aria-selected="true">Others</a>
+
+		
+
+	</div>
+</nav>
+
+<div class="tab-content" id="nav-tab-content">
+
+	
+
+
+
+
+
+
+<div class="tab-pane fade show active" id="adecfb" role="tabpanel" aria-labelledby="nav-1">
+
+	
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="6fbe731" class="language-bash ">
+  <code>cd /kubespray &amp;&amp; ansible-playbook upgrade-cluster.yml -b -K \
+-i ${HOSTS_FILE} \
+-e kube_version=${KUBE_VERSION} \
+-e rhel_enable_repos=false</code>
   </pre>
   </div>
 <ul>
-<li>sudo 卡住，多數原因為 sudo 會進行 hostname 的 DNS 反查，<code>/etc/hosts</code> 內缺此主機的 host 對應時即可能發生</li>
+<li><code>-K</code> 等同於 <code>--ask-become-pass</code>，執行時跳出視窗詢問目標節點的 sudo 密碼。</li>
+<li><code>-e kube_version</code> 指定 k8s 版本，一定要設定才會更新 k8s 版本。</li>
+<li><code>-e rhel_enable_repos=false</code> 為了 RHEL8 沒啟用 repo 設定的參數，若有啟用可忽略。</li>
 </ul>
 
 
+</div>
 
-  
-  
-  
 
-  
-  
-  
-  
 
-  
 
-  <div class="prism-codeblock ">
-  <pre id="23f6f83" class="language- ">
-  <code>hostname | awk &#39;{print &#34;127.0.0.1 &#34;$1}&#39; &gt;&gt; /etc/hosts</code>
-  </pre>
-  </div>
-<h1 id="dial-tcp-xxxx6443-connect-no-route-to-host">dial tcp x.x.x.x:6443: connect: no route to host <a href="#dial-tcp-xxxx6443-connect-no-route-to-host" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1>
+
+
+<div class="tab-pane fade" id="becfad" role="tabpanel" aria-labelledby="nav-1">
+
+	
 
 
   
@@ -533,117 +668,352 @@ EOF</code>
   
 
   <div class="prism-codeblock ">
-  <pre id="0ee4cef" class="language-bash ">
-  <code>TASK [kubernetes/kubeadm : Join to cluster] ****************************************************************************
-fatal: [worker1]: FAILED! =&gt; {&#34;changed&#34;: false, &#34;cmd&#34;: [&#34;timeout&#34;, &#34;-k&#34;, &#34;120s&#34;, &#34;120s&#34;, &#34;/usr/local/bin/kubeadm&#34;, &#34;join&#34;, 
-&#34;--config&#34;, &#34;/etc/kubernetes/kubeadm-client.conf&#34;, &#34;--ignore-preflight-errors=DirAvailable--etc-kubernetes-manifests&#34;, 
-&#34;--skip-phases=&#34;], &#34;delta&#34;: &#34;0:01:00.446181&#34;, &#34;end&#34;: &#34;2024-01-17 14:02:52.298855&#34;, &#34;msg&#34;: &#34;non-zero return code&#34;, &#34;rc&#34;: 1, 
-&#34;start&#34;: &#34;2024-01-17 14:01:51.852674&#34;, &#34;stderr&#34;: &#34;\t[WARNING FileExisting-tc]: tc not found in system path\nerror execution phase 
-preflight: couldn&#39;t validate the identity of the API Server: Get \&#34;https://192.168.2.61:6443/api/v1/namespaces/kube-public/configmaps
-/cluster-info?timeout=10s\&#34;: dial tcp 192.168.2.61:6443: connect: no route to host\nTo see the stack trace of this error execute with 
---v=5 or higher&#34;, &#34;stderr_lines&#34;: [&#34;\t[WARNING FileExisting-tc]: tc not found in system path&#34;, &#34;error execution phase preflight: couldn&#39;t 
-validate the identity of the API Server: Get \&#34;https://192.168.2.61:6443/api/v1/namespaces/kube-public/configmaps/cluster-info?timeout=10s\&#34;: 
-dial tcp 192.168.2.61:6443: connect: no route to host&#34;, &#34;To see the stack trace of this error execute with --v=5 or higher&#34;], 
-&#34;stdout&#34;: &#34;[preflight] Running pre-flight checks&#34;, &#34;stdout_lines&#34;: [&#34;[preflight] Running pre-flight checks&#34;]}
-Wednesday 17 January 2024  19:02:52 &#43;0000 (0:01:01.433)       0:19:41.762 *****
-
-TASK [kubernetes/kubeadm : Display kubeadm join stderr if any] *****************************************************************************************************************************************************
-ok: [worker1] =&gt; {
-    &#34;msg&#34;: &#34;Joined with warnings\n[&#39;\\t[WARNING FileExisting-tc]: tc not found in system path&#39;, &#39;error execution phase preflight: 
-    couldn\\&#39;t validate the identity of the API Server: Get \&#34;https://192.168.2.61:6443/api/v1/namespaces/kube-public/configmaps/cluster-info?timeout=10s\&#34;: 
-    dial tcp 192.168.2.61:6443: connect: no route to host&#39;, &#39;To see the stack trace of this error execute with --v=5 or higher&#39;]\n&#34;
-}
-Wednesday 17 January 2024  19:03:53 &#43;0000 (0:00:00.049)       0:20:43.119 *****</code>
+  <pre id="553f2d8" class="language-bash ">
+  <code>cd /kubespray &amp;&amp; ansible-playbook upgrade-cluster.yml -b -K \
+-i ${HOSTS_FILE} \
+-e kube_version=${KUBE_VERSION} </code>
   </pre>
   </div>
-<p>執行過程中部分節點無法連線到 Kubernetes API Server，且出現 <code>no route to host</code></p>
-<ol>
-<li>
-<p>確定節點間網路皆正常異常</p>
-<p>先檢測兩節點間網路是否通暢，可以使用任何網路工具 (i.e ping) 確認是否能連通</br>
-可能是 VLAN tag、路由、實體網路出現狀況而導致</p>
-</li>
-<li>
-<p>嘗試連線 Kubernetes API Server</p>
-
-
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-
-  <div class="prism-codeblock ">
-  <pre id="454ad98" class="language-bash ">
-  <code>curl https://x.x.x.x:6443</code>
-  </pre>
-  </div>
-</li>
-<li>
-<p>防火牆</p>
-<p>若此時出現 <code>no route to host</code> 但節點間網路是可以互相連通，很可能就是防火牆導致</br>
-連到該 IP 所屬節點後，利用指令檢查防火牆狀況</p>
-
-
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-
-  <div class="prism-codeblock ">
-  <pre id="c0b3ec3" class="language-bash ">
-  <code>$ sudo firewall-cmd --list-all
-public (active)
-target: default
-...
-services: cockpit dhcpv6-client dns https kube-worker ssh
-ports: &lt;---- 為空表示沒有開放任何 Port 
-protocols:
-...</code>
-  </pre>
-  </div>
-<p>加入規則開放 <code>6443</code></p>
-
-
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-
-  <div class="prism-codeblock ">
-  <pre id="75cfc36" class="language-bash ">
-  <code>sudo firewall-cmd --add-port=6443/tcp --permanent
-sudo firewall-cmd --reload
-sudo firewall-cmd --list-all</code>
-  </pre>
-  </div>
-<p>確認 <code>6443</code> 是否成功加入，若成功會看到 <code>ports: 6443/tcp</code></p>
-</li>
-</ol>
-<p>可以查看<a data-bs-delay="{&#34;hide&#34;:300,&#34;show&#34;:550}" data-bs-html="true" data-bs-title="<a href='/zh-hant/docs/deployment/kubernetes-ports/'><p>KUBERNETES 叢集建置</p><strong>Kubernetes 埠號</strong><br>Kubernetes 所使用到的相關埠號</a>" data-bs-toggle="tooltip" href="/zh-hant/docs/deployment/kubernetes-ports/">文件</a>瞭解更多 Kubernetes 使用到的埠號</p>
 <ul>
-<li>Reference: <a href="https://stackoverflow.com/questions/56220392/kubectl-unable-to-connect-to-the-server-dial-tcp-192-168-214-1366443-conne" rel="external" target="_blank">https://stackoverflow.com/questions/56220392/kubectl-unable-to-connect-to-the-server-dial-tcp-192-168-214-1366443-conne<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></li>
+<li><code>-K</code> 等同於 <code>--ask-become-pass</code>，執行時跳出視窗詢問目標節點的 sudo 密碼。</li>
+<li><code>-e kube_version</code> 指定 k8s 版本，一定要設定才會更新 k8s 版本。</li>
 </ul>
+
+
+</div>
+
+
+</div>
+<h2 id="指定節點更新">指定節點更新 <a href="#%e6%8c%87%e5%ae%9a%e7%af%80%e9%bb%9e%e6%9b%b4%e6%96%b0" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>指定節點更新與 <code>hosts.yml</code> 內容息息相關，以下為示範用例:</p>
+
+
+
+
+
+
+  
+      <div class="prism-shortcode">
+      <pre id="df37fd5" class="language-yml line-numbers"
+        ><code class="language-yml"
+        >all:
+  vars:
+    ansible_user: &lt;部署專用帳號&gt;
+  hosts:
+    master1:
+      ansible_host: 192.168.1.2
+      ip: 192.168.1.2
+      access_ip: 192.168.1.2
+    worker1:
+      ansible_host: 192.168.1.3
+      ip: 192.168.1.3
+      access_ip: 192.168.1.3
+    worker2:
+      ansible_host: 192.168.1.4
+      ip: 192.168.1.4
+      access_ip: 192.168.1.4
+  children:
+    kube_control_plane:
+      hosts:
+        master1:
+    kube_node:
+      hosts:
+        worker1:
+        worker2:
+    etcd:
+      hosts:
+        master1:
+    k8s_cluster:
+      children:
+        kube_control_plane:
+        kube_node:
+    calico_rr:
+      hosts: {}
+</code></pre>
+      </div>
+  
+
+<p>特定節點升級需要使用到 <code>--limit</code> 來<strong>指定</strong> ansible-playbook 要執行的目標節點，搭配上方 <code>hosts.yml</code></p>
+<ul>
+<li><code>--limit &quot;kube_node&quot;</code>: 目標節點為 <code>L21</code> 的 <code>kube_node.hosts</code> 底下的 <code>worker1</code> 與 <code>worker2</code></li>
+</ul>
+<h3 id="控制平面">控制平面 <a href="#%e6%8e%a7%e5%88%b6%e5%b9%b3%e9%9d%a2" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3>
+<div class="alert alert-warning d-flex" role="alert">
+  <div class="flex-shrink-1 alert-icon">
+  
+  <span class="material-icons size-20 me-2">
+  warning
+  </span></div>
+  
+  <div class="w-100">請務必於升級前，做好 etcd 備份</div>
+  </div>
+<p>一般升級時會先從控制平面 (Control Plane) 開始</p>
+<ul>
+<li>請調整 <code>--limit</code> 為適合你的數值</li>
+</ul>
+
+<nav>
+	<div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+		
+		
+		
+		
+
+		
+
+		<a class="nav-link  active"
+		   id="bfcdaeTab" data-bs-toggle="tab" data-bs-target="#bfcdae"
+		   type="button" role="tab" aria-controls="bfcdae" aria-selected="true">RHEL 8/9</a>
+
+		
+
+		<a class="nav-link "
+		   id="caedfbTab" data-bs-toggle="tab" data-bs-target="#caedfb"
+		   type="button" role="tab" aria-controls="caedfb" aria-selected="true">Others</a>
+
+		
+
+	</div>
+</nav>
+
+<div class="tab-content" id="nav-tab-content">
+
+	
+
+
+
+
+
+
+<div class="tab-pane fade show active" id="bfcdae" role="tabpanel" aria-labelledby="nav-1">
+
+	
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="c24a9e3" class="language-bash ">
+  <code>ansible-playbook upgrade-cluster.yml -b -K \
+-i ${HOSTS_FILE} \
+-e kube_version=&amp;{KUBE_VERSION} \
+-e rhel_enable_repos=false  \
+--limit &#34;kube_control_plane:etcd&#34;</code>
+  </pre>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+<div class="tab-pane fade" id="caedfb" role="tabpanel" aria-labelledby="nav-1">
+
+	
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="5cb8783" class="language-bash ">
+  <code>ansible-playbook upgrade-cluster.yml -b -K \
+-i ${HOSTS_FILE} \
+-e kube_version=&amp;{KUBE_VERSION} \
+--limit &#34;kube_control_plane:etcd&#34;</code>
+  </pre>
+  </div>
+
+
+</div>
+
+
+</div>
+<ul>
+<li><code>kube_control_plane:etcd</code>: 目標節點為 <code>kube_control_plane</code> 與 <code>etcd</code> 底下的 <code>master1</code>
+<ul>
+<li><code>:</code> 為分隔符號，亦可以用 <code>,</code> 取代，變成 <code>kube_control_plane,etcd</code> (請見<a href="https://docs.ansible.com/ansible/latest/inventory_guide/intro_patterns.html#common-patterns" rel="external" target="_blank">詳情<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a>)</li>
+</ul>
+</li>
+</ul>
+<h3 id="運算節點">運算節點 <a href="#%e9%81%8b%e7%ae%97%e7%af%80%e9%bb%9e" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h3><p>更新特定運算節點</p>
+<ul>
+<li>請調整 <code>--limit</code> 為適合你的數值</li>
+</ul>
+
+<nav>
+	<div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+		
+		
+		
+		
+
+		
+
+		<a class="nav-link  active"
+		   id="cbfdeaTab" data-bs-toggle="tab" data-bs-target="#cbfdea"
+		   type="button" role="tab" aria-controls="cbfdea" aria-selected="true">RHEL 8/9</a>
+
+		
+
+		<a class="nav-link "
+		   id="cdfebaTab" data-bs-toggle="tab" data-bs-target="#cdfeba"
+		   type="button" role="tab" aria-controls="cdfeba" aria-selected="true">Others</a>
+
+		
+
+	</div>
+</nav>
+
+<div class="tab-content" id="nav-tab-content">
+
+	
+
+
+
+
+
+
+<div class="tab-pane fade show active" id="cbfdea" role="tabpanel" aria-labelledby="nav-1">
+
+	
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="dfdd838" class="language-bash ">
+  <code>ansible-playbook upgrade-cluster.yml -b -K \
+-i ${HOSTS_FILE} \
+-e kube_version=&amp;{KUBE_VERSION} \
+-e rhel_enable_repos=false  \
+--limit &#34;worker1:worker2&#34;</code>
+  </pre>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+<div class="tab-pane fade" id="cdfeba" role="tabpanel" aria-labelledby="nav-1">
+
+	
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="f2fbc47" class="language-bash ">
+  <code>ansible-playbook upgrade-cluster.yml -b -K \
+-i ${HOSTS_FILE} \
+-e kube_version=&amp;{KUBE_VERSION} \
+--limit &#34;worker1:worker2&#34;</code>
+  </pre>
+  </div>
+
+
+</div>
+
+
+</div>
+<ul>
+<li><code>worker1:worker2</code>: 目標節點為 <code>worker1</code> 以及 <code>worker2</code></li>
+</ul>
+<h2 id="只更新-kubernetes-版本">只更新 Kubernetes 版本 <a href="#%e5%8f%aa%e6%9b%b4%e6%96%b0-kubernetes-%e7%89%88%e6%9c%ac" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2>
+<div class="alert alert-danger d-flex" role="alert">
+  <div class="flex-shrink-1 alert-icon">
+  
+  <span class="material-icons size-20 me-2">
+  report
+  </span></div>
+  
+  <div class="w-100">Kubernetes 元件間有版本相容性問題，多數情況下較不推薦使用此種方式</div>
+  </div>
+<p>執行 <code>extra_playbooks/upgrade-only-k8s.yml</code>，此腳本執行時不會去更新其它元件，包含:</p>
+<ul>
+<li>Will not upgrade etcd</li>
+<li>Will not upgrade network plugins</li>
+<li>Will not upgrade Docker</li>
+<li>Will not pre-download containers or kubeadm</li>
+<li>Currently does not support Vault deployment.</li>
+</ul>
+<p>詳情請見<a href="https://github.com/kubernetes-sigs/kubespray/blob/669589f7614a311c934e130fe1d5bdf6ed485a7b/extra_playbooks/upgrade-only-k8s.yml#L1-L11" rel="external" target="_blank">extra_playbooks/upgrade-only-k8s.yml<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
+
+<div class="alert alert-danger d-flex" role="alert">
+  <div class="flex-shrink-1 alert-icon">
+  
+  <span class="material-icons size-20 me-2">
+  report
+  </span></div>
+  
+  <div class="w-100">再次提醒，此種升級方式將可能因部分元件未升級，導致版本相容性問題</div>
+  </div>
+<p>執行更新腳本</p>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="ce8ff77" class="language-bash ">
+  <code>ansible-playbook extra_playbooks/upgrade-only-k8s.yml -b -K \ 
+-i ${HOSTS_FILE} \
+-e kube_version=&amp;{KUBE_VERSION}</code>
+  </pre>
+  </div>
+<h2 id="增減替換節點">增減、替換節點 <a href="#%e5%a2%9e%e6%b8%9b%e6%9b%bf%e6%8f%9b%e7%af%80%e9%bb%9e" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>現階段請先參考<a href="https://github.com/kubernetes-sigs/kubespray/blob/master/docs/nodes.md" rel="external" target="_blank">官方說明<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
 
     </div>
 
@@ -800,22 +1170,22 @@ sudo firewall-cmd --list-all</code>
 
 	<div class="row flex-xl-nowrap ">
 	<div class="col-sm-6 pt-2 doc-next">
-		<a href="/zh-hant/docs/deployment/upgrade/">
+		<a href="/zh-hant/docs/deployment/installation/">
 			<div class="card h-100 my-1">
 				<div class="card-body py-2">
-                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> 升級 Kubernetes</p>
-					<p class="card-text ms-2">開始升級 Kubernetes 叢集</p>
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> 安裝 Kubernetes</p>
+					<p class="card-text ms-2">開始安裝 Kubernetes 叢集</p>
 					
 				</div>
 			</div>
 		</a>
         </div>
 	<div class="col-sm-6 pt-2 doc-prev">
-		<a class="ms-auto" href="/zh-hant/docs/deployment/kubernetes-ports/">
+		<a class="ms-auto" href="/zh-hant/docs/deployment/troubleshooting/">
 			<div class="card h-100 my-1 text-end">
 				<div class="card-body py-2">
-                    <p class="card-title fs-5 fw-semibold lh-base mb-0">Kubernetes 埠號 <i class="material-icons align-middle">navigate_next</i></p>
-					<p class="card-text me-2">Kubernetes 所使用到的相關埠號</p>
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0">故障排除 <i class="material-icons align-middle">navigate_next</i></p>
+					<p class="card-text me-2">開始安裝 Kubernetes 叢集</p>
 					
 				</div>
 			</div>

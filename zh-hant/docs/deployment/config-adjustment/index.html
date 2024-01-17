@@ -16,7 +16,7 @@
 
 <html lang="zh-Hant"><head>
     <meta charset="utf-8" />
-    <title>部署參數調整 | Lotus Docs</title>
+    <title>部署參數調整 | Srcmesh</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="安裝前的 Kubespray 部署參數調整">
     <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
@@ -34,10 +34,10 @@
 <meta property="og:title" content="部署參數調整" />
 <meta property="og:description" content="安裝前的 Kubespray 部署參數調整" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/zh-hant/docs/deployment/config-adjustment/" /><meta property="og:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_9901586306943789783.png"/><meta property="article:section" content="docs" />
+<meta property="og:url" content="/zh-hant/docs/deployment/config-adjustment/" /><meta property="og:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_10031076099791419484.png"/><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2023-08-25T15:52:21+01:00" />
-<meta property="article:modified_time" content="2024-01-10T18:55:16+08:00" /><meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_9901586306943789783.png"/>
+<meta property="article:modified_time" content="2024-01-18T03:01:16+08:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_10031076099791419484.png"/>
 <meta name="twitter:title" content="部署參數調整"/>
 <meta name="twitter:description" content="安裝前的 Kubespray 部署參數調整"/>
 
@@ -138,6 +138,11 @@
                                         
                                         
                                             <li class=" "><a class="sidebar-nested-link" href="/zh-hant/docs/deployment/installation/">安裝 Kubernetes</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" "><a class="sidebar-nested-link" href="/zh-hant/docs/deployment/upgrade/">升級 Kubernetes</a></li>
                                         
                                     
                                         
@@ -244,11 +249,11 @@
                     <button class="btn btn-link btn-default dropdown-toggle ps-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         
                             
-                            v0.0.0
+                            Stable
                     </button>
                     <ul class="dropdown-menu text-end">
                         
-    <li><a class="dropdown-item" href="https://nightly.srcmesh.dev/zh-hant/docs/deployment/troubleshooting/">Nightly</a></li>
+    <li><a class="dropdown-item" href="https://nightly--ubiquitous-pudding-8cedc2.netlify.app/zh-hant/docs/deployment/config-adjustment/">Nightly</a></li>
     
 
     
@@ -354,12 +359,12 @@
         <li><a href="#修改腳本執行時套件下載路徑">修改腳本執行時套件下載路徑</a></li>
       </ul>
     </li>
-    <li><a href="#設定-kubernetes-cni---calico--flannel--cilium">設定 Kubernetes CNI - calico / flannel / cilium</a></li>
+    <li><a href="#設定-kubernetes-cni">設定 Kubernetes CNI</a></li>
     <li><a href="#其他參數調整">其他參數調整</a>
       <ul>
-        <li><a href="#沒有設定上游-dns-查詢主機時">沒有設定上游 DNS 查詢主機時</a></li>
-        <li><a href="#修正-rhel-的-subscription-錯誤">修正 RHEL 的 subscription 錯誤</a></li>
+        <li><a href="#修正-rhel-訂閱錯誤">修正 RHEL 訂閱錯誤</a></li>
         <li><a href="#調整-hostnetwork-true-模式下-dns-解析設定">調整 <code>hostNetwork: true</code> 模式下 DNS 解析設定</a></li>
+        <li><a href="#沒有設定上游-dns-查詢主機時">沒有設定上游 DNS 查詢主機時</a></li>
       </ul>
     </li>
   </ul>
@@ -381,12 +386,12 @@
         <li><a href="#修改腳本執行時套件下載路徑">修改腳本執行時套件下載路徑</a></li>
       </ul>
     </li>
-    <li><a href="#設定-kubernetes-cni---calico--flannel--cilium">設定 Kubernetes CNI - calico / flannel / cilium</a></li>
+    <li><a href="#設定-kubernetes-cni">設定 Kubernetes CNI</a></li>
     <li><a href="#其他參數調整">其他參數調整</a>
       <ul>
-        <li><a href="#沒有設定上游-dns-查詢主機時">沒有設定上游 DNS 查詢主機時</a></li>
-        <li><a href="#修正-rhel-的-subscription-錯誤">修正 RHEL 的 subscription 錯誤</a></li>
+        <li><a href="#修正-rhel-訂閱錯誤">修正 RHEL 訂閱錯誤</a></li>
         <li><a href="#調整-hostnetwork-true-模式下-dns-解析設定">調整 <code>hostNetwork: true</code> 模式下 DNS 解析設定</a></li>
+        <li><a href="#沒有設定上游-dns-查詢主機時">沒有設定上游 DNS 查詢主機時</a></li>
       </ul>
     </li>
   </ul>
@@ -399,19 +404,6 @@
     
       
 
-
-  <br/>
-  <div class="alert alert-warning d-flex" role="alert">
-    <div class="flex-shrink-1 alert-icon">
-
-    <span class="material-icons size-20 me-2">
-    warning
-    </span></div>
-
-    <div class="w-100">
-      <p>Version <strong>v0.0.0</strong> documentation is <strong>unreleased and frequently changed</strong>. For up-to-date information, see the <a href="" target="_blank"><strong>latest version</strong></a>.</p>
-    </div>
-  </div>
 
                                             <div class="mb-0 d-flex">
                                                 
@@ -461,14 +453,14 @@
 		
 
 		<a class="nav-link  active"
-		   id="edbfacTab" data-bs-toggle="tab" data-bs-target="#edbfac"
-		   type="button" role="tab" aria-controls="edbfac" aria-selected="true">RHEL</a>
+		   id="acbdefTab" data-bs-toggle="tab" data-bs-target="#acbdef"
+		   type="button" role="tab" aria-controls="acbdef" aria-selected="true">RHEL</a>
 
 		
 
 		<a class="nav-link "
-		   id="dbacfeTab" data-bs-toggle="tab" data-bs-target="#dbacfe"
-		   type="button" role="tab" aria-controls="dbacfe" aria-selected="true">Debian 12</a>
+		   id="cdeabfTab" data-bs-toggle="tab" data-bs-target="#cdeabf"
+		   type="button" role="tab" aria-controls="cdeabf" aria-selected="true">Debian 12</a>
 
 		
 
@@ -484,7 +476,7 @@
 
 
 
-<div class="tab-pane fade show active" id="edbfac" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="acbdef" role="tabpanel" aria-labelledby="nav-1">
 
 	<p>進入容器後，RHEL 因為預設的設定問題會造成ssh超時，建議執行下列指令</p>
 
@@ -518,7 +510,7 @@ EOF</code>
 
 
 
-<div class="tab-pane fade" id="dbacfe" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="cdeabf" role="tabpanel" aria-labelledby="nav-1">
 
 	<p>修正 Kubespray 官方設定，補上套件支援</p>
 
@@ -587,7 +579,7 @@ CONFIG_FILE=/inventory/hosts.yml python3 contrib/inventory_builder/inventory.py 
 <li>設定各節點 Hostname (範例為：master1, worker1, worker2)</li>
 <li>決定各目標節點功能，如控制節點 (Control Plane)、運算節點 (Worker Node)、etcd 執行節點</li>
 </ol>
-<p>以下為調整指令範例 (請根據實際狀況調整，切勿 Copy/Paste)</p>
+<p>以下為範例 (請根據實際狀況調整，切勿 Copy/Paste)</p>
 
 
 
@@ -642,41 +634,34 @@ EOF</code>
   </pre>
   </div>
 <h2 id="修改腳本執行時套件下載路徑">修改腳本執行時套件下載路徑 <a href="#%e4%bf%ae%e6%94%b9%e8%85%b3%e6%9c%ac%e5%9f%b7%e8%a1%8c%e6%99%82%e5%a5%97%e4%bb%b6%e4%b8%8b%e8%bc%89%e8%b7%af%e5%be%91" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>修改 <code>/inventory/group_vars/all/offline.yml</code> 內套件下載位置</p>
-<p>以下為調整指令範例 (請根據實際狀況調整，切勿 Copy/Paste)</p>
-<p><strong>NOTICE</strong>: 請更換範例的 IP 位置為部署主機之 IP</p>
+<p>以下為調整指令範例 (請看下面解釋根據實際狀況調整，切勿 Copy/Paste)</p>
+
+
+
 
 
 
   
-  
-  
-
-  
-  
-  
-  
-
-  
-
-  <div class="prism-codeblock ">
-  <pre id="bf5914f" class="language- ">
-  <code>cat &gt; /inventory/group_vars/all/offline.yml &lt;&lt; EOF
+      <div class="prism-shortcode data-line">
+      <pre id="dbe4204" class="language-yml" data-line="2,4-6,12-17" data-start="1"
+        ><code class="language-yml"
+        >cat &gt; /inventory/group_vars/all/offline.yml &lt;&lt; EOF
 http_server: &#34;http://&lt;部署主機 IP&gt;&#34;
-registry_host: &#34;&lt;部署主機 IP&gt;:35000&#34;
 
-containerd_insecure_registries: # Kubespray #8340
-  &#34;&lt;部署主機 IP&gt;:35000&#34;: &#34;http://&lt;部署主機 IP&gt;:35000&#34;
+registry_host: &#34;&lt;REGISTRY_HOST&gt;:&lt;REGISTRY_PORT&gt;&#34;
+containerd_insecure_registries:
+    &#34;&lt;REGISTRY_HOST&gt;:&lt;REGISTRY_PORT&gt;&#34;: &#34;http://&lt;REGISTRY_HOST&gt;:&lt;REGISTRY_PORT&gt;&#34;
 
 files_repo: &#34;{{ http_server }}/files&#34;
 yum_repo: &#34;{{ http_server }}/rpms&#34;
 ubuntu_repo: &#34;{{ http_server }}/debs&#34;
 
 # Registry overrides
-kube_image_repo: &#34;{{ registry_host }}&#34;
-gcr_image_repo: &#34;{{ registry_host }}&#34;
-docker_image_repo: &#34;{{ registry_host }}&#34;
-quay_image_repo: &#34;{{ registry_host }}&#34;
-github_image_repo: &#34;{{ registry_host }}/ghcr.io&#34;
+kube_image_repo: &#34;{{ registry_host }}/&lt;REGISTRY_REPO&gt;&#34;
+gcr_image_repo: &#34;{{ registry_host }}/&lt;REGISTRY_REPO&gt;&#34;
+docker_image_repo: &#34;{{ registry_host }}/&lt;REGISTRY_REPO&gt;&#34;
+quay_image_repo: &#34;{{ registry_host }}/&lt;REGISTRY_REPO&gt;&#34;
+github_image_repo: &#34;{{ registry_host }}/&lt;REGISTRY_REPO&gt;&#34;
 
 # Download URLs: See roles/download/defaults/main.yml of kubespray.
 kubeadm_download_url: &#34;{{ files_repo }}/kubernetes/{{ kube_version }}/kubeadm&#34;
@@ -696,67 +681,37 @@ ciliumcli_download_url: &#34;{{ files_repo }}/cilium-linux-{{ image_arch }}.tar.
 runc_download_url: &#34;{{ files_repo }}/runc/{{ runc_version }}/runc.{{ image_arch }}&#34;
 nerdctl_download_url: &#34;{{ files_repo }}/nerdctl-{{ nerdctl_version }}-{{ ansible_system | lower }}-{{ image_arch }}.tar.gz&#34;
 containerd_download_url: &#34;{{ files_repo }}/containerd-{{ containerd_version }}-linux-{{ image_arch }}.tar.gz&#34;
-EOF</code>
-  </pre>
-  </div>
-<h1 id="設定-kubernetes-cni---calico--flannel--cilium">設定 Kubernetes CNI - calico / flannel / cilium <a href="#%e8%a8%ad%e5%ae%9a-kubernetes-cni---calico--flannel--cilium" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1>
+EOF
 
-
-  
-  
+</code></pre>
+      </div>
   
 
-  
-  
-  
-  
-
-  
-
-  <div class="prism-codeblock ">
-  <pre id="316bbb0" class="language- ">
-  <code>vi /inventory/group_vars/k8s_cluster/k8s-cluster.yml</code>
-  </pre>
-  </div>
-<p>修改 <code>kube_network_plugin</code> 成所需的 CNI 套件。以下以 <code>flannel</code> 作為示範:</p>
-
-
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-
-  <div class="prism-codeblock ">
-  <pre id="1770ce6" class="language- ">
-  <code>kube_network_plugin: flannel</code>
-  </pre>
-  </div>
 <ul>
-<li>使用 <strong>flannel</strong> 時，務必確認所有節點都有設定 <strong>Default Gateway</strong></li>
-<li>Kubespray 官方預設為 <strong>calico</strong></li>
-<li>目前 <strong>calico</strong>、<strong>flannel</strong>、<strong>cilium</strong> 都經過驗證可以直接切換使用</li>
+<li><code>L2</code>: 請更換為部署主機之 IP</li>
+<li><code>L4</code>-<code>L6</code>: 請務必確認 <code>REGISTRY_HOST</code> 與 <code>REGISTRY_PORT</code> 是否與<a data-bs-delay="{&#34;hide&#34;:300,&#34;show&#34;:550}" data-bs-html="true" data-bs-title="<a href='/zh-hant/docs/deployment/enter-kubespray-exe-env/'><p>KUBERNETES 叢集建置</p><strong>啟動 Kubespray 執行環境</strong><br>載入所需套件以及啟動 Kubespray 執行環境</a>" data-bs-toggle="tooltip" href="/zh-hant/docs/deployment/enter-kubespray-exe-env/#設定遠端-container-registry">前面 Container Repository 設定相同</a></li>
+<li><code>L2</code>-<code>L17</code>: 請務必確認 <code>REGISTRY_REPO</code> 是否與<a data-bs-delay="{&#34;hide&#34;:300,&#34;show&#34;:550}" data-bs-html="true" data-bs-title="<a href='/zh-hant/docs/deployment/enter-kubespray-exe-env/'><p>KUBERNETES 叢集建置</p><strong>啟動 Kubespray 執行環境</strong><br>載入所需套件以及啟動 Kubespray 執行環境</a>" data-bs-toggle="tooltip" href="/zh-hant/docs/deployment/enter-kubespray-exe-env/#設定遠端-container-registry">前面 Container Repository 設定相同</a>。若為空值，請改為 <code>&quot;{{ registry_host }}&quot;</code></li>
 </ul>
-<h1 id="其他參數調整">其他參數調整 <a href="#%e5%85%b6%e4%bb%96%e5%8f%83%e6%95%b8%e8%aa%bf%e6%95%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1>
-<div class="alert alert-warning d-flex" role="alert">
-  <div class="flex-shrink-1 alert-icon">
+<h1 id="設定-kubernetes-cni">設定 Kubernetes CNI <a href="#%e8%a8%ad%e5%ae%9a-kubernetes-cni" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1>
+
+
   
-  <span class="material-icons size-20 me-2">
-  warning
-  </span></div>
   
-  <div class="w-100">以下設定一般不需要更動與調整，除非該環境有遇到下列狀況才需要進行修改</div>
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="f8e52a9" class="language- ">
+  <code>vim /inventory/group_vars/k8s_cluster/k8s-cluster.yml</code>
+  </pre>
   </div>
-<h2 id="沒有設定上游-dns-查詢主機時">沒有設定上游 DNS 查詢主機時 <a href="#%e6%b2%92%e6%9c%89%e8%a8%ad%e5%ae%9a%e4%b8%8a%e6%b8%b8-dns-%e6%9f%a5%e8%a9%a2%e4%b8%bb%e6%a9%9f%e6%99%82" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><blockquote>
-<p>此步驟原本為非必要，但是目前 NodeLocalDNS 有臭蟲，故須多作設定迴避此問題</p>
-</blockquote>
-<p>原本的設定檔並未設定 <code>upstream_dns_servers</code>，將導致 Local DNS =&gt; Global DNS =&gt; Local DNS 一直循環。</p>
+<p>修改 <code>kube_network_plugin</code> 成所需的 CNI，設定如下:</p>
 
 <nav>
 	<div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -769,8 +724,20 @@ EOF</code>
 		
 
 		<a class="nav-link  active"
-		   id="cefdbaTab" data-bs-toggle="tab" data-bs-target="#cefdba"
-		   type="button" role="tab" aria-controls="cefdba" aria-selected="true">RHEL</a>
+		   id="cebafdTab" data-bs-toggle="tab" data-bs-target="#cebafd"
+		   type="button" role="tab" aria-controls="cebafd" aria-selected="true">Cilium</a>
+
+		
+
+		<a class="nav-link "
+		   id="ecafdbTab" data-bs-toggle="tab" data-bs-target="#ecafdb"
+		   type="button" role="tab" aria-controls="ecafdb" aria-selected="true">Calico</a>
+
+		
+
+		<a class="nav-link "
+		   id="fdcbeaTab" data-bs-toggle="tab" data-bs-target="#fdcbea"
+		   type="button" role="tab" aria-controls="fdcbea" aria-selected="true">Flannel</a>
 
 		
 
@@ -786,7 +753,195 @@ EOF</code>
 
 
 
-<div class="tab-pane fade show active" id="cefdba" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="cebafd" role="tabpanel" aria-labelledby="nav-1">
+
+	<p>主流常見的 eBPF CNI 解決方案，需確認此次安裝版本 <a href="https://docs.cilium.io/en/stable/operations/system_requirements/" rel="external" target="_blank">Linux Kernel<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a> 是否符合需求</p>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="cf1c918" class="language-yaml ">
+  <code>kube_network_plugin: cilium</code>
+  </pre>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+<div class="tab-pane fade" id="ecafdb" role="tabpanel" aria-labelledby="nav-1">
+
+	<p>Kubespray 官方預設</p>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="5681af3" class="language-yaml ">
+  <code>kube_network_plugin: calico</code>
+  </pre>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+<div class="tab-pane fade" id="fdcbea" role="tabpanel" aria-labelledby="nav-1">
+
+	<p>使用時，務必確認所有節點都有設定 <strong>Default Gateway</strong></p>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="944516b" class="language-yaml ">
+  <code>kube_network_plugin: flannel</code>
+  </pre>
+  </div>
+
+
+</div>
+
+
+</div>
+<ul>
+<li>儘管目前測試 <strong>calico</strong>、<strong>flannel</strong>、<strong>cilium</strong> 經過驗證可以直接切換使用，仍不建議於正式環境上隨意切換</li>
+</ul>
+<h1 id="其他參數調整">其他參數調整 <a href="#%e5%85%b6%e4%bb%96%e5%8f%83%e6%95%b8%e8%aa%bf%e6%95%b4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1>
+<div class="alert alert-warning d-flex" role="alert">
+  <div class="flex-shrink-1 alert-icon">
+  
+  <span class="material-icons size-20 me-2">
+  warning
+  </span></div>
+  
+  <div class="w-100">以下設定一般不需要更動與調整，除非該環境有遇到下列狀況才需要進行修改</div>
+  </div>
+<h2 id="修正-rhel-訂閱錯誤">修正 RHEL 訂閱錯誤 <a href="#%e4%bf%ae%e6%ad%a3-rhel-%e8%a8%82%e9%96%b1%e9%8c%af%e8%aa%a4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>如果出現 RHEL 訂閱錯誤 (subscription error) 時才需要進行以下設定調整</p>
+<p>於 <code>/inventory/group_vars/all/all.yml</code> 增加下列設定</p>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="47cba66" class="language- ">
+  <code>cat &gt;&gt; /inventory/group_vars/all/all.yml &lt;&lt; EOF
+rhel_enable_repos: false
+EOF</code>
+  </pre>
+  </div>
+<h2 id="調整-hostnetwork-true-模式下-dns-解析設定">調整 <code>hostNetwork: true</code> 模式下 DNS 解析設定 <a href="#%e8%aa%bf%e6%95%b4-hostnetwork-true-%e6%a8%a1%e5%bc%8f%e4%b8%8b-dns-%e8%a7%a3%e6%9e%90%e8%a8%ad%e5%ae%9a" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>如目標主機並未指定上游 DNS 主機時可能會出現部分異常，請調整 <code>/inventory/group_vars/k8s_cluster/k8s-cluster.yml</code> 的 <code>resolvconf_mode</code> 改成下列樣式</p>
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  <div class="prism-codeblock ">
+  <pre id="9d6c016" class="language- ">
+  <code># Can be docker_dns, host_resolvconf or none
+resolvconf_mode: none</code>
+  </pre>
+  </div>
+<p>如該環境皆有指定 DNS 主機，可以保持官方原始設定 <code>host_resolvconf</code>，詳細參數設定含義請參考<a href="https://github.com/kubernetes-sigs/kubespray/blob/master/docs/dns-stack.md#resolvconf_mode" rel="external" target="_blank">官方文件<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
+<h2 id="沒有設定上游-dns-查詢主機時">沒有設定上游 DNS 查詢主機時 <a href="#%e6%b2%92%e6%9c%89%e8%a8%ad%e5%ae%9a%e4%b8%8a%e6%b8%b8-dns-%e6%9f%a5%e8%a9%a2%e4%b8%bb%e6%a9%9f%e6%99%82" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2>
+<div class="alert alert-info d-flex" role="alert">
+  <div class="flex-shrink-1 alert-icon">
+  
+  <span class="material-icons size-20 me-2">
+  info
+  </span></div>
+  
+  <div class="w-100">企業內部主機通常皆設有上游 DNS 主機，可以忽略此步驟。若無，則現階段 NodeLocalDNS 有臭蟲，故須多作設定迴避此問題</div>
+  </div>
+<p>原本的設定檔並未設定 <code>upstream_dns_servers</code>，將導致 Local DNS =&gt; Global DNS =&gt; Local DNS 一直循環。</p>
+
+<nav>
+	<div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+		
+		
+		
+		
+
+		
+
+		<a class="nav-link  active"
+		   id="fcbedaTab" data-bs-toggle="tab" data-bs-target="#fcbeda"
+		   type="button" role="tab" aria-controls="fcbeda" aria-selected="true">RHEL</a>
+
+		
+
+	</div>
+</nav>
+
+<div class="tab-content" id="nav-tab-content">
+
+	
+
+
+
+
+
+
+<div class="tab-pane fade show active" id="fcbeda" role="tabpanel" aria-labelledby="nav-1">
 
 	<p>修正 <code>/inventory/group_vars/all/all.yml</code> 改成下列樣式</p>
 
@@ -817,51 +972,6 @@ upstream_dns_servers: []
 
 
 </div>
-<h2 id="修正-rhel-的-subscription-錯誤">修正 RHEL 的 subscription 錯誤 <a href="#%e4%bf%ae%e6%ad%a3-rhel-%e7%9a%84-subscription-%e9%8c%af%e8%aa%a4" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>如果出現 RHEL 訂閱錯誤時才需要進行以下設定調整</p>
-<p>於 <code>/inventory/group_vars/all/all.yml</code> 增加下列設定</p>
-
-
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-
-  <div class="prism-codeblock ">
-  <pre id="cf4228f" class="language- ">
-  <code>cat &gt;&gt; /inventory/group_vars/all/all.yml &lt;&lt; EOF
-rhel_enable_repos: false
-EOF</code>
-  </pre>
-  </div>
-<h2 id="調整-hostnetwork-true-模式下-dns-解析設定">調整 <code>hostNetwork: true</code> 模式下 DNS 解析設定 <a href="#%e8%aa%bf%e6%95%b4-hostnetwork-true-%e6%a8%a1%e5%bc%8f%e4%b8%8b-dns-%e8%a7%a3%e6%9e%90%e8%a8%ad%e5%ae%9a" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>如目標主機並未指定 DNS 主機時可能會出現部分異常，請調整 <code>/inventory/group_vars/k8s_cluster/k8s-cluster.yml</code> 的 <code>resolvconf_mode</code> 改成下列樣式</p>
-
-
-
-  
-  
-  
-
-  
-  
-  
-  
-
-  
-
-  <div class="prism-codeblock ">
-  <pre id="28e3b36" class="language- ">
-  <code># Can be docker_dns, host_resolvconf or none
-resolvconf_mode: none</code>
-  </pre>
-  </div>
-<p>如該環境皆有指定 DNS 主機，可以保持官方原始設定 <code>host_resolvconf</code>，詳細參數設定含義請參考<a href="https://github.com/kubernetes-sigs/kubespray/blob/master/docs/dns-stack.md#resolvconf_mode" rel="external" target="_blank">官方文件<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a></p>
 
     </div>
 
@@ -879,32 +989,8 @@ resolvconf_mode: none</code>
 
 
 
-<div class="gitinfo d-flex flex-wrap justify-content-between align-items-center opacity-85 pt-3">
-    <div id="edit-this-page" class="mt-1">
-        <a href="https://github.com/srcmesh/srcmesh.dev/blob/release/content/zh-hant/docs/deployment/config-adjustment.md" alt="部署參數調整" rel="noopener noreferrer" target="_blank">
-            
-            <span class="me-1 align-text-bottom">
-                
-                    <svg width="20px" height="20px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-  <path d="M16 0.396c-8.839 0-16 7.167-16 16 0 7.073 4.584 13.068 10.937 15.183 0.803 0.151 1.093-0.344 1.093-0.772 0-0.38-0.009-1.385-0.015-2.719-4.453 0.964-5.391-2.151-5.391-2.151-0.729-1.844-1.781-2.339-1.781-2.339-1.448-0.989 0.115-0.968 0.115-0.968 1.604 0.109 2.448 1.645 2.448 1.645 1.427 2.448 3.744 1.74 4.661 1.328 0.14-1.031 0.557-1.74 1.011-2.135-3.552-0.401-7.287-1.776-7.287-7.907 0-1.751 0.62-3.177 1.645-4.297-0.177-0.401-0.719-2.031 0.141-4.235 0 0 1.339-0.427 4.4 1.641 1.281-0.355 2.641-0.532 4-0.541 1.36 0.009 2.719 0.187 4 0.541 3.043-2.068 4.381-1.641 4.381-1.641 0.859 2.204 0.317 3.833 0.161 4.235 1.015 1.12 1.635 2.547 1.635 4.297 0 6.145-3.74 7.5-7.296 7.891 0.556 0.479 1.077 1.464 1.077 2.959 0 2.14-0.020 3.864-0.020 4.385 0 0.416 0.28 0.916 1.104 0.755 6.4-2.093 10.979-8.093 10.979-15.156 0-8.833-7.161-16-16-16z"/>
-</svg>
-
-                
-            </span>
-            Edit this page
-            
-        </a>
-    </div>
+<div class="gitinfo d-flex flex-wrap justify-content-between align-items-center opacity-85 visually-hidden">
     
-    <div id="last-modified" class="mt-1">
-        <p class="mb-0 fw-semibold">Last updated <span
-            id="relativetime"
-            data-authdate="2024-01-10T18:55:16&#43;0800"
-            title="10 1月 2024, 18:55 CST">
-            10 1月 2024, 18:55 CST
-        </span>. <span class="material-icons size-20 align-text-bottom opacity-75">history</span>
-        </p>
-    </div>
     
 </div>
 
@@ -1278,6 +1364,13 @@ resolvconf_mode: none</code>
     
     
     
+    
+    
+    
+    
+    
+    
+    
 
 
     
@@ -1290,7 +1383,7 @@ resolvconf_mode: none</code>
                 href: "\/zh-hant\/docs\/deployment\/setup-deploy-enviroment\/",
                 title: "準備部署環境",
                 description: "部署主機環境建置與前置設定",
-                content: " notifications 除「創建部署用帳號」需在全部主機操作外，以下指令皆請於部署主機上進行操作 環境初步設置 link名詞解釋 link 部署主機：執行 Kubespray 腳本的主機 目標主機：欲安裝 Kubernetes 的主機 部署主機安裝 link部署主機將用來執行 Kubespray 的環境，建議專機專用避免受其他外部因素影響。\n系統要求 link Linux 主機 (VM 即可) 腳本執行環境已經全面容器化，可為 Ubuntu、Debian、RHEL，如希望萬無一失則建議採用與目標主機相同之系統 設定過程中會自動安裝 containerd 與 nerdctl 等容器執行環境，若部署主機上已有安裝相關套件，建議移除避免異常 由於套件與鏡像容量較大，建議硬碟空間需 \u003e 100GB 創建部署用帳號 link需要在每台目標機器建立帳號以供 Kubespray 腳本用來安裝，且該帳號需滿足以下條件\n擁有 sudo 權限 開啟能以 Public Key 登入 產生 SSH Public Key Pair link在部署主機上產生 RSA Key Pair\nif [[ ! -e ~/.ssh/id_rsa.pub \u0026\u0026 ! -e ~/.ssh/id_rsa ]]; then ssh-keygen -N \"\" -t rsa fi 散佈 Public Key link把剛產生的 Public Key 安裝到所有目標主機上\nssh-copy-id @ 解壓縮離線安裝包檔 link將交付的打包檔 output.tar 放置到部署主機的登入帳號之家目錄，並解封至家目錄下\ntar -xf output.tar -C ${HOME}/ cd ${HOME}/outputs/ \u0026\u0026 chmod a+x *.sh "
+                content: " notifications 除「創建部署用帳號」需在全部主機操作外，以下指令皆請於部署主機上進行操作 環境初步設置 link名詞解釋 link 部署主機：執行 Kubespray 腳本的主機 目標主機：欲安裝 Kubernetes 的主機 部署主機安裝 link部署主機將用來執行 Kubespray 的環境，建議專機專用避免受其他外部因素影響。\n系統要求 link Linux 主機 (VM 即可) 腳本執行環境已經全面容器化，因此部署主機的作業系統可為 Ubuntu、Debian、RHEL，如希望萬無一失則建議採用與目標主機相同之系統 設定過程中會自動安裝 containerd 與 nerdctl 等容器執行環境，若部署主機上已有安裝相關套件，建議移除避免異常 由於套件與鏡像容量較大，建議硬碟空間需 \u003e 100GB 網路要求 link 部署主機與目標主機之間網路需直接連通，不經過任何堡壘機 創建部署用帳號 link需要在每台目標機器建立帳號以供 Kubespray 腳本用來安裝，且該帳號需滿足以下條件\n擁有 sudo 權限 開啟能以 Public Key 登入 產生 SSH Public Key Pair link在部署主機上產生 RSA Key Pair\nif [[ ! -e ~/.ssh/id_rsa.pub \u0026\u0026 ! -e ~/.ssh/id_rsa ]]; then ssh-keygen -N \"\" -t rsa fi 散佈 Public Key link把剛產生的 Public Key 安裝到所有目標主機上\nssh-copy-id @ 解壓縮離線安裝包檔 link將交付的打包檔 output.tar 放置到部署主機的登入帳號之家目錄，並解封至家目錄下\ntar -xf output.tar -C ${HOME}/ cd ${HOME}/outputs/ \u0026\u0026 chmod a+x *.sh "
             }
         );
     index.add(
@@ -1299,7 +1392,7 @@ resolvconf_mode: none</code>
                 href: "\/zh-hant\/docs\/deployment\/enter-kubespray-exe-env\/",
                 title: "啟動 Kubespray 執行環境",
                 description: "載入所需套件以及啟動 Kubespray 執行環境",
-                content: " notifications 以下指令皆請於部署主機上進行操作 啟動安裝環境 link以下指令將解壓部署腳本，並以容器方式啟動所有安裝過程中所需的服務容器\ncd ${HOME}/outputs/ \u0026\u0026 ./extract-kubespray.sh (Optional) 如需手動移除舊有資料 sudo /usr/local/bin/nerdctl rm -f $(sudo /usr/local/bin/nerdctl ps -a -q) sudo /usr/local/bin/nerdctl rmi -f $(sudo /usr/local/bin/nerdctl images -a -q) sudo /usr/local/bin/nerdctl ps -a sudo /usr/local/bin/nerdctl images -a sudo rm -rf ${HOME}/mycluster/ ${HOME}/outputs/ 設定離線安裝之部署 Package Repo 與 Container Registry\nreport 以下指令會將套件與鏡像進行解壓縮將佔用大量硬碟空間，請務必確保主機上有至少 30GB 以上之空間 cd ${HOME}/outputs/ \u0026\u0026 ./setup-all.sh 自動化腳本內的流程驟說明 (無需手動執行) 設定防火牆 (RHEL)\nsudo firewall-cmd –zone=public –add-port=35000/tcp –permanent sudo firewall-cmd –zone=public –add-service=http –permanent sudo firewall-cmd –reload 安裝 containerd\n載入部署用的映像檔 - nginx / registry / kubespray\n啟動 Nginx\nstart-nginx.sh 在部署主機建立起 Web Service，讓目標主機可以連到此處下載對應的BINARY/DEB/RPM套件。 啟動 Image Registry\nstart-registry.sh 在部署主機建立起 Private Registry，讓目標主機可以連到此處下載對應的 Container Images。 載入 Kubernates Container Images into Local Private Registry\nload-push-all-images.sh 由於上一個步驟只是把 Private Registry 架設起來，裡面是沒有任何 Container Image 可供下載的。此步驟就是把 local 端的 Container Images 全部都匯入。 進入 Kubespray 執行環境 link以下指令會自動化掛載相關的路徑後進入 Kubespray 腳本執行環境的容器內\ncd ${HOME}/outputs/ \u0026\u0026 ./start-kubespray.sh 手動進入方式 最新指令請參考 start-kubespray.sh "
+                content: " notifications 以下指令皆請於部署主機上進行操作 啟動安裝環境 link以下指令將解壓部署腳本，並以容器方式啟動所有安裝過程中所需的服務容器\ncd ${HOME}/outputs/ \u0026\u0026 ./extract-kubespray.sh (Optional) 如需手動移除舊有資料 sudo /usr/local/bin/nerdctl rm -f $(sudo /usr/local/bin/nerdctl ps -a -q) sudo /usr/local/bin/nerdctl rmi -f $(sudo /usr/local/bin/nerdctl images -a -q) sudo /usr/local/bin/nerdctl ps -a sudo /usr/local/bin/nerdctl images -a sudo rm -rf ${HOME}/mycluster/ ${HOME}/outputs/ 設定離線安裝之部署 Package Repo 與 Container Registry\n設定遠端 Container Registry link企業內部通常會有用來存放鏡像的 Container Registry (i.e Harbor, Quay)\n需要在部署前將此次所用的到鏡像推送到 Container Registry 儲存，避免後續鏡像因故消失無法重新自遠端下載。\ncd ${HOME}/outputs/ \u0026\u0026 vim config.sh 正式環境部署務必調整以下參數 (測試環境可以略過)\nREGISTRY_HOST=${REGISTRY_HOST:-\"localhost\"} REGISTRY_PORT=${REGISTRY_PORT:-35000} REGISTRY_REPO=${REGISTRY_REPO:-\"\"} REGISTRY_USER=${REGISTRY_USER:-\"\"} REGISTRY_PASSWORD=${REGISTRY_PASSWORD:-\"\"} 啟動相關服務 link report 以下指令會將套件與鏡像進行解壓縮將佔用大量硬碟空間，請務必確保主機上有至少 30GB 以上之空間 cd ${HOME}/outputs/ \u0026\u0026 ./setup-all.sh 自動化腳本內的流程驟說明 (無需手動執行) 設定防火牆 (RHEL)\nsudo firewall-cmd –zone=public –add-port=35000/tcp –permanent sudo firewall-cmd –zone=public –add-service=http –permanent sudo firewall-cmd –reload 安裝 containerd\n載入部署用的映像檔 - nginx / registry / kubespray\n啟動 Nginx\nstart-nginx.sh 在部署主機建立起 Web Service，讓目標主機可以連到此處下載對應的BINARY/DEB/RPM套件。 啟動 Image Registry\nstart-registry.sh 在部署主機建立起 Private Registry，讓目標主機可以連到此處下載對應的 Container Images。 載入 Kubernates Container Images into Local Private Registry\nload-push-all-images.sh 由於上一個步驟只是把 Private Registry 架設起來，裡面是沒有任何 Container Image 可供下載的。此步驟就是把 local 端的 Container Images 全部都匯入。 進入 Kubespray 執行環境 link以下指令會自動化掛載相關的路徑後進入 Kubespray 腳本執行環境的容器內\ncd ${HOME}/outputs/ \u0026\u0026 ./start-kubespray.sh 手動進入方式 最新指令請參考 start-kubespray.sh "
             }
         );
     index.add(
@@ -1323,24 +1416,33 @@ resolvconf_mode: none</code>
     index.add(
             {
                 id:  4 ,
-                href: "\/zh-hant\/docs\/deployment\/troubleshooting\/",
-                title: "故障排除",
-                description: "開始安裝 Kubernetes 叢集",
-                content: "kubectl 指令找不到 link sudo su -c \"echo 'export PATH=\\${PATH}:/usr/local/bin' \u003e\u003e /root/.bashrc\" 目標節點下載失敗 link 下載第一個檔案就失敗 在目標主機上執行 curl [http://\u003c部署主機 IP\u003e/ --output /tmp/trash.bin 檢查 佈署主機 防火牆是否有開通 Port : 80 \u0026 35000 檢查 佈署主機 Nginx \u0026 Registry 服務是否有起來 檢查 佈署主機 資料目錄內是否有此對應的檔案 中間某個檔案單獨失敗 檢查檔案是否存在 到 ${HOME}/outputs/files/ 下確認此檔案是否存在，以及版本等資訊是否一致 檢查檔案 Hash 值是否正確 執行 Ansible-playbook 時加上 -v, -vvv, -vvvvvv 檢視詳細的 debug資訊，確認比對的 hash 值 移除 ${kubespray_project}/roles/download/tasks/download_file.yml 內，get_url module 內的 nolog 項目 Hash 值存放的位置：${kubespray_project}/roles/download/defaults/main.yml 推薦的修復方式：新增 ${kubespray_inventory_dir}/group_vars/all/patch.yml，並且在裡面設定一樣的變數名稱來取代錯誤的 hash 值。此方式新增的變數優先權比 roles/download/defaults/main.yml 高，所以執行時會自動替代掉舊值。 NodeLocalDNS CrashLoopBackOff 問題 link現階段可行目前解法如下\n修改 /inventory/group_vars/ks8_cluster/k8s-cluster.yml 內 resolvconf_mode 成 none 移除 /inventory/group_vars/all/all.yml內upstream_dns_servers前面的註解符號，讓此處的設定指向至少一個 DNS，此處的範例直接沿用官方的範例 8.8.8.8 \u0026 8.8.4.4。 參考來源 如果該環境內部並未使用 DNS，可以採取另一個方案\n修改 /inventory/group_vars/ks8_cluster/k8s-cluster.yml 內 enable_nodelocaldns 成 false Flannel 安裝失敗 link 安裝到一半顯示 Timeout when waiting for file /run/flannel/subnet.env subnet.env 為 CNI Pod 啟動時自動產生，需先查明不能啟動的原因 檢查 nodes 上面是否缺 default route (ex : 0.0.0.0/0)，flannel 啟動時是透過搜尋 default route 為哪張網卡決定他要綁在哪個裝置上。 查測方式 kubectl get pods -A 取得掛掉的 Pod Name kubectl logs -n kube-system {Pod Name} 檢視問題 Timeout (12s) waiting for privilege escalation prompt link如出現 fatal: [node1]: FAILED! =\u003e {\"msg\": \"Timeout (12s) waiting for privilege escalation prompt: \"}\n確定是不是 VM 給太少記憶體，造成虛擬基網卡異常。 進入容器後，RHEL 因為預設的設定問題會造成 SSH 超時，建議執行下列指令 cat \u003e ~/.ssh/config \u003c\u003c EOF GSSAPIAuthentication no GSSAPIDelegateCredentials yes EOF sudo 卡住，多數原因為 sudo 會進行 hostname 的 DNS 反查，/etc/hosts 內缺此主機的 host 對應時即可能發生 hostname | awk '{print \"127.0.0.1 \"$1}' \u003e\u003e /etc/hosts "
+                href: "\/zh-hant\/docs\/deployment\/upgrade\/",
+                title: "升級 Kubernetes",
+                description: "開始升級 Kubernetes 叢集",
+                content: " report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考"
             }
         );
     index.add(
             {
                 id:  5 ,
-                href: "\/zh-hant\/docs\/deployment\/kubernetes-ports\/",
-                title: "Kubernetes 埠號",
-                description: "Kubernetes 所使用到的相關埠號",
-                content: "Control Plane Node link port explain 2379/tcp Client =\u003e ETCD Server 2380/tcp ETCD \u003c=\u003e ETCD 資料互相同步使用 6443/tcp Client =\u003e Client =\u003e Kube Api Server : The Kubernetes API server validates and configures data for the api objects which include pods, services, replicationcontrollers, and others. 10252/tcp Kube Controller Manager : The Kubernetes controller manager is a daemon that embeds the core control loops shipped with Kubernetes. 10251/tcp Kubernetes Scheduler : The Kubernetes scheduler is a policy-rich, topology-aware, workload-specific function that significantly impacts availability, performance, and capacity. 443/tcp Kube Api Server也會用到 Worker Node \u0026 Control Plane Node link port explain 10250/tcp Kubernetes Kubelet : The kubelet API is used to communicate between kube-scheduler and the node. 10255/tcp kubelet : Unauthenticated read-only port, allowing access to node state 10256/tcp kube-proxy : Health check server for Kube Proxy 30000-32767/tcp Services of type NodePort expose a port on each worker 53/tcp \u0026 53/udp DNS 443/tcp Api Server 4149/tcp kubelet : Default cAdvisor port used to query container metrics "
+                href: "\/zh-hant\/docs\/deployment\/troubleshooting\/",
+                title: "故障排除",
+                description: "開始安裝 Kubernetes 叢集",
+                content: "kubectl 指令找不到 link sudo su -c \"echo 'export PATH=\\${PATH}:/usr/local/bin' \u003e\u003e /root/.bashrc\" 目標節點下載失敗 link 下載第一個檔案就失敗 在目標主機上執行 curl [http://\u003c部署主機 IP\u003e/ --output /tmp/trash.bin 檢查 佈署主機 防火牆是否有開通 Port : 80 \u0026 35000 檢查 佈署主機 Nginx \u0026 Registry 服務是否有起來 檢查 佈署主機 資料目錄內是否有此對應的檔案 中間某個檔案單獨失敗 檢查檔案是否存在 到 ${HOME}/outputs/files/ 下確認此檔案是否存在，以及版本等資訊是否一致 檢查檔案 Hash 值是否正確 執行 Ansible-playbook 時加上 -v, -vvv, -vvvvvv 檢視詳細的 debug資訊，確認比對的 hash 值 移除 ${kubespray_project}/roles/download/tasks/download_file.yml 內，get_url module 內的 nolog 項目 Hash 值存放的位置：${kubespray_project}/roles/download/defaults/main.yml 推薦的修復方式：新增 ${kubespray_inventory_dir}/group_vars/all/patch.yml，並且在裡面設定一樣的變數名稱來取代錯誤的 hash 值。此方式新增的變數優先權比 roles/download/defaults/main.yml 高，所以執行時會自動替代掉舊值。 NodeLocalDNS CrashLoopBackOff 問題 link現階段可行目前解法如下\n修改 /inventory/group_vars/ks8_cluster/k8s-cluster.yml 內 resolvconf_mode 成 none 移除 /inventory/group_vars/all/all.yml內upstream_dns_servers前面的註解符號，讓此處的設定指向至少一個 DNS，此處的範例直接沿用官方的範例 8.8.8.8 \u0026 8.8.4.4。 參考來源 如果該環境內部並未使用 DNS，可以採取另一個方案\n修改 /inventory/group_vars/ks8_cluster/k8s-cluster.yml 內 enable_nodelocaldns 成 false Flannel 安裝失敗 link 安裝到一半顯示 Timeout when waiting for file /run/flannel/subnet.env subnet.env 為 CNI Pod 啟動時自動產生，需先查明不能啟動的原因 檢查 nodes 上面是否缺 default route (ex : 0.0.0.0/0)，flannel 啟動時是透過搜尋 default route 為哪張網卡決定他要綁在哪個裝置上。 查測方式 kubectl get pods -A 取得掛掉的 Pod Name kubectl logs -n kube-system {Pod Name} 檢視問題 Timeout (12s) waiting for privilege escalation prompt link如出現 fatal: [node1]: FAILED! =\u003e {\"msg\": \"Timeout (12s) waiting for privilege escalation prompt: \"}\n確定是不是 VM 給太少記憶體，造成虛擬基網卡異常。 進入容器後，RHEL 因為預設的設定問題會造成 SSH 超時，建議執行下列指令 cat \u003e ~/.ssh/config \u003c\u003c EOF GSSAPIAuthentication no GSSAPIDelegateCredentials yes EOF sudo 卡住，多數原因為 sudo 會進行 hostname 的 DNS 反查，/etc/hosts 內缺此主機的 host 對應時即可能發生 hostname | awk '{print \"127.0.0.1 \"$1}' \u003e\u003e /etc/hosts dial tcp x.x.x.x:6443: connect: no route to host link TASK [kubernetes/kubeadm : Join to cluster] **************************************************************************** fatal: [worker1]: FAILED! =\u003e {\"changed\": false, \"cmd\": [\"timeout\", \"-k\", \"120s\", \"120s\", \"/usr/local/bin/kubeadm\", \"join\", \"--config\", \"/etc/kubernetes/kubeadm-client.conf\", \"--ignore-preflight-errors=DirAvailable--etc-kubernetes-manifests\", \"--skip-phases=\"], \"delta\": \"0:01:00.446181\", \"end\": \"2024-01-17 14:02:52.298855\", \"msg\": \"non-zero return code\", \"rc\": 1, \"start\": \"2024-01-17 14:01:51.852674\", \"stderr\": \"\\t[WARNING FileExisting-tc]: tc not found in system path\\nerror execution phase preflight: couldn't validate the identity of the API Server: Get \\\"https://192.168.2.61:6443/api/v1/namespaces/kube-public/configmaps /cluster-info?timeout=10s\\\": dial tcp 192.168.2.61:6443: connect: no route to host\\nTo see the stack trace of this error execute with --v=5 or higher\", \"stderr_lines\": [\"\\t[WARNING FileExisting-tc]: tc not found in system path\", \"error execution phase preflight: couldn't validate the identity of the API Server: Get \\\"https://192.168.2.61:6443/api/v1/namespaces/kube-public/configmaps/cluster-info?timeout=10s\\\": dial tcp 192.168.2.61:6443: connect: no route to host\", \"To see the stack trace of this error execute with --v=5 or higher\"], \"stdout\": \"[preflight] Running pre-flight checks\", \"stdout_lines\": [\"[preflight] Running pre-flight checks\"]} Wednesday 17 January 2024 19:02:52 +0000 (0:01:01.433) 0:19:41.762 ***** TASK [kubernetes/kubeadm : Display kubeadm join stderr if any] ***************************************************************************************************************************************************** ok: [worker1] =\u003e { \"msg\": \"Joined with warnings\\n['\\\\t[WARNING FileExisting-tc]: tc not found in system path', 'error execution phase preflight: couldn\\\\'t validate the identity of the API Server: Get \\\"https://192.168.2.61:6443/api/v1/namespaces/kube-public/configmaps/cluster-info?timeout=10s\\\": dial tcp 192.168.2.61:6443: connect: no route to host', 'To see the stack trace of this error execute with --v=5 or higher']\\n\" } Wednesday 17 January 2024 19:03:53 +0000 (0:00:00.049) 0:20:43.119 ***** 執行過程中部分節點無法連線到 Kubernetes API Server，且出現 no route to host\n確定節點間網路皆正常異常\n先檢測兩節點間網路是否通暢，可以使用任何網路工具 (i.e ping) 確認是否能連通 可能是 VLAN tag、路由、實體網路出現狀況而導致\n嘗試連線 Kubernetes API Server\ncurl https://x.x.x.x:6443 防火牆\n若此時出現 no route to host 但節點間網路是可以互相連通，很可能就是防火牆導致 連到該 IP 所屬節點後，利用指令檢查防火牆狀況\n$ sudo firewall-cmd --list-all public (active) target: default ... services: cockpit dhcpv6-client dns https kube-worker ssh ports: \u003c---- 為空表示沒有開放任何 Port protocols: ... 加入規則開放 6443\nsudo firewall-cmd --add-port=6443/tcp --permanent sudo firewall-cmd --reload sudo firewall-cmd --list-all 確認 6443 是否成功加入，若成功會看到 ports: 6443/tcp\n可以查看"
             }
         );
     index.add(
             {
                 id:  6 ,
+                href: "\/zh-hant\/docs\/deployment\/kubernetes-ports\/",
+                title: "Kubernetes 埠號",
+                description: "Kubernetes 所使用到的相關埠號",
+                content: "Control Plane Node link port explain 2379/tcp Client =\u003e ETCD Server 2380/tcp ETCD \u003c=\u003e ETCD 資料互相同步使用 6443/tcp Client =\u003e Client =\u003e Kube Api Server : The Kubernetes API server validates and configures data for the api objects which include pods, services, replicationcontrollers, and others. 10252/tcp Kube Controller Manager : The Kubernetes controller manager is a daemon that embeds the core control loops shipped with Kubernetes. 10251/tcp Kubernetes Scheduler : The Kubernetes scheduler is a policy-rich, topology-aware, workload-specific function that significantly impacts availability, performance, and capacity. 443/tcp Kube Api Server也會用到 Worker Node \u0026 Control Plane Node link port explain 10250/tcp Kubernetes Kubelet : The kubelet API is used to communicate between kube-scheduler and the node. 10255/tcp kubelet : Unauthenticated read-only port, allowing access to node state 10256/tcp kube-proxy : Health check server for Kube Proxy 30000-32767/tcp Services of type NodePort expose a port on each worker 53/tcp \u0026 53/udp DNS 443/tcp Api Server 4149/tcp kubelet : Default cAdvisor port used to query container metrics Others link port explain 22/tcp SSH 80/tcp Web or Ingress "
+            }
+        );
+    index.add(
+            {
+                id:  7 ,
                 href: "\/zh-hant\/docs\/",
                 title: "Documentation",
                 description: "Explore our guides and examples to deploy your Hugo site using the Lotus Docs theme.",
@@ -1349,7 +1451,7 @@ resolvconf_mode: none</code>
         );
     index.add(
             {
-                id:  7 ,
+                id:  8 ,
                 href: "\/zh-hant\/docs\/deployment\/",
                 title: "Kubernetes 叢集建置",
                 description: "Kubernetes 安裝環境準備與建置教學",

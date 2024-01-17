@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Project Documentation</title>
+    <title>Kubespray Offline | Srcmesh</title>
     <link>/zh-hant/</link>
-    <description>Recent content on Project Documentation</description>
+    <description>Recent content on Kubespray Offline | Srcmesh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hant</language>
     <lastBuildDate>Fri, 25 Aug 2023 15:52:21 +0100</lastBuildDate>
@@ -13,14 +13,14 @@
       <link>/zh-hant/docs/deployment/setup-deploy-enviroment/</link>
       <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
       <guid>/zh-hant/docs/deployment/setup-deploy-enviroment/</guid>
-      <description>notifications 除「創建部署用帳號」需在全部主機操作外，以下指令皆請於部署主機上進行操作 環境初步設置 link名詞解釋 link 部署主機：執行 Kubespray 腳本的主機 目標主機：欲安裝 Kubernetes 的主機 部署主機安裝 link部署主機將用來執行 Kubespray 的環境，建議專機專用避免受其他外部因素影響。&#xA;系統要求 link Linux 主機 (VM 即可) 腳本執行環境已經全面容器化，可為 Ubuntu、Debian、RHEL，如希望萬無一失則建議採用與目標主機相同之系統 設定過程中會自動安裝 containerd 與 nerdctl 等容器執行環境，若部署主機上已有安裝相關套件，建議移除避免異常 由於套件與鏡像容量較大，建議硬碟空間需 &amp;gt; 100GB 創建部署用帳號 link需要在每台目標機器建立帳號以供 Kubespray 腳本用來安裝，且該帳號需滿足以下條件&#xA;擁有 sudo 權限 開啟能以 Public Key 登入 產生 SSH Public Key Pair link在部署主機上產生 RSA Key Pair&#xA;if [[ ! -e ~/.ssh/id_rsa.pub &amp;amp;&amp;amp; ! -e ~/.ssh/id_rsa ]]; then ssh-keygen -N &amp;#34;&amp;#34; -t rsa fi 散佈 Public Key link把剛產生的 Public Key 安裝到所有目標主機上</description>
+      <description>notifications 除「創建部署用帳號」需在全部主機操作外，以下指令皆請於部署主機上進行操作 環境初步設置 link名詞解釋 link 部署主機：執行 Kubespray 腳本的主機 目標主機：欲安裝 Kubernetes 的主機 部署主機安裝 link部署主機將用來執行 Kubespray 的環境，建議專機專用避免受其他外部因素影響。&#xA;系統要求 link Linux 主機 (VM 即可) 腳本執行環境已經全面容器化，因此部署主機的作業系統可為 Ubuntu、Debian、RHEL，如希望萬無一失則建議採用與目標主機相同之系統 設定過程中會自動安裝 containerd 與 nerdctl 等容器執行環境，若部署主機上已有安裝相關套件，建議移除避免異常 由於套件與鏡像容量較大，建議硬碟空間需 &amp;gt; 100GB 網路要求 link 部署主機與目標主機之間網路需直接連通，不經過任何堡壘機 創建部署用帳號 link需要在每台目標機器建立帳號以供 Kubespray 腳本用來安裝，且該帳號需滿足以下條件&#xA;擁有 sudo 權限 開啟能以 Public Key 登入 產生 SSH Public Key Pair link在部署主機上產生 RSA Key Pair&#xA;if [[ ! -e ~/.ssh/id_rsa.pub &amp;amp;&amp;amp; ! -e ~/.ssh/id_rsa ]]; then ssh-keygen -N &amp;#34;&amp;#34; -t rsa fi 散佈 Public Key link把剛產生的 Public Key 安裝到所有目標主機上</description>
     </item>
     <item>
       <title>啟動 Kubespray 執行環境</title>
       <link>/zh-hant/docs/deployment/enter-kubespray-exe-env/</link>
       <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
       <guid>/zh-hant/docs/deployment/enter-kubespray-exe-env/</guid>
-      <description>notifications 以下指令皆請於部署主機上進行操作 啟動安裝環境 link以下指令將解壓部署腳本，並以容器方式啟動所有安裝過程中所需的服務容器&#xA;cd ${HOME}/outputs/ &amp;amp;&amp;amp; ./extract-kubespray.sh (Optional) 如需手動移除舊有資料 sudo /usr/local/bin/nerdctl rm -f $(sudo /usr/local/bin/nerdctl ps -a -q) sudo /usr/local/bin/nerdctl rmi -f $(sudo /usr/local/bin/nerdctl images -a -q) sudo /usr/local/bin/nerdctl ps -a sudo /usr/local/bin/nerdctl images -a sudo rm -rf ${HOME}/mycluster/ ${HOME}/outputs/ 設定離線安裝之部署 Package Repo 與 Container Registry&#xA;report 以下指令會將套件與鏡像進行解壓縮將佔用大量硬碟空間，請務必確保主機上有至少 30GB 以上之空間 cd ${HOME}/outputs/ &amp;amp;&amp;amp; ./setup-all.sh 自動化腳本內的流程驟說明 (無需手動執行) 設定防火牆 (RHEL)&#xA;sudo firewall-cmd &amp;ndash;zone=public &amp;ndash;add-port=35000/tcp &amp;ndash;permanent sudo firewall-cmd &amp;ndash;zone=public &amp;ndash;add-service=http &amp;ndash;permanent sudo firewall-cmd &amp;ndash;reload 安裝 containerd</description>
+      <description>notifications 以下指令皆請於部署主機上進行操作 啟動安裝環境 link以下指令將解壓部署腳本，並以容器方式啟動所有安裝過程中所需的服務容器&#xA;cd ${HOME}/outputs/ &amp;amp;&amp;amp; ./extract-kubespray.sh (Optional) 如需手動移除舊有資料 sudo /usr/local/bin/nerdctl rm -f $(sudo /usr/local/bin/nerdctl ps -a -q) sudo /usr/local/bin/nerdctl rmi -f $(sudo /usr/local/bin/nerdctl images -a -q) sudo /usr/local/bin/nerdctl ps -a sudo /usr/local/bin/nerdctl images -a sudo rm -rf ${HOME}/mycluster/ ${HOME}/outputs/ 設定離線安裝之部署 Package Repo 與 Container Registry&#xA;設定遠端 Container Registry link企業內部通常會有用來存放鏡像的 Container Registry (i.e Harbor, Quay)&#xA;需要在部署前將此次所用的到鏡像推送到 Container Registry 儲存，避免後續鏡像因故消失無法重新自遠端下載。&#xA;cd ${HOME}/outputs/ &amp;amp;&amp;amp; vim config.sh 正式環境部署務必調整以下參數 (測試環境可以略過)&#xA;REGISTRY_HOST=${REGISTRY_HOST:-&amp;#34;localhost&amp;#34;} REGISTRY_PORT=${REGISTRY_PORT:-35000} REGISTRY_REPO=${REGISTRY_REPO:-&amp;#34;&amp;#34;} REGISTRY_USER=${REGISTRY_USER:-&amp;#34;&amp;#34;} REGISTRY_PASSWORD=${REGISTRY_PASSWORD:-&amp;#34;&amp;#34;} 啟動相關服務 link report 以下指令會將套件與鏡像進行解壓縮將佔用大量硬碟空間，請務必確保主機上有至少 30GB 以上之空間 cd ${HOME}/outputs/ &amp;amp;&amp;amp; .</description>
     </item>
     <item>
       <title>部署參數調整</title>
@@ -34,7 +34,14 @@
       <link>/zh-hant/docs/deployment/installation/</link>
       <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
       <guid>/zh-hant/docs/deployment/installation/</guid>
-      <description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境&#xA;/inventory/hosts.yml 為剛剛生成的部署節點設定檔，如你的檔名有變換請調整下面指令 設定安裝日誌紀錄路徑 link預設安裝日誌只出現在 Console 上，考慮到安裝時間過長 IT 人員無法時刻關注安裝過程，我們需要開啟相關日誌設定&#xA;echo &amp;#34;log_path=/inventory/playbook.log&amp;#34; &amp;gt;&amp;gt; /kubespray/ansible.cfg 後面查詢日誌或錯誤時，可以在 /inventory/playbook.log 查詢所有安裝日誌&#xA;修改目標主機 APT/YUM Repository &amp;amp; Firewall 設定 link安裝過程中會需要從部署主機下載安裝套件，需要暫時將節點的套件下載位置指向前面步驟啟動的服務，並暫時關閉防火牆。&#xA;cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa /playbook/offline-repo.yml -v -K -K 等同於 --ask-become-pass，執行時跳出視窗詢問目標節點的 sudo 密碼。 開始安裝 Kubernetes link cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa cluster.yml -v -b -K 舊版本 (i.e v2.21) Kubespary 調整為非 Calico 的 CNI 會出現異常，請加上 --skip-tags=multus</description>
+      <description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境&#xA;/inventory/hosts.yml 為剛剛生成的部署節點設定檔，如你的檔名有變換請調整下面指令 設定安裝日誌紀錄路徑 link預設安裝日誌只出現在 Console 上，考慮到安裝時間過長 IT 人員無法時刻關注安裝過程，我們需要開啟相關日誌設定&#xA;export ANSIBLE_LOG_PATH=/inventory/playbook.log 後面查詢日誌或錯誤時，可以在 /inventory/playbook.log 查詢所有安裝日誌&#xA;修改目標主機 Repository &amp;amp; Firewall 設定 link安裝過程中會需要從部署主機下載安裝套件，需要暫時將節點的套件下載位置指向前面步驟啟動的服務，並暫時關閉防火牆。&#xA;cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa /playbook/offline-repo.yml -v -K -K 等同於 --ask-become-pass，執行時跳出視窗詢問目標節點的 sudo 密碼。 開始安裝 Kubernetes link Kubespray v2.21 v2.22&amp;#43; 舊版本 (i.e v2.21) Kubespary 調整為非 Calico 的 CNI 會出現異常，請加上 --skip-tags=multus&#xA;cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa cluster.yml -v -b -K --skip-tags=multus cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.</description>
+    </item>
+    <item>
+      <title>升級 Kubernetes</title>
+      <link>/zh-hant/docs/deployment/upgrade/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/deployment/upgrade/</guid>
+      <description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境&#xA;升級前重要事項 link請務必於升級前，按照官方建議備份 etcd 叢集內的資料，避免升級損壞時無法修復&#xA;https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/ kubespray 與 kubernetes 版本關係 link官方分支在下個版本釋出後，先前版本分支即鮮少更新， 因此 Kubespray 官方安裝腳本所安裝的 Kubernetes 版本通常較舊&#xA;kubespray kubernetes 2.21.x 1.25.x 2.22.x 1.26.x 2.23.0 1.27.x 可以透過以下方式確認交付的離線安裝包版本&#xA;cat /kubespray/config.sh | grep VERSION 會看到類似下面輸出&#xA;# 代表基於官方 v2.21.0 分支 (Kubernetes v1.25) 修改後交付的第 1 個版本 KUBESPRAY_VERSION=v2.21.0-1.25-1 # 代表此離線安裝支援的 Kubernetes 版本為 v1.25.16 KUBE_VERSION=v1.25.16 為避免資安問題，我們提供最新 3 個 Kubernetes 版本的離線安裝包，避免安裝過時或帶有已知 CVE 的程式。&#xA;如需提供大於 3 個版本以上之版本維護，請洽詢業務同仁 設定日誌紀錄路徑 link預設日誌只出現在 Console 上，考慮到安裝時間過長 IT 人員無法時刻關注安裝過程，我們需要開啟相關日誌設定</description>
     </item>
     <item>
       <title>故障排除</title>

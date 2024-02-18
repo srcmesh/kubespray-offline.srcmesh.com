@@ -313,7 +313,7 @@
                     </button>
                     <ul class="dropdown-menu text-end">
                         
-    <li><a class="dropdown-item" href="https://nightly--ubiquitous-pudding-8cedc2.netlify.app/zh-hant/docs/kubernetes-offline/pain-point/">Nightly</a></li>
+    <li><a class="dropdown-item" href="https://nightly--ubiquitous-pudding-8cedc2.netlify.app/zh-hant/docs/troubleshooting/common/">Nightly</a></li>
     
 
     
@@ -525,14 +525,14 @@
 		
 
 		<a class="nav-link  active"
-		   id="bdcaefTab" data-bs-toggle="tab" data-bs-target="#bdcaef"
-		   type="button" role="tab" aria-controls="bdcaef" aria-selected="true">Kubespray v2.21</a>
+		   id="aecbfdTab" data-bs-toggle="tab" data-bs-target="#aecbfd"
+		   type="button" role="tab" aria-controls="aecbfd" aria-selected="true">Kubespray v2.21</a>
 
 		
 
 		<a class="nav-link "
-		   id="befacdTab" data-bs-toggle="tab" data-bs-target="#befacd"
-		   type="button" role="tab" aria-controls="befacd" aria-selected="true">v2.22&#43;</a>
+		   id="dfcebaTab" data-bs-toggle="tab" data-bs-target="#dfceba"
+		   type="button" role="tab" aria-controls="dfceba" aria-selected="true">v2.22&#43;</a>
 
 		
 
@@ -548,7 +548,7 @@
 
 
 
-<div class="tab-pane fade show active" id="bdcaef" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="aecbfd" role="tabpanel" aria-labelledby="nav-1">
 
 	<p>舊版本 (i.e v2.21) Kubespary 調整為非 <code>Calico</code> 的 CNI 會出現<a href="https://github.com/kubernetes-sigs/kubespray/issues/9703" rel="external" target="_blank">異常<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a>，請加上 <code>--skip-tags=multus</code></p>
 
@@ -579,7 +579,7 @@
 
 
 
-<div class="tab-pane fade" id="befacd" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="dfceba" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -1086,7 +1086,7 @@
                 href: "\/zh-hant\/docs\/kubernetes-offline\/pain-point\/",
                 title: "企業痛點",
                 description: "生態系蓬勃發展帶來的副作用",
-                content: "潛在隱性成本 link近年各國針對企業的資訊安全越發重視，部分產業 (如金融產業、半導體業、軍工業) 要求內外網隔離甚至 Air Gap 環境\n需要花費大量時間將安裝所需套件、鏡像搬移至內部以實現全離線安裝的需求。 除顯性成本如時間、人力外，企業仍須關注以下議題帶來潛在隱性成本，包含:\nKubernetes 版本維護 套件相容性測試 安裝包管理與維護 相較於 Kubernetes 生態系蓬勃發展，軟體版本長年保持高頻更新，企業為確保生產環境持續運作，要求基礎設施保持穩定致使更新頻率較低。 最終導致企業難以長期關注潛在風險，使得每次升級都是種挑戰。甚至無法做出正確的版本路線規劃，從而影響服務可用性\nKubernetes 生命週期 linkKubernetes 一年約更新 3 個版號，每個版本官方提供 450 天上下的維護支援\n由於生態系發展迅速，若與最新版本差異過大將會發生:\n開源軟體不再收到更新支援 沒有修補的 CVE 漏洞 Kubernetes 物件版本落差過大，導致升級困難 通常建議保持在 N-2 的版本，比如最新版本為 1.29，則企業生產環境建議最低版本為 1.27 以確保跟上軟體生態系\ngantt dateFormat YYYY-MM-DD title Kubernetes Release Cycle section Active 1.29.x :active, 1.28, 2023-12-13, 2025-02-28 1.28.x :active, 1.28, 2023-08-15, 2024-10-28 section Maintenance 1.27.x :done, 1.27, 2023-04-11, 2024-06-28 1.26.x :done, 1.26, 2022-12-08, 2024-02-28 section End of Life 1.25.x :crit, 1.25, 2022-08-23, 2023-10-27 1.24.x :crit, 1.24, 2022-05-03, 2023-07-28 1.23.x :crit, 1.23, 2021-12-07, 2023-02-28 1.22.x :crit, 1.22, 2021-08-04, 2022-10-28 另外，Kubernetes 版本若差距過大，原地升級通常無法直接升級至指定版號，比方說 1.18 -\u003e 1.24 的建議升級路徑:\n1.18 -\u003e 1.19 -\u003e 1.20 -\u003e 1.21 -\u003e 1.22 -\u003e 1.23 -\u003e 1.24 此種路徑不僅將耗費大量時間升級拉長維護時間，跨越多個版號升級中途需要驗證軟體以及 Kubernetes 物件相容性\n對於需要常年維持上線的生產環境是無法容忍且風險隨之上升。根據客戶實際案例，我們建議:\n保持每 6~8 個月升級頻率 通常每 4 個月釋出新版，新版本初期較不穩定稍微錯開較為適當 若為 CVE 緊急版本，則視情況升級 版本差距 \u003e 3 個大版號 建議採用「先建後拆」模式，同時平行驗證並保證生產環境持續運作 請參考我們的客戶案例 kubespray 與 kubernetes 版本關係 linkKubespray分支在新版本釋出後，通常舊分支即鮮少更新。 致使若未跟上最新分支即可能安裝到 Kubernetes 版本通常較舊。\n每次新版本釋出時會連帶淘汰部分功能與設定，現階段官方建議 不要隨意跳過 Kubespray 版本\n比如 2.21 升級至 2.24 時，需按照 2.21 -\u003e 2.22 -\u003e 2.23 -\u003e 2.24 升級路徑進行。\n考慮到企業需要長期穩定支援，部分功能與設定若淘汰將導致服務異常，需謹慎思考適合的 Kubernetes 版本與未來升級路線規劃\n"
+                content: "潛在隱性成本 link近年各國針對企業的資訊安全越發重視，部分產業 (如金融產業、半導體業、軍工業) 要求內外網隔離甚至 Air Gap 環境\n需要花費大量時間將安裝所需套件、鏡像搬移至內部以實現全離線安裝的需求。 除顯性成本如時間、人力外，企業仍須關注以下議題帶來潛在隱性成本，包含:\nKubernetes 版本維護 套件相容性測試 安裝包管理與維護 相較於 Kubernetes 生態系蓬勃發展，軟體版本長年保持高頻更新，企業為確保生產環境持續運作，要求基礎設施保持穩定致使更新頻率較低。 最終導致企業難以長期關注潛在風險，使得每次升級都是種挑戰。甚至無法做出正確的版本路線規劃，從而影響服務可用性\nKubernetes 生命週期 linkKubernetes 一年約更新 3 個版號，每個版本官方提供 450 天上下的維護支援\n由於生態系發展迅速，若與最新版本差異過大將會發生:\n開源軟體不再收到更新支援 沒有修補的 CVE 漏洞 Kubernetes 物件版本落差過大，導致升級困難 建議保持 \u003e N-2 的版本，比如最新版本為 1.29 則企業生產環境建議最低版本應為 1.27 以確保跟上軟體生態系\ngantt dateFormat YYYY-MM-DD title Kubernetes Release Cycle section Active 1.29.x :active, 1.28, 2023-12-13, 2025-02-28 1.28.x :active, 1.28, 2023-08-15, 2024-10-28 section Maintenance 1.27.x :done, 1.27, 2023-04-11, 2024-06-28 1.26.x :done, 1.26, 2022-12-08, 2024-02-28 section End of Life 1.25.x :crit, 1.25, 2022-08-23, 2023-10-27 1.24.x :crit, 1.24, 2022-05-03, 2023-07-28 1.23.x :crit, 1.23, 2021-12-07, 2023-02-28 1.22.x :crit, 1.22, 2021-08-04, 2022-10-28 另外，Kubernetes 版本若差距過大，原地升級通常無法直接升級至指定版號，比方說 1.18 -\u003e 1.24 的建議升級路徑:\n1.18 -\u003e 1.19 -\u003e 1.20 -\u003e 1.21 -\u003e 1.22 -\u003e 1.23 -\u003e 1.24 此種路徑不僅將耗費大量時間升級拉長維護時間，跨越多個版號升級中途需要驗證軟體以及 Kubernetes 物件相容性\n對於需要常年維持上線的生產環境是無法容忍且風險隨之上升。根據客戶實際案例，我們建議:\n保持每 6~8 個月升級頻率 通常每 4 個月釋出新版，新版本初期較不穩定稍微錯開較為適當 若為 CVE 緊急版本，則視情況升級 版本差距 \u003e 3 個大版號 建議採用「先建後拆」模式，同時平行驗證並保證生產環境持續運作 請參考我們的客戶案例 kubespray 與 kubernetes 版本關係 linkKubespray分支在新版本釋出後，通常舊分支即鮮少更新。 致使若未跟上最新分支即可能安裝到 Kubernetes 版本通常較舊\n每次 Kubespray 新版本釋出時會連帶淘汰部分功能與設定，現階段官方建議 不要略過中間任意版本\n比如希望將 Kubespray 從 2.21 升級至 2.24 時，需按照 2.21 -\u003e 2.22 -\u003e 2.23 -\u003e 2.24 升級路徑進行\n考慮到企業需要長期穩定支援，部分功能與設定若淘汰將導致服務異常，需謹慎思考適合的 Kubernetes 版本與未來升級路線規劃\n如認為規劃過於複雜且充滿不確定性，請參考"
             }
         );
     index.add(
@@ -1095,7 +1095,7 @@
                 href: "\/zh-hant\/docs\/kubernetes-offline\/plan-tiers\/",
                 title: "服務訂閱方案介紹",
                 description: "Kubespray-Offline 服務訂閱介紹",
-                content: " 讓企業專注於高價值核心服務，我們是您的最佳後勤人員\n方案介紹 linkKubespray Offline 協助企業解決無暇關注版本異動或投注人力的問題，適合重視資訊安全且有離線安裝需求之企業推出的訂閱制服務\nCommunity link 離線安裝包 Kubespray * 安裝教學文件 Basic link 離線安裝包 Kubespray * 安裝教學文件 叢集升級路線規劃 工單支援 ** 資安 CVE 通知 Standard link 離線安裝包 Kubespray * 主流開源軟體 安裝教學文件 叢集升級路線規劃 工單支援 ** 資安 CVE 通知 交互式 CLI (2024 Q2) 評估報告 Kubernetes 版本升級影響評估 CVE 影響評估 Premium link 離線安裝包 Kubespray * 主流開源軟體 安裝教學文件 叢集升級路線規劃 工單支援 ** 資安 CVE 通知 交互式 CLI (2024 Q2) 評估報告 Kubernetes 版本升級影響評估 \u0026 解決方案規劃 CVE 影響評估 \u0026 解決方案規劃 客製分支版本維護 指定套件版本 客製化 Patch 管理與修正 方案詳細說明 link發佈週期 link 方案 發佈時間 CVE 緊急版本 描述 Community 12 月 X 最新 3 個 Kubernetes 版本 Basic 6/12 月 O 最新 3 個 Kubernetes 版本 Standard 3/6/9/12 月 O 最新 5 個 Kubernetes 版本 Premium 隨需 O 可指定任意版本 工單支援 link 方案 次數 (每年) 反應時間 Community 0 - Basic 3 1 工作天回覆 Standard 10 工作天內 4 小時回覆 Premium 20 工作天內 2 小時回覆 額外服務項目 link 代客叢集安裝、調試 代客軟體安裝 如為商用軟體，需自行準備原廠授權與安裝腳本。如無腳本需額外洽詢 代客叢集維運 - 5x8、7x24 顧問諮詢服務 客戶技術管理 (TAM) 我們支援的版本 link kubespray 版本 預設 K8s 版本 最低支援 K8S 版本 2.24.x 1.28.x 1.26.0 2.23.x 1.27.x 1.25.0 2.22.x 1.26.x 1.24.0 如希望支援版本未列在其中，您將需要訂閱 Premium 方案以獲得客製化服務\n如有相關需求，請來信洽詢 sales@srcmesh.com\n"
+                content: " 讓企業專注於高價值核心任務，我們是您的最佳後勤人員\n方案介紹 linkKubespray Offline 協助企業解決無暇關注版本異動或投注人力的問題，適合重視資訊安全且有離線安裝需求之企業推出的訂閱制服務\nCommunity link 離線安裝包 Kubespray * 安裝教學文件 Basic link 離線安裝包 Kubespray * 安裝教學文件 叢集升級路線規劃 工單支援 ** 資安 CVE 通知 Standard link 離線安裝包 Kubespray * 主流開源軟體 安裝教學文件 叢集升級路線規劃 工單支援 ** 資安 CVE 通知 交互式 CLI (2024 Q2) 評估報告 Kubernetes 版本升級影響評估 CVE 影響評估 Premium link 離線安裝包 Kubespray * 主流開源軟體 安裝教學文件 叢集升級路線規劃 工單支援 ** 資安 CVE 通知 交互式 CLI (2024 Q2) 評估報告 Kubernetes 版本升級影響評估 \u0026 解決方案規劃 CVE 影響評估 \u0026 解決方案規劃 客製分支版本維護 指定套件版本 客製化 Patch 管理與修正 方案詳細說明 link發佈週期 link 方案 發佈時間 CVE 緊急版本 描述 Community 12 月 X 最新 3 個 Kubernetes 版本 Basic 6/12 月 O 最新 3 個 Kubernetes 版本 Standard 3/6/9/12 月 O 最新 5 個 Kubernetes 版本 Premium 隨需 O 可指定任意版本 工單支援 link 方案 次數 (每年) 反應時間 Community 0 - Basic 3 1 工作天回覆 Standard 10 工作天內 4 小時回覆 Premium 20 工作天內 2 小時回覆 額外服務項目 link 代客叢集安裝、調試 代客軟體安裝 如為商用軟體，需自行準備原廠授權與安裝腳本。如無腳本需額外洽詢 代客叢集維運 - 5x8、7x24 顧問諮詢服務 客戶技術管理 (TAM) 我們支援的版本 link kubespray 版本 預設 K8s 版本 最低支援 K8S 版本 2.24.x 1.28.x 1.26.0 2.23.x 1.27.x 1.25.0 2.22.x 1.26.x 1.24.0 如希望支援版本未列在其中，您將需要訂閱 Premium 方案以獲得客製化服務\n如有相關需求，請來信洽詢 sales@srcmesh.com\n"
             }
         );
     index.add(

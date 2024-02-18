@@ -1,32 +1,82 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kubespray Offline | Srcmesh</title><link>/zh-hant/</link><description>Recent content on Kubespray Offline | Srcmesh</description><generator>Hugo -- gohugo.io</generator><language>zh-Hant</language><lastBuildDate>Fri, 25 Aug 2023 15:52:21 +0100</lastBuildDate><atom:link href="/zh-hant/index.xml" rel="self" type="application/rss+xml"/><item><title>企業痛點</title><link>/zh-hant/docs/kubernetes-offline/pain-point/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/kubernetes-offline/pain-point/</guid><description>潛在隱性成本 link近年各國針對企業的資訊安全越發重視，部分產業 (如金融產業、半導體業、軍工業) 要求內外網隔離甚至 Air Gap 環境
-需要花費大量時間將安裝所需套件、鏡像搬移至內部以實現全離線安裝的需求。 除顯性成本如時間、人力外，企業仍須關注以下議題帶來潛在隱性成本，包含:
-Kubernetes 版本維護 套件相容性測試 安裝包管理與維護 相較於 Kubernetes 生態系蓬勃發展，軟體版本長年保持高頻更新，企業為確保生產環境持續運作，要求基礎設施保持穩定致使更新頻率較低。 最終導致企業難以長期關注潛在風險，使得每次升級都是種挑戰。甚至無法做出正確的版本路線規劃，從而影響服務可用性
-Kubernetes 生命週期 linkKubernetes 一年約更新 3 個版號，每個版本官方提供 450 天上下的維護支援
-由於生態系發展迅速，若與最新版本差異過大將會發生:
-開源軟體不再收到更新支援 沒有修補的 CVE 漏洞 Kubernetes 物件版本落差過大，導致升級困難 通常建議保持在 N-2 的版本，比如最新版本為 1.29，則企業生產環境建議最低版本為 1.27 以確保跟上軟體生態系
-gantt dateFormat YYYY-MM-DD title Kubernetes Release Cycle section Active 1.29.x :active, 1.28, 2023-12-13, 2025-02-28 1.28.x :active, 1.28, 2023-08-15, 2024-10-28 section Maintenance 1.27.x :done, 1.27, 2023-04-11, 2024-06-28 1.26.x :done, 1.26, 2022-12-08, 2024-02-28 section End of Life 1.</description></item><item><title>服務方案介紹</title><link>/zh-hant/docs/kubernetes-offline/plan-tiers/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/kubernetes-offline/plan-tiers/</guid><description>讓企業專注於高價值核心服務，我們是您的最佳後勤人員
-方案說明 linkKubespray Offline 協助企業解決無暇關注版本異動或投注人力的問題，適合重視資訊安全且有離線安裝需求之企業推出的訂閱制服務
-主要提供服務項目:
-Plus link 升級路線規劃 離線安裝包 (每半年) Kubespray 每季 2 次工單支援 (遠端 5x8 服務) 資安 CVE 通知 交互式 CLI (2024 Q2) Pro link 升級路線規劃 離線安裝包 (每季，CVE 緊急版本不受此限) Kubespray 主流開源軟體 每季 5 次工單支援 (遠端 5x8 服務) 資安 CVE 通知 交互式 CLI (2024 Q2) 評估報告 Kubernetes 版本升級影響評估 CVE 影響評估 Premium link 升級路線規劃 離線安裝包 (隨需) Kubespray 主流開源軟體 每季 10 次工單支援 (近/遠端 5x8 服務) 資安 CVE 通知 交互式 CLI (2024 Q2) 評估報告 Kubernetes 版本升級影響評估 &amp;amp; 解決方案規劃 CVE 影響評估 &amp;amp; 解決方案規劃 客製分支版本維護 指定套件版本 客製化 Patch 管理與修正 Optional link 代客叢集安裝、調試 代客軟體安裝 如為商用軟體，需自行準備原廠授權與安裝腳本。如無腳本需額外洽詢 代客叢集維運 - 5x8、7x24 顧問 TAM 服務 如有相關需求，請來信洽詢 sales@srcmesh.</description></item><item><title>通用故障</title><link>/zh-hant/docs/troubleshooting/rhel/common/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/troubleshooting/rhel/common/</guid><description>SSH 超時 linkRHEL 因為預設的設定問題會造成 SSH 超時，建議執行下列指令
-cat &amp;gt; ~/.ssh/config &amp;lt;&amp;lt; EOF GSSAPIAuthentication no GSSAPIDelegateCredentials yes EOF 更多通用故障，請參考連結</description></item><item><title>準備部署環境</title><link>/zh-hant/docs/getting-started/setup-deploy-enviroment/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/getting-started/setup-deploy-enviroment/</guid><description>notifications 除「創建部署用帳號」需在全部主機操作外，以下指令皆請於部署主機上進行操作 部署主機安裝 link部署主機將用來執行 Kubespray 的環境，建議專機專用避免受其他外部因素影響。
-名詞解釋 link 部署主機：執行 Kubespray 腳本的主機 目標主機：欲安裝 Kubernetes 的主機 系統要求 link Linux 主機 (VM 即可) 腳本執行環境已經全面容器化，因此部署主機的作業系統可為 Ubuntu、Debian、RHEL，如希望萬無一失則建議採用與目標主機相同之系統 設定過程中會自動安裝 containerd 與 nerdctl 等容器執行環境，若部署主機上已有安裝相關套件，建議移除避免異常 由於套件與鏡像容量較大，建議硬碟空間需 &amp;gt; 100GB 網路要求 link 部署主機與目標主機之間網路需直接連通，不經過任何堡壘機 創建部署用帳號 link需要在每台目標機器建立帳號以供 Kubespray 腳本用來安裝，且該帳號需滿足以下條件
-擁有 sudo 權限 開啟能以 Public Key 登入 產生 SSH Public Key Pair link在部署主機上產生 RSA Key Pair
-if [[ ! -e ~/.ssh/id_rsa.pub &amp;amp;&amp;amp; ! -e ~/.ssh/id_rsa ]]; then ssh-keygen -N &amp;#34;&amp;#34; -t rsa fi 散佈 Public Key link把剛產生的 Public Key 安裝到所有目標主機上</description></item><item><title>啟動 Kubespray 執行環境</title><link>/zh-hant/docs/getting-started/enter-kubespray-exe-env/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/getting-started/enter-kubespray-exe-env/</guid><description>notifications 以下指令皆請於部署主機上進行操作 確認版本是否符合相符 link可以透過以下方式確認交付的離線安裝包版本
-# 請注意此時為剛解壓完成的步驟，尚未進入到 Kubespray 容器內 cat config.sh | grep VERSION 會看到類似下面範例輸出
-# 代表基於官方 v2.21.0 分支 (Kubernetes v1.25) 修改後交付的第 1 個版本 KUBESPRAY_VERSION=v2.21.0-1.25-1 # 代表此離線安裝包支援 Kubernetes 版本為 v1.25.16 KUBE_VERSION=v1.25.16 啟動安裝環境 link以下指令將解壓部署腳本，並以容器方式啟動所有安裝過程中所需的服務容器
-cd ${HOME}/outputs/ &amp;amp;&amp;amp; ./extract-kubespray.sh (Optional) 如需手動移除舊有資料 sudo /usr/local/bin/nerdctl rm -f $(sudo /usr/local/bin/nerdctl ps -a -q) sudo /usr/local/bin/nerdctl rmi -f $(sudo /usr/local/bin/nerdctl images -a -q) sudo /usr/local/bin/nerdctl ps -a sudo /usr/local/bin/nerdctl images -a sudo rm -rf ${HOME}/mycluster/ ${HOME}/outputs/ 設定離線安裝之部署 Package Repo 與 Container Registry</description></item><item><title>部署前參數調整</title><link>/zh-hant/docs/getting-started/config-adjustment/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/getting-started/config-adjustment/</guid><description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境
-notifications 設定檔只需要在第一次建置時修改同時寫回部署主機上，未來只要執行 ${HOME}/outputs/start-kubespray.sh 就可以自動載入先前所有設定 OS 設定 link請根據目標主機的 OS 選擇對應設定調整
-RHEL Debian 12 進入容器後，RHEL 因為預設的設定問題會造成ssh超時，建議執行下列指令
-cat &amp;gt; ~/.ssh/config &amp;lt;&amp;lt; EOF GSSAPIAuthentication no GSSAPIDelegateCredentials yes EOF 修正 Kubespray 官方設定，補上套件支援
-cat &amp;gt; /kubespray/roles/kubernetes/preinstall/vars/debian-12.yml &amp;lt;&amp;lt; EOF --- required_pkgs: - python3-apt - gnupg - apt-transport-https - software-properties-common - conntrack - iptables - apparmor - libseccomp2 - mergerfs EOF 生成 Inventory 檔 (Optional) link此處我們使用工具來自動生成 Inventory 檔案 (YAML 格式)，如已經有既定的 Inventory 檔亦可使用</description></item><item><title>安裝 &amp; 建置</title><link>/zh-hant/docs/getting-started/installation/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/getting-started/installation/</guid><description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境
-/inventory/hosts.yml 為剛剛生成的部署節點設定檔，如你的檔名有變換請調整下面指令 設定安裝日誌紀錄路徑 link預設安裝日誌只出現在 Console 上，考慮到安裝時間過長 IT 人員無法時刻關注安裝過程，我們需要開啟相關日誌設定
-export ANSIBLE_LOG_PATH=/inventory/playbook.log 後面查詢日誌或錯誤時，可以在 /inventory/playbook.log 查詢所有安裝日誌
-修改目標主機 Repository &amp;amp; Firewall 設定 link安裝過程中會需要從部署主機下載安裝套件，需要暫時將節點的套件下載位置指向前面步驟啟動的服務，並暫時關閉防火牆。
-cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa /playbook/offline-repo.yml -v -K -K 等同於 --ask-become-pass，執行時跳出視窗詢問目標節點的 sudo 密碼。 開始安裝 Kubernetes link Kubespray v2.21 v2.22&amp;#43; 舊版本 (i.e v2.21) Kubespary 調整為非 Calico 的 CNI 會出現異常，請加上 --skip-tags=multus
-cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa cluster.yml -v -b -K --skip-tags=multus cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.</description></item><item><title>備份 &amp; 升級</title><link>/zh-hant/docs/getting-started/upgrade/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/getting-started/upgrade/</guid><description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境
-升級前重要事項 link請務必於升級前，按照官方建議備份 etcd 叢集內的資料，避免升級損壞時無法修復
-https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/ 設定日誌紀錄路徑 link預設日誌只出現在 Console 上，考慮到安裝時間過長 IT 人員無法時刻關注安裝過程，我們需要開啟相關日誌設定
-export ANSIBLE_LOG_PATH=/inventory/playbook.log 後面查詢日誌或錯誤時，可以在 /inventory/playbook.log 查詢所有安裝日誌
-設定所需變數 link export HOSTS_FILE=&amp;#34;/inventory/hosts.yml&amp;#34; export KUBE_VERSION=&amp;#34;${KUBE_VERSION}&amp;#34; /inventory/hosts.yml 為參數調整階段所產生的檔案，如有異動請調整成對應的檔名與路徑 KUBE_VERSION請參考步驟獲取正確版本 再次確認是否都有值
-echo $HOSTS_FILE echo $KUBE_VERSION 更新叢集方式 link report 請務必於升級前做好 etcd 備份，避免後續出現異常時無法恢復 全叢集更新 link RHEL 8/9 Others cd /kubespray &amp;amp;&amp;amp; ansible-playbook upgrade-cluster.yml -b -K \ -i ${HOSTS_FILE} \ -e kube_version=${KUBE_VERSION} \ -e rhel_enable_repos=false -K 等同於 --ask-become-pass，執行時跳出視窗詢問目標節點的 sudo 密碼。 -e kube_version 指定 k8s 版本，一定要設定才會更新 k8s 版本。 -e rhel_enable_repos=false 為了 RHEL8 沒啟用 repo 設定的參數，若有啟用可忽略。 cd /kubespray &amp;amp;&amp;amp; ansible-playbook upgrade-cluster.</description></item><item><title>Kubernetes 埠號</title><link>/zh-hant/docs/getting-started/kubernetes-ports/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/getting-started/kubernetes-ports/</guid><description>Control Plane Node link port explain 2379/tcp Client =&amp;gt; ETCD Server 2380/tcp ETCD &amp;lt;=&amp;gt; ETCD 資料互相同步使用 6443/tcp Client =&amp;gt; Client =&amp;gt; Kube Api Server : The Kubernetes API server validates and configures data for the api objects which include pods, services, replicationcontrollers, and others. 10252/tcp Kube Controller Manager : The Kubernetes controller manager is a daemon that embeds the core control loops shipped with Kubernetes. 10251/tcp Kubernetes Scheduler : The Kubernetes scheduler is a policy-rich, topology-aware, workload-specific function that significantly impacts availability, performance, and capacity.</description></item><item><title>通用故障</title><link>/zh-hant/docs/troubleshooting/common/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/troubleshooting/common/</guid><description>指令找不到 kubectl link sudo su -c &amp;#34;echo &amp;#39;export PATH=\${PATH}:/usr/local/bin&amp;#39; &amp;gt;&amp;gt; /root/.bashrc&amp;#34; 目標節點下載失敗 link 下載第一個檔案就失敗 在目標主機上執行 curl [http://&amp;lt;部署主機 IP&amp;gt;/ --output /tmp/trash.bin 檢查 佈署主機 防火牆是否有開通 Port (80 &amp;amp; 35000) 檢查 佈署主機 Nginx &amp;amp; Registry 服務是否有起來 檢查 佈署主機 資料目錄內是否有此對應的檔案 中間某個檔案單獨失敗 檢查檔案是否存在 ${HOME}/outputs/files/ 下確認此檔案是否存在、版本等資訊是否一致 檢查檔案 Hash 值是否正確 執行 Ansible-playbook 時加上 -v, -vvv, -vvvvvv 檢視詳細的除錯資訊，訊息確認比對的 hash 值 Hash 值存放的位置：${kubespray_project}/roles/download/defaults/main.yml 臨時性修復方式：新增 ${kubespray_inventory_dir}/group_vars/all/patch.yml，並且在裡面設定一樣的變數名稱來取代錯誤的 hash 值 此方式新增的變數優先權比 roles/download/defaults/main.yml 高，所以執行時會自動替代掉舊值 NodeLocalDNS CrashLoopBackOff 問題 link此問題通常發生在該節點並未設置上游 DNS 伺服器時。現階段解法如下
-修改 /inventory/group_vars/ks8_cluster/k8s-cluster.yml 內 resolvconf_mode 成 none 移除 /inventory/group_vars/all/all.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kubespray Offline | Srcmesh</title>
+    <link>/zh-hant/</link>
+    <description>Recent content on Kubespray Offline | Srcmesh</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-Hant</language>
+    <lastBuildDate>Fri, 25 Aug 2023 15:52:21 +0100</lastBuildDate>
+    <atom:link href="/zh-hant/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>企業痛點</title>
+      <link>/zh-hant/docs/kubernetes-offline/pain-point/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/kubernetes-offline/pain-point/</guid>
+      <description>潛在隱性成本 link近年各國針對企業的資訊安全越發重視，部分產業 (如金融產業、半導體業、軍工業) 要求內外網隔離甚至 Air Gap 環境&#xA;需要花費大量時間將安裝所需套件、鏡像搬移至內部以實現全離線安裝的需求。 除顯性成本如時間、人力外，企業仍須關注以下議題帶來潛在隱性成本，包含:&#xA;Kubernetes 版本維護 套件相容性測試 安裝包管理與維護 相較於 Kubernetes 生態系蓬勃發展，軟體版本長年保持高頻更新，企業為確保生產環境持續運作，要求基礎設施保持穩定致使更新頻率較低。 最終導致企業難以長期關注潛在風險，使得每次升級都是種挑戰。甚至無法做出正確的版本路線規劃，從而影響服務可用性&#xA;Kubernetes 生命週期 linkKubernetes 一年約更新 3 個版號，每個版本官方提供 450 天上下的維護支援&#xA;由於生態系發展迅速，若與最新版本差異過大將會發生:&#xA;開源軟體不再收到更新支援 沒有修補的 CVE 漏洞 Kubernetes 物件版本落差過大，導致升級困難 通常建議保持在 N-2 的版本，比如最新版本為 1.29，則企業生產環境建議最低版本為 1.27 以確保跟上軟體生態系&#xA;gantt dateFormat YYYY-MM-DD title Kubernetes Release Cycle section Active 1.29.x :active, 1.28, 2023-12-13, 2025-02-28 1.28.x :active, 1.28, 2023-08-15, 2024-10-28 section Maintenance 1.27.x :done, 1.27, 2023-04-11, 2024-06-28 1.26.x :done, 1.26, 2022-12-08, 2024-02-28 section End of Life 1.</description>
+    </item>
+    <item>
+      <title>服務訂閱方案介紹</title>
+      <link>/zh-hant/docs/kubernetes-offline/plan-tiers/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/kubernetes-offline/plan-tiers/</guid>
+      <description>讓企業專注於高價值核心服務，我們是您的最佳後勤人員&#xA;方案介紹 linkKubespray Offline 協助企業解決無暇關注版本異動或投注人力的問題，適合重視資訊安全且有離線安裝需求之企業推出的訂閱制服務&#xA;Community link 離線安裝包 Kubespray * 安裝教學文件 Basic link 離線安裝包 Kubespray * 安裝教學文件 叢集升級路線規劃 工單支援 ** 資安 CVE 通知 Standard link 離線安裝包 Kubespray * 主流開源軟體 安裝教學文件 叢集升級路線規劃 工單支援 ** 資安 CVE 通知 交互式 CLI (2024 Q2) 評估報告 Kubernetes 版本升級影響評估 CVE 影響評估 Premium link 離線安裝包 Kubespray * 主流開源軟體 安裝教學文件 叢集升級路線規劃 工單支援 ** 資安 CVE 通知 交互式 CLI (2024 Q2) 評估報告 Kubernetes 版本升級影響評估 &amp;amp; 解決方案規劃 CVE 影響評估 &amp;amp; 解決方案規劃 客製分支版本維護 指定套件版本 客製化 Patch 管理與修正 方案詳細說明 link發佈週期 link 方案 發佈時間 CVE 緊急版本 描述 Community 12 月 X 最新 3 個 Kubernetes 版本 Basic 6/12 月 O 最新 5 個 Kubernetes 版本 Standard 3/6/9/12 月 O 最新 5 個 Kubernetes 版本 Premium 隨需 O 可指定任意版本 工單支援 link 方案 次數 (每年) 反應時間 Community 0 - Basic 3 1 工作天回覆 Standard 10 工作天內 4 小時回覆 Premium 20 工作天內 2 小時回覆 額外服務項目 link 代客叢集安裝、調試 代客軟體安裝 如為商用軟體，需自行準備原廠授權與安裝腳本。如無腳本需額外洽詢 代客叢集維運 - 5x8、7x24 顧問諮詢服務 客戶技術管理 (TAM) 我們支援的版本 link kubespray 版本 預設 K8s 版本 最低支援 K8S 版本 2.</description>
+    </item>
+    <item>
+      <title>通用故障</title>
+      <link>/zh-hant/docs/troubleshooting/rhel/common/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/troubleshooting/rhel/common/</guid>
+      <description>SSH 超時 linkRHEL 因為預設的設定問題會造成 SSH 超時，建議執行下列指令&#xA;cat &amp;gt; ~/.ssh/config &amp;lt;&amp;lt; EOF GSSAPIAuthentication no GSSAPIDelegateCredentials yes EOF 更多通用故障，請參考連結</description>
+    </item>
+    <item>
+      <title>準備部署環境</title>
+      <link>/zh-hant/docs/getting-started/setup-deploy-enviroment/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/getting-started/setup-deploy-enviroment/</guid>
+      <description>notifications 除「創建部署用帳號」需在全部主機操作外，以下指令皆請於部署主機上進行操作 部署主機安裝 link部署主機將用來執行 Kubespray 的環境，建議專機專用避免受其他外部因素影響。&#xA;名詞解釋 link 部署主機：執行 Kubespray 腳本的主機 目標主機：欲安裝 Kubernetes 的主機 系統要求 link Linux 主機 (VM 即可) 腳本執行環境已經全面容器化，因此部署主機的作業系統可為 Ubuntu、Debian、RHEL，如希望萬無一失則建議採用與目標主機相同之系統 設定過程中會自動安裝 containerd 與 nerdctl 等容器執行環境，若部署主機上已有安裝相關套件，建議移除避免異常 由於套件與鏡像容量較大，建議硬碟空間需 &amp;gt; 100GB 網路要求 link 部署主機與目標主機之間網路需直接連通，不經過任何堡壘機 創建部署用帳號 link需要在每台目標機器建立帳號以供 Kubespray 腳本用來安裝，且該帳號需滿足以下條件&#xA;擁有 sudo 權限 開啟能以 Public Key 登入 產生 SSH Public Key Pair link在部署主機上產生 RSA Key Pair&#xA;if [[ ! -e ~/.ssh/id_rsa.pub &amp;amp;&amp;amp; ! -e ~/.ssh/id_rsa ]]; then ssh-keygen -N &amp;#34;&amp;#34; -t rsa fi 散佈 Public Key link把剛產生的 Public Key 安裝到所有目標主機上</description>
+    </item>
+    <item>
+      <title>啟動 Kubespray 執行環境</title>
+      <link>/zh-hant/docs/getting-started/enter-kubespray-exe-env/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/getting-started/enter-kubespray-exe-env/</guid>
+      <description>notifications 以下指令皆請於部署主機上進行操作 確認版本是否符合相符 link可以透過以下方式確認交付的離線安裝包版本&#xA;# 請注意此時為剛解壓完成的步驟，尚未進入到 Kubespray 容器內 cat config.sh | grep VERSION 會看到類似下面範例輸出&#xA;# 代表基於官方 v2.21.0 分支 (Kubernetes v1.25) 修改後交付的第 1 個版本 KUBESPRAY_VERSION=v2.21.0-1.25-1 # 代表此離線安裝包支援 Kubernetes 版本為 v1.25.16 KUBE_VERSION=v1.25.16 啟動安裝環境 link以下指令將解壓部署腳本，並以容器方式啟動所有安裝過程中所需的服務容器&#xA;cd ${HOME}/outputs/ &amp;amp;&amp;amp; ./extract-kubespray.sh (Optional) 如需手動移除舊有資料 sudo /usr/local/bin/nerdctl rm -f $(sudo /usr/local/bin/nerdctl ps -a -q) sudo /usr/local/bin/nerdctl rmi -f $(sudo /usr/local/bin/nerdctl images -a -q) sudo /usr/local/bin/nerdctl ps -a sudo /usr/local/bin/nerdctl images -a sudo rm -rf ${HOME}/mycluster/ ${HOME}/outputs/ 設定離線安裝之部署 Package Repo 與 Container Registry</description>
+    </item>
+    <item>
+      <title>部署前參數調整</title>
+      <link>/zh-hant/docs/getting-started/config-adjustment/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/getting-started/config-adjustment/</guid>
+      <description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境&#xA;notifications 設定檔只需要在第一次建置時修改同時寫回部署主機上，未來只要執行 ${HOME}/outputs/start-kubespray.sh 就可以自動載入先前所有設定 OS 設定 link請根據目標主機的 OS 選擇對應設定調整&#xA;RHEL Debian 12 進入容器後，RHEL 因為預設的設定問題會造成ssh超時，建議執行下列指令&#xA;cat &amp;gt; ~/.ssh/config &amp;lt;&amp;lt; EOF GSSAPIAuthentication no GSSAPIDelegateCredentials yes EOF 修正 Kubespray 官方設定，補上套件支援&#xA;cat &amp;gt; /kubespray/roles/kubernetes/preinstall/vars/debian-12.yml &amp;lt;&amp;lt; EOF --- required_pkgs: - python3-apt - gnupg - apt-transport-https - software-properties-common - conntrack - iptables - apparmor - libseccomp2 - mergerfs EOF 生成 Inventory 檔 (Optional) link此處我們使用工具來自動生成 Inventory 檔案 (YAML 格式)，如已經有既定的 Inventory 檔亦可使用</description>
+    </item>
+    <item>
+      <title>安裝 &amp; 建置</title>
+      <link>/zh-hant/docs/getting-started/installation/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/getting-started/installation/</guid>
+      <description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境&#xA;/inventory/hosts.yml 為剛剛生成的部署節點設定檔，如你的檔名有變換請調整下面指令 設定安裝日誌紀錄路徑 link預設安裝日誌只出現在 Console 上，考慮到安裝時間過長 IT 人員無法時刻關注安裝過程，我們需要開啟相關日誌設定&#xA;export ANSIBLE_LOG_PATH=/inventory/playbook.log 後面查詢日誌或錯誤時，可以在 /inventory/playbook.log 查詢所有安裝日誌&#xA;修改目標主機 Repository &amp;amp; Firewall 設定 link安裝過程中會需要從部署主機下載安裝套件，需要暫時將節點的套件下載位置指向前面步驟啟動的服務，並暫時關閉防火牆。&#xA;cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa /playbook/offline-repo.yml -v -K -K 等同於 --ask-become-pass，執行時跳出視窗詢問目標節點的 sudo 密碼。 開始安裝 Kubernetes link Kubespray v2.21 v2.22&amp;#43; 舊版本 (i.e v2.21) Kubespary 調整為非 Calico 的 CNI 會出現異常，請加上 --skip-tags=multus&#xA;cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa cluster.yml -v -b -K --skip-tags=multus cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.</description>
+    </item>
+    <item>
+      <title>備份 &amp; 升級</title>
+      <link>/zh-hant/docs/getting-started/upgrade/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/getting-started/upgrade/</guid>
+      <description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境&#xA;升級前重要事項 link請務必於升級前，按照官方建議備份 etcd 叢集內的資料，避免升級損壞時無法修復&#xA;https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/ 設定日誌紀錄路徑 link預設日誌只出現在 Console 上，考慮到安裝時間過長 IT 人員無法時刻關注安裝過程，我們需要開啟相關日誌設定&#xA;export ANSIBLE_LOG_PATH=/inventory/playbook.log 後面查詢日誌或錯誤時，可以在 /inventory/playbook.log 查詢所有安裝日誌&#xA;設定所需變數 link export HOSTS_FILE=&amp;#34;/inventory/hosts.yml&amp;#34; export KUBE_VERSION=&amp;#34;${KUBE_VERSION}&amp;#34; /inventory/hosts.yml 為參數調整階段所產生的檔案，如有異動請調整成對應的檔名與路徑 KUBE_VERSION請參考步驟獲取正確版本 再次確認是否都有值&#xA;echo $HOSTS_FILE echo $KUBE_VERSION 更新叢集方式 link report 請務必於升級前做好 etcd 備份，避免後續出現異常時無法恢復 全叢集更新 link RHEL 8/9 Others cd /kubespray &amp;amp;&amp;amp; ansible-playbook upgrade-cluster.yml -b -K \ -i ${HOSTS_FILE} \ -e kube_version=${KUBE_VERSION} \ -e rhel_enable_repos=false -K 等同於 --ask-become-pass，執行時跳出視窗詢問目標節點的 sudo 密碼。 -e kube_version 指定 k8s 版本，一定要設定才會更新 k8s 版本。 -e rhel_enable_repos=false 為了 RHEL8 沒啟用 repo 設定的參數，若有啟用可忽略。 cd /kubespray &amp;amp;&amp;amp; ansible-playbook upgrade-cluster.</description>
+    </item>
+    <item>
+      <title>Kubernetes 埠號</title>
+      <link>/zh-hant/docs/getting-started/kubernetes-ports/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/getting-started/kubernetes-ports/</guid>
+      <description>Control Plane Node link port explain 2379/tcp Client =&amp;gt; ETCD Server 2380/tcp ETCD &amp;lt;=&amp;gt; ETCD 資料互相同步使用 6443/tcp Client =&amp;gt; Client =&amp;gt; Kube Api Server : The Kubernetes API server validates and configures data for the api objects which include pods, services, replicationcontrollers, and others. 10252/tcp Kube Controller Manager : The Kubernetes controller manager is a daemon that embeds the core control loops shipped with Kubernetes. 10251/tcp Kubernetes Scheduler : The Kubernetes scheduler is a policy-rich, topology-aware, workload-specific function that significantly impacts availability, performance, and capacity.</description>
+    </item>
+    <item>
+      <title>通用故障</title>
+      <link>/zh-hant/docs/troubleshooting/common/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/troubleshooting/common/</guid>
+      <description>指令找不到 kubectl link sudo su -c &amp;#34;echo &amp;#39;export PATH=\${PATH}:/usr/local/bin&amp;#39; &amp;gt;&amp;gt; /root/.bashrc&amp;#34; 目標節點下載失敗 link 下載第一個檔案就失敗 在目標主機上執行 curl [http://&amp;lt;部署主機 IP&amp;gt;/ --output /tmp/trash.bin 檢查 佈署主機 防火牆是否有開通 Port (80 &amp;amp; 35000) 檢查 佈署主機 Nginx &amp;amp; Registry 服務是否有起來 檢查 佈署主機 資料目錄內是否有此對應的檔案 中間某個檔案單獨失敗 檢查檔案是否存在 ${HOME}/outputs/files/ 下確認此檔案是否存在、版本等資訊是否一致 檢查檔案 Hash 值是否正確 執行 Ansible-playbook 時加上 -v, -vvv, -vvvvvv 檢視詳細的除錯資訊，訊息確認比對的 hash 值 Hash 值存放的位置：${kubespray_project}/roles/download/defaults/main.yml 臨時性修復方式：新增 ${kubespray_inventory_dir}/group_vars/all/patch.yml，並且在裡面設定一樣的變數名稱來取代錯誤的 hash 值 此方式新增的變數優先權比 roles/download/defaults/main.yml 高，所以執行時會自動替代掉舊值 NodeLocalDNS CrashLoopBackOff 問題 link此問題通常發生在該節點並未設置上游 DNS 伺服器時。現階段解法如下&#xA;修改 /inventory/group_vars/ks8_cluster/k8s-cluster.yml 內 resolvconf_mode 成 none 移除 /inventory/group_vars/all/all.</description>
+    </item>
+  </channel>
+</rss>

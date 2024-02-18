@@ -1,2 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RedHat on Kubespray Offline | Srcmesh</title><link>/zh-hant/docs/troubleshooting/rhel/</link><description>Recent content in RedHat on Kubespray Offline | Srcmesh</description><generator>Hugo -- gohugo.io</generator><language>zh-Hant</language><lastBuildDate>Fri, 25 Aug 2023 15:52:21 +0100</lastBuildDate><atom:link href="/zh-hant/docs/troubleshooting/rhel/index.xml" rel="self" type="application/rss+xml"/><item><title>通用故障</title><link>/zh-hant/docs/troubleshooting/rhel/common/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/troubleshooting/rhel/common/</guid><description>SSH 超時 linkRHEL 因為預設的設定問題會造成 SSH 超時，建議執行下列指令
-cat &amp;gt; ~/.ssh/config &amp;lt;&amp;lt; EOF GSSAPIAuthentication no GSSAPIDelegateCredentials yes EOF 更多通用故障，請參考連結</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RedHat on Kubespray Offline | Srcmesh</title>
+    <link>/zh-hant/docs/troubleshooting/rhel/</link>
+    <description>Recent content in RedHat on Kubespray Offline | Srcmesh</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-Hant</language>
+    <lastBuildDate>Fri, 25 Aug 2023 15:52:21 +0100</lastBuildDate>
+    <atom:link href="/zh-hant/docs/troubleshooting/rhel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>通用故障</title>
+      <link>/zh-hant/docs/troubleshooting/rhel/common/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/troubleshooting/rhel/common/</guid>
+      <description>SSH 超時 linkRHEL 因為預設的設定問題會造成 SSH 超時，建議執行下列指令&#xA;cat &amp;gt; ~/.ssh/config &amp;lt;&amp;lt; EOF GSSAPIAuthentication no GSSAPIDelegateCredentials yes EOF 更多通用故障，請參考連結</description>
+    </item>
+  </channel>
+</rss>

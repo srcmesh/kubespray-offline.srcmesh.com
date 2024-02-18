@@ -1,21 +1,54 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Getting Started on Kubespray Offline | Srcmesh</title><link>/zh-hant/docs/getting-started/</link><description>Recent content in Getting Started on Kubespray Offline | Srcmesh</description><generator>Hugo -- gohugo.io</generator><language>zh-Hant</language><lastBuildDate>Fri, 25 Aug 2023 15:52:21 +0100</lastBuildDate><atom:link href="/zh-hant/docs/getting-started/index.xml" rel="self" type="application/rss+xml"/><item><title>準備部署環境</title><link>/zh-hant/docs/getting-started/setup-deploy-enviroment/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/getting-started/setup-deploy-enviroment/</guid><description>notifications 除「創建部署用帳號」需在全部主機操作外，以下指令皆請於部署主機上進行操作 部署主機安裝 link部署主機將用來執行 Kubespray 的環境，建議專機專用避免受其他外部因素影響。
-名詞解釋 link 部署主機：執行 Kubespray 腳本的主機 目標主機：欲安裝 Kubernetes 的主機 系統要求 link Linux 主機 (VM 即可) 腳本執行環境已經全面容器化，因此部署主機的作業系統可為 Ubuntu、Debian、RHEL，如希望萬無一失則建議採用與目標主機相同之系統 設定過程中會自動安裝 containerd 與 nerdctl 等容器執行環境，若部署主機上已有安裝相關套件，建議移除避免異常 由於套件與鏡像容量較大，建議硬碟空間需 &amp;gt; 100GB 網路要求 link 部署主機與目標主機之間網路需直接連通，不經過任何堡壘機 創建部署用帳號 link需要在每台目標機器建立帳號以供 Kubespray 腳本用來安裝，且該帳號需滿足以下條件
-擁有 sudo 權限 開啟能以 Public Key 登入 產生 SSH Public Key Pair link在部署主機上產生 RSA Key Pair
-if [[ ! -e ~/.ssh/id_rsa.pub &amp;amp;&amp;amp; ! -e ~/.ssh/id_rsa ]]; then ssh-keygen -N &amp;#34;&amp;#34; -t rsa fi 散佈 Public Key link把剛產生的 Public Key 安裝到所有目標主機上</description></item><item><title>啟動 Kubespray 執行環境</title><link>/zh-hant/docs/getting-started/enter-kubespray-exe-env/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/getting-started/enter-kubespray-exe-env/</guid><description>notifications 以下指令皆請於部署主機上進行操作 確認版本是否符合相符 link可以透過以下方式確認交付的離線安裝包版本
-# 請注意此時為剛解壓完成的步驟，尚未進入到 Kubespray 容器內 cat config.sh | grep VERSION 會看到類似下面範例輸出
-# 代表基於官方 v2.21.0 分支 (Kubernetes v1.25) 修改後交付的第 1 個版本 KUBESPRAY_VERSION=v2.21.0-1.25-1 # 代表此離線安裝包支援 Kubernetes 版本為 v1.25.16 KUBE_VERSION=v1.25.16 啟動安裝環境 link以下指令將解壓部署腳本，並以容器方式啟動所有安裝過程中所需的服務容器
-cd ${HOME}/outputs/ &amp;amp;&amp;amp; ./extract-kubespray.sh (Optional) 如需手動移除舊有資料 sudo /usr/local/bin/nerdctl rm -f $(sudo /usr/local/bin/nerdctl ps -a -q) sudo /usr/local/bin/nerdctl rmi -f $(sudo /usr/local/bin/nerdctl images -a -q) sudo /usr/local/bin/nerdctl ps -a sudo /usr/local/bin/nerdctl images -a sudo rm -rf ${HOME}/mycluster/ ${HOME}/outputs/ 設定離線安裝之部署 Package Repo 與 Container Registry</description></item><item><title>部署前參數調整</title><link>/zh-hant/docs/getting-started/config-adjustment/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/getting-started/config-adjustment/</guid><description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境
-notifications 設定檔只需要在第一次建置時修改同時寫回部署主機上，未來只要執行 ${HOME}/outputs/start-kubespray.sh 就可以自動載入先前所有設定 OS 設定 link請根據目標主機的 OS 選擇對應設定調整
-RHEL Debian 12 進入容器後，RHEL 因為預設的設定問題會造成ssh超時，建議執行下列指令
-cat &amp;gt; ~/.ssh/config &amp;lt;&amp;lt; EOF GSSAPIAuthentication no GSSAPIDelegateCredentials yes EOF 修正 Kubespray 官方設定，補上套件支援
-cat &amp;gt; /kubespray/roles/kubernetes/preinstall/vars/debian-12.yml &amp;lt;&amp;lt; EOF --- required_pkgs: - python3-apt - gnupg - apt-transport-https - software-properties-common - conntrack - iptables - apparmor - libseccomp2 - mergerfs EOF 生成 Inventory 檔 (Optional) link此處我們使用工具來自動生成 Inventory 檔案 (YAML 格式)，如已經有既定的 Inventory 檔亦可使用</description></item><item><title>安裝 &amp; 建置</title><link>/zh-hant/docs/getting-started/installation/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/getting-started/installation/</guid><description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境
-/inventory/hosts.yml 為剛剛生成的部署節點設定檔，如你的檔名有變換請調整下面指令 設定安裝日誌紀錄路徑 link預設安裝日誌只出現在 Console 上，考慮到安裝時間過長 IT 人員無法時刻關注安裝過程，我們需要開啟相關日誌設定
-export ANSIBLE_LOG_PATH=/inventory/playbook.log 後面查詢日誌或錯誤時，可以在 /inventory/playbook.log 查詢所有安裝日誌
-修改目標主機 Repository &amp;amp; Firewall 設定 link安裝過程中會需要從部署主機下載安裝套件，需要暫時將節點的套件下載位置指向前面步驟啟動的服務，並暫時關閉防火牆。
-cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa /playbook/offline-repo.yml -v -K -K 等同於 --ask-become-pass，執行時跳出視窗詢問目標節點的 sudo 密碼。 開始安裝 Kubernetes link Kubespray v2.21 v2.22&amp;#43; 舊版本 (i.e v2.21) Kubespary 調整為非 Calico 的 CNI 會出現異常，請加上 --skip-tags=multus
-cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa cluster.yml -v -b -K --skip-tags=multus cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.</description></item><item><title>備份 &amp; 升級</title><link>/zh-hant/docs/getting-started/upgrade/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/getting-started/upgrade/</guid><description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境
-升級前重要事項 link請務必於升級前，按照官方建議備份 etcd 叢集內的資料，避免升級損壞時無法修復
-https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/ 設定日誌紀錄路徑 link預設日誌只出現在 Console 上，考慮到安裝時間過長 IT 人員無法時刻關注安裝過程，我們需要開啟相關日誌設定
-export ANSIBLE_LOG_PATH=/inventory/playbook.log 後面查詢日誌或錯誤時，可以在 /inventory/playbook.log 查詢所有安裝日誌
-設定所需變數 link export HOSTS_FILE=&amp;#34;/inventory/hosts.yml&amp;#34; export KUBE_VERSION=&amp;#34;${KUBE_VERSION}&amp;#34; /inventory/hosts.yml 為參數調整階段所產生的檔案，如有異動請調整成對應的檔名與路徑 KUBE_VERSION請參考步驟獲取正確版本 再次確認是否都有值
-echo $HOSTS_FILE echo $KUBE_VERSION 更新叢集方式 link report 請務必於升級前做好 etcd 備份，避免後續出現異常時無法恢復 全叢集更新 link RHEL 8/9 Others cd /kubespray &amp;amp;&amp;amp; ansible-playbook upgrade-cluster.yml -b -K \ -i ${HOSTS_FILE} \ -e kube_version=${KUBE_VERSION} \ -e rhel_enable_repos=false -K 等同於 --ask-become-pass，執行時跳出視窗詢問目標節點的 sudo 密碼。 -e kube_version 指定 k8s 版本，一定要設定才會更新 k8s 版本。 -e rhel_enable_repos=false 為了 RHEL8 沒啟用 repo 設定的參數，若有啟用可忽略。 cd /kubespray &amp;amp;&amp;amp; ansible-playbook upgrade-cluster.</description></item><item><title>Kubernetes 埠號</title><link>/zh-hant/docs/getting-started/kubernetes-ports/</link><pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate><guid>/zh-hant/docs/getting-started/kubernetes-ports/</guid><description>Control Plane Node link port explain 2379/tcp Client =&amp;gt; ETCD Server 2380/tcp ETCD &amp;lt;=&amp;gt; ETCD 資料互相同步使用 6443/tcp Client =&amp;gt; Client =&amp;gt; Kube Api Server : The Kubernetes API server validates and configures data for the api objects which include pods, services, replicationcontrollers, and others. 10252/tcp Kube Controller Manager : The Kubernetes controller manager is a daemon that embeds the core control loops shipped with Kubernetes. 10251/tcp Kubernetes Scheduler : The Kubernetes scheduler is a policy-rich, topology-aware, workload-specific function that significantly impacts availability, performance, and capacity.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Getting Started on Kubespray Offline | Srcmesh</title>
+    <link>/zh-hant/docs/getting-started/</link>
+    <description>Recent content in Getting Started on Kubespray Offline | Srcmesh</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-Hant</language>
+    <lastBuildDate>Fri, 25 Aug 2023 15:52:21 +0100</lastBuildDate>
+    <atom:link href="/zh-hant/docs/getting-started/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>準備部署環境</title>
+      <link>/zh-hant/docs/getting-started/setup-deploy-enviroment/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/getting-started/setup-deploy-enviroment/</guid>
+      <description>notifications 除「創建部署用帳號」需在全部主機操作外，以下指令皆請於部署主機上進行操作 部署主機安裝 link部署主機將用來執行 Kubespray 的環境，建議專機專用避免受其他外部因素影響。&#xA;名詞解釋 link 部署主機：執行 Kubespray 腳本的主機 目標主機：欲安裝 Kubernetes 的主機 系統要求 link Linux 主機 (VM 即可) 腳本執行環境已經全面容器化，因此部署主機的作業系統可為 Ubuntu、Debian、RHEL，如希望萬無一失則建議採用與目標主機相同之系統 設定過程中會自動安裝 containerd 與 nerdctl 等容器執行環境，若部署主機上已有安裝相關套件，建議移除避免異常 由於套件與鏡像容量較大，建議硬碟空間需 &amp;gt; 100GB 網路要求 link 部署主機與目標主機之間網路需直接連通，不經過任何堡壘機 創建部署用帳號 link需要在每台目標機器建立帳號以供 Kubespray 腳本用來安裝，且該帳號需滿足以下條件&#xA;擁有 sudo 權限 開啟能以 Public Key 登入 產生 SSH Public Key Pair link在部署主機上產生 RSA Key Pair&#xA;if [[ ! -e ~/.ssh/id_rsa.pub &amp;amp;&amp;amp; ! -e ~/.ssh/id_rsa ]]; then ssh-keygen -N &amp;#34;&amp;#34; -t rsa fi 散佈 Public Key link把剛產生的 Public Key 安裝到所有目標主機上</description>
+    </item>
+    <item>
+      <title>啟動 Kubespray 執行環境</title>
+      <link>/zh-hant/docs/getting-started/enter-kubespray-exe-env/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/getting-started/enter-kubespray-exe-env/</guid>
+      <description>notifications 以下指令皆請於部署主機上進行操作 確認版本是否符合相符 link可以透過以下方式確認交付的離線安裝包版本&#xA;# 請注意此時為剛解壓完成的步驟，尚未進入到 Kubespray 容器內 cat config.sh | grep VERSION 會看到類似下面範例輸出&#xA;# 代表基於官方 v2.21.0 分支 (Kubernetes v1.25) 修改後交付的第 1 個版本 KUBESPRAY_VERSION=v2.21.0-1.25-1 # 代表此離線安裝包支援 Kubernetes 版本為 v1.25.16 KUBE_VERSION=v1.25.16 啟動安裝環境 link以下指令將解壓部署腳本，並以容器方式啟動所有安裝過程中所需的服務容器&#xA;cd ${HOME}/outputs/ &amp;amp;&amp;amp; ./extract-kubespray.sh (Optional) 如需手動移除舊有資料 sudo /usr/local/bin/nerdctl rm -f $(sudo /usr/local/bin/nerdctl ps -a -q) sudo /usr/local/bin/nerdctl rmi -f $(sudo /usr/local/bin/nerdctl images -a -q) sudo /usr/local/bin/nerdctl ps -a sudo /usr/local/bin/nerdctl images -a sudo rm -rf ${HOME}/mycluster/ ${HOME}/outputs/ 設定離線安裝之部署 Package Repo 與 Container Registry</description>
+    </item>
+    <item>
+      <title>部署前參數調整</title>
+      <link>/zh-hant/docs/getting-started/config-adjustment/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/getting-started/config-adjustment/</guid>
+      <description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境&#xA;notifications 設定檔只需要在第一次建置時修改同時寫回部署主機上，未來只要執行 ${HOME}/outputs/start-kubespray.sh 就可以自動載入先前所有設定 OS 設定 link請根據目標主機的 OS 選擇對應設定調整&#xA;RHEL Debian 12 進入容器後，RHEL 因為預設的設定問題會造成ssh超時，建議執行下列指令&#xA;cat &amp;gt; ~/.ssh/config &amp;lt;&amp;lt; EOF GSSAPIAuthentication no GSSAPIDelegateCredentials yes EOF 修正 Kubespray 官方設定，補上套件支援&#xA;cat &amp;gt; /kubespray/roles/kubernetes/preinstall/vars/debian-12.yml &amp;lt;&amp;lt; EOF --- required_pkgs: - python3-apt - gnupg - apt-transport-https - software-properties-common - conntrack - iptables - apparmor - libseccomp2 - mergerfs EOF 生成 Inventory 檔 (Optional) link此處我們使用工具來自動生成 Inventory 檔案 (YAML 格式)，如已經有既定的 Inventory 檔亦可使用</description>
+    </item>
+    <item>
+      <title>安裝 &amp; 建置</title>
+      <link>/zh-hant/docs/getting-started/installation/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/getting-started/installation/</guid>
+      <description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境&#xA;/inventory/hosts.yml 為剛剛生成的部署節點設定檔，如你的檔名有變換請調整下面指令 設定安裝日誌紀錄路徑 link預設安裝日誌只出現在 Console 上，考慮到安裝時間過長 IT 人員無法時刻關注安裝過程，我們需要開啟相關日誌設定&#xA;export ANSIBLE_LOG_PATH=/inventory/playbook.log 後面查詢日誌或錯誤時，可以在 /inventory/playbook.log 查詢所有安裝日誌&#xA;修改目標主機 Repository &amp;amp; Firewall 設定 link安裝過程中會需要從部署主機下載安裝套件，需要暫時將節點的套件下載位置指向前面步驟啟動的服務，並暫時關閉防火牆。&#xA;cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa /playbook/offline-repo.yml -v -K -K 等同於 --ask-become-pass，執行時跳出視窗詢問目標節點的 sudo 密碼。 開始安裝 Kubernetes link Kubespray v2.21 v2.22&amp;#43; 舊版本 (i.e v2.21) Kubespary 調整為非 Calico 的 CNI 會出現異常，請加上 --skip-tags=multus&#xA;cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa cluster.yml -v -b -K --skip-tags=multus cd /kubespray &amp;amp;&amp;amp; ansible-playbook -i /inventory/hosts.</description>
+    </item>
+    <item>
+      <title>備份 &amp; 升級</title>
+      <link>/zh-hant/docs/getting-started/upgrade/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/getting-started/upgrade/</guid>
+      <description>report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考啟動 Kubespray 執行環境&#xA;升級前重要事項 link請務必於升級前，按照官方建議備份 etcd 叢集內的資料，避免升級損壞時無法修復&#xA;https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/ 設定日誌紀錄路徑 link預設日誌只出現在 Console 上，考慮到安裝時間過長 IT 人員無法時刻關注安裝過程，我們需要開啟相關日誌設定&#xA;export ANSIBLE_LOG_PATH=/inventory/playbook.log 後面查詢日誌或錯誤時，可以在 /inventory/playbook.log 查詢所有安裝日誌&#xA;設定所需變數 link export HOSTS_FILE=&amp;#34;/inventory/hosts.yml&amp;#34; export KUBE_VERSION=&amp;#34;${KUBE_VERSION}&amp;#34; /inventory/hosts.yml 為參數調整階段所產生的檔案，如有異動請調整成對應的檔名與路徑 KUBE_VERSION請參考步驟獲取正確版本 再次確認是否都有值&#xA;echo $HOSTS_FILE echo $KUBE_VERSION 更新叢集方式 link report 請務必於升級前做好 etcd 備份，避免後續出現異常時無法恢復 全叢集更新 link RHEL 8/9 Others cd /kubespray &amp;amp;&amp;amp; ansible-playbook upgrade-cluster.yml -b -K \ -i ${HOSTS_FILE} \ -e kube_version=${KUBE_VERSION} \ -e rhel_enable_repos=false -K 等同於 --ask-become-pass，執行時跳出視窗詢問目標節點的 sudo 密碼。 -e kube_version 指定 k8s 版本，一定要設定才會更新 k8s 版本。 -e rhel_enable_repos=false 為了 RHEL8 沒啟用 repo 設定的參數，若有啟用可忽略。 cd /kubespray &amp;amp;&amp;amp; ansible-playbook upgrade-cluster.</description>
+    </item>
+    <item>
+      <title>Kubernetes 埠號</title>
+      <link>/zh-hant/docs/getting-started/kubernetes-ports/</link>
+      <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
+      <guid>/zh-hant/docs/getting-started/kubernetes-ports/</guid>
+      <description>Control Plane Node link port explain 2379/tcp Client =&amp;gt; ETCD Server 2380/tcp ETCD &amp;lt;=&amp;gt; ETCD 資料互相同步使用 6443/tcp Client =&amp;gt; Client =&amp;gt; Kube Api Server : The Kubernetes API server validates and configures data for the api objects which include pods, services, replicationcontrollers, and others. 10252/tcp Kube Controller Manager : The Kubernetes controller manager is a daemon that embeds the core control loops shipped with Kubernetes. 10251/tcp Kubernetes Scheduler : The Kubernetes scheduler is a policy-rich, topology-aware, workload-specific function that significantly impacts availability, performance, and capacity.</description>
+    </item>
+  </channel>
+</rss>

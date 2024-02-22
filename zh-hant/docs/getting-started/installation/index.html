@@ -36,7 +36,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/zh-hant/docs/getting-started/installation/" /><meta property="og:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_15138089089414380660.png"/><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2023-08-25T15:52:21+01:00" />
-<meta property="article:modified_time" content="2024-01-21T13:18:26+08:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta property="article:modified_time" content="2024-02-22T01:47:59+08:00" /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_15138089089414380660.png"/>
 <meta name="twitter:title" content="安裝 &amp; 建置"/>
 <meta name="twitter:description" content="開始安裝 Kubernetes 叢集"/>
@@ -152,12 +152,22 @@
                                     
                                         
                                         
-                                            <li class=" "><a class="sidebar-nested-link" href="/zh-hant/docs/getting-started/enter-kubespray-exe-env/">啟動 Kubespray 執行環境</a></li>
+                                            <li class=" "><a class="sidebar-nested-link" href="/zh-hant/docs/getting-started/enter-kubespray-exe-env-container/">啟動執行環境 (Image 交付)</a></li>
                                         
                                     
                                         
                                         
-                                            <li class=" "><a class="sidebar-nested-link" href="/zh-hant/docs/getting-started/config-adjustment/">部署前參數調整</a></li>
+                                            <li class=" "><a class="sidebar-nested-link" href="/zh-hant/docs/getting-started/enter-kubespray-exe-env/">啟動執行環境 (Tar 交付)</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" "><a class="sidebar-nested-link" href="/zh-hant/docs/getting-started/config-adjustment-container/">部署參數調整 (Image 交付)</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" "><a class="sidebar-nested-link" href="/zh-hant/docs/getting-started/config-adjustment/">部署參數調整 (Tar 交付)</a></li>
                                         
                                     
                                         
@@ -313,7 +323,7 @@
                     </button>
                     <ul class="dropdown-menu text-end">
                         
-    <li><a class="dropdown-item" href="https://nightly--ubiquitous-pudding-8cedc2.netlify.app/zh-hant/docs/troubleshooting/rhel/common/">Nightly</a></li>
+    <li><a class="dropdown-item" href="https://nightly--ubiquitous-pudding-8cedc2.netlify.app/zh-hant/docs/kubernetes-offline/pain-point/">Nightly</a></li>
     
 
     
@@ -463,7 +473,7 @@
   report
   </span></div>
   
-  <div class="w-100"><p>以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考<a data-bs-delay="{&#34;hide&#34;:300,&#34;show&#34;:550}" data-bs-html="true" data-bs-title="<a href='/zh-hant/docs/getting-started/enter-kubespray-exe-env/'><p>GETTING STARTED</p><strong>啟動 Kubespray 執行環境</strong><br>載入所需套件以及啟動 Kubespray 執行環境</a>" data-bs-toggle="tooltip" href="/zh-hant/docs/getting-started/enter-kubespray-exe-env/">啟動 Kubespray 執行環境</a></p>
+  <div class="w-100"><p>以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考<a data-bs-delay="{&#34;hide&#34;:300,&#34;show&#34;:550}" data-bs-html="true" data-bs-title="<a href='/zh-hant/docs/getting-started/enter-kubespray-exe-env/'><p>GETTING STARTED</p><strong>啟動執行環境 (Tar 交付)</strong><br>載入所需套件以及啟動 Kubespray 執行環境</a>" data-bs-toggle="tooltip" href="/zh-hant/docs/getting-started/enter-kubespray-exe-env/">啟動 Kubespray 執行環境</a></p>
 </div>
   </div>
 <ul>
@@ -485,8 +495,9 @@
   
 
   <div class="prism-codeblock ">
-  <pre id="d1ef0c4" class="language- ">
-  <code>export ANSIBLE_LOG_PATH=/inventory/playbook.log</code>
+  <pre id="4c3b394" class="language- ">
+  <code># 以 Image 交付者已經無須設定
+export ANSIBLE_LOG_PATH=/inventory/playbook.log</code>
   </pre>
   </div>
 <p>後面查詢日誌或錯誤時，可以在 <code>/inventory/playbook.log</code> 查詢所有安裝日誌</p>
@@ -506,12 +517,16 @@
   
 
   <div class="prism-codeblock ">
-  <pre id="558fc39" class="language- ">
-  <code>cd /kubespray &amp;&amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa /playbook/offline-repo.yml -v -K</code>
+  <pre id="11b4859" class="language- ">
+  <code>cd /kubespray &amp;&amp; ansible-playbook \
+    -e &#34;unsafe_show_logs=true&#34; -i /inventory/hosts.yml \
+    --private-key /root/.ssh/id_rsa /playbook/offline-repo.yml -v -K</code>
   </pre>
   </div>
 <ul>
-<li><code>-K</code> 等同於 <code>--ask-become-pass</code>，執行時跳出視窗詢問目標節點的 sudo 密碼。</li>
+<li><code>-e unsafe_show_logs=true</code> 部分錯誤訊息需要添加此參數才能印出，建議添加</li>
+<li><code>-v</code> 設定 <code>verbose</code> 等級，如需更多資訊可以設定為 <code>-vvv</code></li>
+<li><code>-K</code> 等同於 <code>--ask-become-pass</code>，執行時跳出視窗詢問目標節點的 sudo 密碼</li>
 </ul>
 <h1 id="開始安裝-kubernetes">開始安裝 Kubernetes <a href="#%e9%96%8b%e5%a7%8b%e5%ae%89%e8%a3%9d-kubernetes" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1>
 <nav>
@@ -525,14 +540,14 @@
 		
 
 		<a class="nav-link  active"
-		   id="eabdfcTab" data-bs-toggle="tab" data-bs-target="#eabdfc"
-		   type="button" role="tab" aria-controls="eabdfc" aria-selected="true">Kubespray v2.21</a>
+		   id="bfadecTab" data-bs-toggle="tab" data-bs-target="#bfadec"
+		   type="button" role="tab" aria-controls="bfadec" aria-selected="true">Kubespray v2.21</a>
 
 		
 
 		<a class="nav-link "
-		   id="acdfbeTab" data-bs-toggle="tab" data-bs-target="#acdfbe"
-		   type="button" role="tab" aria-controls="acdfbe" aria-selected="true">v2.22&#43;</a>
+		   id="efabdcTab" data-bs-toggle="tab" data-bs-target="#efabdc"
+		   type="button" role="tab" aria-controls="efabdc" aria-selected="true">v2.22&#43;</a>
 
 		
 
@@ -548,9 +563,9 @@
 
 
 
-<div class="tab-pane fade show active" id="eabdfc" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="bfadec" role="tabpanel" aria-labelledby="nav-1">
 
-	<p>舊版本 (i.e v2.21) Kubespary 調整為非 <code>Calico</code> 的 CNI 會出現<a href="https://github.com/kubernetes-sigs/kubespray/issues/9703" rel="external" target="_blank">異常<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a>，請加上 <code>--skip-tags=multus</code></p>
+	<p>舊版本 (i.e v2.21) Kubespray 調整為非 <code>Calico</code> 的 CNI 會出現<a href="https://github.com/kubernetes-sigs/kubespray/issues/9703" rel="external" target="_blank">異常<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a>，請加上 <code>--skip-tags=multus</code></p>
 
 
 
@@ -566,8 +581,10 @@
   
 
   <div class="prism-codeblock ">
-  <pre id="60753ff" class="language- ">
-  <code>cd /kubespray &amp;&amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa cluster.yml -v -b -K --skip-tags=multus</code>
+  <pre id="da2f0a2" class="language- ">
+  <code>cd /kubespray &amp;&amp; ansible-playbook \
+    -e &#34;unsafe_show_logs=true&#34; -e &#34;rhel_enable_repos=false&#34; -i /inventory/hosts.yml \
+    --private-key /root/.ssh/id_rsa cluster.yml -v -b -K --skip-tags=multus</code>
   </pre>
   </div>
 
@@ -579,7 +596,7 @@
 
 
 
-<div class="tab-pane fade" id="acdfbe" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="efabdc" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -596,8 +613,10 @@
   
 
   <div class="prism-codeblock ">
-  <pre id="72d86e8" class="language- ">
-  <code>cd /kubespray &amp;&amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa cluster.yml -v -b -K</code>
+  <pre id="85b88dd" class="language- ">
+  <code>cd /kubespray &amp;&amp; ansible-playbook \
+    -e &#34;unsafe_show_logs=true&#34; -e &#34;rhel_enable_repos=false&#34; -i /inventory/hosts.yml \
+    --private-key /root/.ssh/id_rsa cluster.yml -v -b -K</code>
   </pre>
   </div>
 
@@ -607,7 +626,6 @@
 
 </div>
 <ul>
-<li><code>-K</code> 等同於 <code>--ask-become-pass</code>，執行時跳出視窗詢問目標節點的 sudo 密碼。</li>
 <li><code>-b</code> 等同於 <code>--become</code>，強制整個 playbook 都使用 sudo 權限執行。</li>
 </ul>
 <h1 id="復原-aptyum-repository-設定">復原 APT/YUM Repository 設定 <a href="#%e5%be%a9%e5%8e%9f-aptyum-repository-%e8%a8%ad%e5%ae%9a" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><p>恢復<code>目標主機</code>原來的 Package Repository 設定</p>
@@ -626,13 +644,12 @@
   
 
   <div class="prism-codeblock ">
-  <pre id="44fb9e1" class="language- ">
-  <code>cd /kubespray &amp;&amp; ansible-playbook -i /inventory/hosts.yml --private-key /root/.ssh/id_rsa /playbook/online-repo.yml -v -K</code>
+  <pre id="ba60af8" class="language- ">
+  <code>cd /kubespray &amp;&amp; ansible-playbook \
+    -i /inventory/hosts.yml \
+    --private-key /root/.ssh/id_rsa /playbook/online-repo.yml -v -K</code>
   </pre>
   </div>
-<ul>
-<li><code>-K</code> 等同於 <code>--ask-become-pass</code>，執行時跳出視窗詢問目標節點的 sudo 密碼。</li>
-</ul>
 
     </div>
 
@@ -792,7 +809,7 @@
 		<a href="/zh-hant/docs/getting-started/config-adjustment/">
 			<div class="card h-100 my-1">
 				<div class="card-body py-2">
-                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> 部署前參數調整</p>
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> 部署參數調整 (Tar 交付)</p>
 					<p class="card-text ms-2">安裝前的 Kubespray 部署參數調整</p>
 					
 				</div>
@@ -1074,6 +1091,20 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
     
@@ -1122,7 +1153,7 @@
                 href: "\/zh-hant\/docs\/troubleshooting\/rhel\/common\/",
                 title: "通用故障",
                 description: "開始安裝 Kubernetes 叢集",
-                content: "SSH 超時 linkRHEL 因為預設的設定問題會造成 SSH 超時，建議執行下列指令\ncat \u003e ~/.ssh/config \u003c\u003c EOF GSSAPIAuthentication no GSSAPIDelegateCredentials yes EOF 更多通用故障，請參考"
+                content: "SSH 超時 linkRHEL 因為預設的設定問題會造成 SSH 超時，建議執行下列指令\ncat \u003e ~/.ssh/config \u003c\u003c EOF GSSAPIAuthentication no GSSAPIDelegateCredentials no EOF 更多通用故障，請參考"
             }
         );
     index.add(
@@ -1131,7 +1162,7 @@
                 href: "\/zh-hant\/docs\/getting-started\/setup-deploy-enviroment\/",
                 title: "準備部署環境",
                 description: "部署主機環境建置與前置設定",
-                content: " notifications 除「創建部署用帳號」需在全部主機操作外，以下指令皆請於部署主機上進行操作 部署主機安裝 link部署主機將用來執行 Kubespray 的環境，建議專機專用避免受其他外部因素影響。\n名詞解釋 link 部署主機：執行 Kubespray 腳本的主機 目標主機：欲安裝 Kubernetes 的主機 系統要求 link Linux 主機 (VM 即可) 腳本執行環境已經全面容器化，因此部署主機的作業系統可為 Ubuntu、Debian、RHEL，如希望萬無一失則建議採用與目標主機相同之系統 設定過程中會自動安裝 containerd 與 nerdctl 等容器執行環境，若部署主機上已有安裝相關套件，建議移除避免異常 由於套件與鏡像容量較大，建議硬碟空間需 \u003e 100GB 網路要求 link 部署主機與目標主機之間網路需直接連通，不經過任何堡壘機 創建部署用帳號 link需要在每台目標機器建立帳號以供 Kubespray 腳本用來安裝，且該帳號需滿足以下條件\n擁有 sudo 權限 開啟能以 Public Key 登入 產生 SSH Public Key Pair link在部署主機上產生 RSA Key Pair\nif [[ ! -e ~/.ssh/id_rsa.pub \u0026\u0026 ! -e ~/.ssh/id_rsa ]]; then ssh-keygen -N \"\" -t rsa fi 散佈 Public Key link把剛產生的 Public Key 安裝到所有目標主機上\nssh-copy-id @ 解壓縮離線安裝包檔 link將交付的打包檔 output.tar 放置到部署主機的登入帳號之家目錄，並解封至家目錄下\ntar -xf output.tar -C ${HOME}/ cd ${HOME}/outputs/ \u0026\u0026 chmod a+x *.sh "
+                content: " notifications 除「創建部署用帳號」需在全部主機操作外，以下指令皆請於部署主機上進行操作 部署主機安裝 link部署主機將用來執行 Kubespray 的環境，建議專機專用避免受其他外部因素影響。\n名詞解釋 link 部署主機：執行 Kubespray 腳本的主機 目標主機：欲安裝 Kubernetes 的主機 系統要求 link Linux 主機 (VM 即可) 腳本執行環境已經全面容器化，因此部署主機的作業系統可為 Ubuntu、Debian、RHEL，如希望萬無一失則建議採用與目標主機相同之系統 設定過程中會自動安裝 containerd 與 nerdctl 等容器執行環境，若部署主機上已有安裝相關套件，建議移除避免異常 如果為 Image 交付者，若部署主機上已有安裝相關套件，則無須調整 由於套件與鏡像容量較大，建議硬碟空間需 \u003e 100GB 網路要求 link 部署主機與目標主機之間網路需直接連通，不經過任何堡壘機 創建部署用帳號 link需要在每台目標機器建立帳號以供 Kubespray 腳本用來安裝，且該帳號需滿足以下條件\n擁有 sudo 權限 開啟能以 Public Key 登入 產生 SSH Public Key Pair link在部署主機上產生 RSA Key Pair\nif [[ ! -e ~/.ssh/id_rsa.pub \u0026\u0026 ! -e ~/.ssh/id_rsa ]]; then ssh-keygen -N \"\" -t rsa fi 散佈 Public Key link把剛產生的 Public Key 安裝到所有目標主機上\nssh-copy-id @ "
             }
         );
     index.add(
@@ -1146,15 +1177,24 @@
     index.add(
             {
                 id:  7 ,
-                href: "\/zh-hant\/docs\/getting-started\/enter-kubespray-exe-env\/",
-                title: "啟動 Kubespray 執行環境",
+                href: "\/zh-hant\/docs\/getting-started\/enter-kubespray-exe-env-container\/",
+                title: "啟動執行環境 (Image 交付)",
                 description: "載入所需套件以及啟動 Kubespray 執行環境",
-                content: " notifications 以下指令皆請於部署主機上進行操作 確認版本是否符合相符 link可以透過以下方式確認交付的離線安裝包版本\n# 請注意此時為剛解壓完成的步驟，尚未進入到 Kubespray 容器內 cat config.sh | grep VERSION 會看到類似下面範例輸出\n# 代表基於官方 v2.21.0 分支 (Kubernetes v1.25) 修改後交付的第 1 個版本 KUBESPRAY_VERSION=v2.21.0-1.25-1 # 代表此離線安裝包支援 Kubernetes 版本為 v1.25.16 KUBE_VERSION=v1.25.16 啟動安裝環境 link以下指令將解壓部署腳本，並以容器方式啟動所有安裝過程中所需的服務容器\ncd ${HOME}/outputs/ \u0026\u0026 ./extract-kubespray.sh (Optional) 如需手動移除舊有資料 sudo /usr/local/bin/nerdctl rm -f $(sudo /usr/local/bin/nerdctl ps -a -q) sudo /usr/local/bin/nerdctl rmi -f $(sudo /usr/local/bin/nerdctl images -a -q) sudo /usr/local/bin/nerdctl ps -a sudo /usr/local/bin/nerdctl images -a sudo rm -rf ${HOME}/mycluster/ ${HOME}/outputs/ 設定離線安裝之部署 Package Repo 與 Container Registry\n設定遠端 Container Registry link企業內部通常會有用來存放鏡像的 Container Registry (i.e Harbor, Quay)\n需要在部署前將此次所用的到鏡像推送到 Container Registry 儲存，避免後續鏡像因故消失無法重新自遠端下載。\ncd ${HOME}/outputs/ \u0026\u0026 vim config.sh 正式環境部署務必調整以下參數 (測試環境可以略過)\nREGISTRY_HOST=${REGISTRY_HOST:-\"localhost\"} REGISTRY_PORT=${REGISTRY_PORT:-35000} REGISTRY_REPO=${REGISTRY_REPO:-\"\"} REGISTRY_USER=${REGISTRY_USER:-\"\"} REGISTRY_PASSWORD=${REGISTRY_PASSWORD:-\"\"} 啟動相關服務 link report 以下指令會將套件與鏡像進行解壓縮將佔用大量硬碟空間，請務必確保主機上有至少 30GB 以上之空間 cd ${HOME}/outputs/ \u0026\u0026 ./setup-all.sh 自動化腳本內的流程驟說明 (無需手動執行) 設定防火牆 (RHEL)\nsudo firewall-cmd –zone=public –add-port=35000/tcp –permanent sudo firewall-cmd –zone=public –add-service=http –permanent sudo firewall-cmd –reload 安裝 containerd\n載入部署用的映像檔 - nginx / registry / kubespray\n啟動 Nginx\nstart-nginx.sh 在部署主機建立起 Web Service，讓目標主機可以連到此處下載對應的BINARY/DEB/RPM套件。 啟動 Image Registry\nstart-registry.sh 在部署主機建立起 Private Registry，讓目標主機可以連到此處下載對應的 Container Images。 載入 Kubernates Container Images into Local Private Registry\nload-push-all-images.sh 由於上一個步驟只是把 Private Registry 架設起來，裡面是沒有任何 Container Image 可供下載的。此步驟就是把 local 端的 Container Images 全部都匯入。 進入 Kubespray 執行環境 link以下指令會自動化掛載相關的路徑後進入 Kubespray 腳本執行環境的容器內\ncd ${HOME}/outputs/ \u0026\u0026 ./start-kubespray.sh 手動進入方式 最新指令請參考 start-kubespray.sh "
+                content: " report 此份文件是針對使用「Kubespray 容器鏡像」之操作指令 挑選版本 link Image Tag Kubernetes Ver. Kubespray Ver. v2.21.0-1.25.6-e86c0cf0-1 1.25.6 v2.21.0 v2.22.0-1.26.11-71b6fa13-1 1.26.11 v2.22.0 v2.23.0-1.27.7-07e19e54-1 1.27.7 v2.23.0 環境變數 link notifications 以下指令請於部署主機上進行操作 設定檔放置位置 link 沒有設定檔 已經有設定檔 export INVENTORY_DIR=${HOME}/mycluster mkdir -p ${INVENTORY_DIR} export INVENTORY_DIR=/path/to/your/inventory CNI Plugin 安裝位置 link部分情況下，主機上會出現已經 CNI Plugin 已經安裝的情形發生，因此必須宣告 CNI 二進制檔位置\nexport CNI_DIR=/path/to/cni/binary/directory 不知道 CNI 路徑時，請點擊看指令 如果不知道 CNI 二進制檔位置，需分別檢測以下資料夾\ncheck-cni.sh #!/bin/bash folders=( \"/usr/local/libexec/cni\" \"/usr/libexec/cni\" \"/usr/local/lib/cni\" \"/usr/lib/cni\" \"/opt/cni/bin\" ) file_name=\"bridge\" for folder in \"${folders[@]}\"; do file_path=\"$folder/$file_name\" if [[ -f \"$file_path\" ]]; then echo \"export CNI_DIR=$folder\" exit 0 fi done echo \"export CNI_DIR=\" 請複製並執行以下指令後，將會自動宣告 CNI_DIR 環境變數\n$(bash check-cni.sh) 主機 IP 地址 link使用 ip 指令取得主機 IP，如無該指令亦可直接指定\n# 1.2.3.4 僅作為佔位符 (placeholder) 之用，非真實地址 export HOST_IP=$(ip route get 1.2.3.4 | awk '{print $7}' | head -n 1) 進入 Kubespray 執行環境 link啟動執行環境並進入到容器內\n#!/bin/bash sudo /usr/local/bin/nerdctl run -d \\ --mount type=bind,source=\"${HOME}\"/\".ssh\",dst=/root/.ssh \\ --mount type=bind,source=\"${INVENTORY_DIR}\",dst=/inventory \\ -p 80:80 -p 35000:35000 \\ -e HOST_IP=${HOST_IP} \\ --name \"koffline\" $([ ! -z \"${CNI_DIR}\" ] \u0026\u0026 echo \"--cni-path=${CNI_DIR}\") \\ 進入到 Kubespray Offline 容器內\nsudo /usr/local/bin/nerdctl exec -it koffline bash "
             }
         );
     index.add(
             {
                 id:  8 ,
+                href: "\/zh-hant\/docs\/getting-started\/enter-kubespray-exe-env\/",
+                title: "啟動執行環境 (Tar 交付)",
+                description: "載入所需套件以及啟動 Kubespray 執行環境",
+                content: " notifications 以下指令皆請於部署主機上進行操作 解壓縮離線安裝包檔 link將交付的打包檔 output.tar 放置到部署主機的登入帳號之家目錄，並解封至家目錄下\ntar -xf output.tar -C ${HOME}/ cd ${HOME}/outputs/ \u0026\u0026 chmod a+x *.sh 確認版本是否符合相符 link可以透過以下方式確認交付的離線安裝包版本\n# 請注意此時為剛解壓完成的步驟，尚未進入到 Kubespray 容器內 cat config.sh | grep VERSION 會看到類似下面範例輸出\n# 代表基於官方 v2.21.0 分支 (Kubernetes v1.25) 修改後交付的第 1 個版本 KUBESPRAY_VERSION=v2.21.0-1.25-1 # 代表此離線安裝包支援 Kubernetes 版本為 v1.25.16 KUBE_VERSION=v1.25.16 啟動安裝環境 link以下指令將解壓部署腳本，並以容器方式啟動所有安裝過程中所需的服務容器\ncd ${HOME}/outputs/ \u0026\u0026 ./extract-kubespray.sh (Optional) 如需手動移除舊有資料 sudo /usr/local/bin/nerdctl rm -f $(sudo /usr/local/bin/nerdctl ps -a -q) sudo /usr/local/bin/nerdctl rmi -f $(sudo /usr/local/bin/nerdctl images -a -q) sudo /usr/local/bin/nerdctl ps -a sudo /usr/local/bin/nerdctl images -a sudo rm -rf ${HOME}/mycluster/ ${HOME}/outputs/ 設定離線安裝之部署 Package Repo 與 Container Registry\n設定遠端 Container Registry link企業內部通常會有用來存放鏡像的 Container Registry (i.e Harbor, Quay)。爲避免後續鏡像因故消失無法重新自遠端下載。需要在部署前將此次所用的到鏡像推送到 Container Registry 儲存\n正式環境部署務必調整以下參數 (安裝測試環境可以略過)\nexport REGISTRY_HOST=${REGISTRY_HOST:-\"localhost\"} export REGISTRY_PORT=${REGISTRY_PORT:-35000} export REGISTRY_REPO=${REGISTRY_REPO:-\"\"} export REGISTRY_USER=${REGISTRY_USER:-\"\"} export REGISTRY_PASSWORD=${REGISTRY_PASSWORD:-\"\"} CNI Plugin 安裝位置 link部分情況下，主機上會出現已經 CNI Plugin 已經安裝的情形發生，因此必須宣告 CNI 二進制檔位置\nexport CNI_DIR=/path/to/cni/binary/directory 不知道 CNI 路徑時，請點擊看指令 如果不知道 CNI 二進制檔位置，需分別檢測以下資料夾\ncheck-cni.sh #!/bin/bash folders=( \"/usr/local/libexec/cni\" \"/usr/libexec/cni\" \"/usr/local/lib/cni\" \"/usr/lib/cni\" \"/opt/cni/bin\" ) file_name=\"bridge\" for folder in \"${folders[@]}\"; do file_path=\"$folder/$file_name\" if [[ -f \"$file_path\" ]]; then echo \"export CNI_DIR=$folder\" exit 0 fi done echo \"export CNI_DIR=\" 請複製並執行以下指令後，將會自動宣告 CNI_DIR 環境變數\n$(bash check-cni.sh) 啟動相關服務 link report 以下指令會將套件與鏡像進行解壓縮將佔用大量硬碟空間，請務必確保主機上有至少 30GB 以上之空間 cd ${HOME}/outputs/ \u0026\u0026 ./setup-all.sh 自動化腳本內的流程驟說明 (無需手動執行) 設定防火牆 (RHEL)\nsudo firewall-cmd –zone=public –add-port=35000/tcp –permanent sudo firewall-cmd –zone=public –add-service=http –permanent sudo firewall-cmd –reload 安裝 containerd\n載入部署用的映像檔 - nginx / registry / kubespray\n啟動 Nginx\nstart-nginx.sh 在部署主機建立起 Web Service，讓目標主機可以連到此處下載對應的BINARY/DEB/RPM套件。 啟動 Image Registry\nstart-registry.sh 在部署主機建立起 Private Registry，讓目標主機可以連到此處下載對應的 Container Images。 載入 Kubernates Container Images into Local Private Registry\nload-push-all-images.sh 由於上一個步驟只是把 Private Registry 架設起來，裡面是沒有任何 Container Image 可供下載的。此步驟就是把 local 端的 Container Images 全部都匯入。 進入 Kubespray 執行環境 link以下指令會自動化掛載相關的路徑後進入 Kubespray 腳本執行環境的容器內\ncd ${HOME}/outputs/ \u0026\u0026 ./start-kubespray.sh 手動進入方式 最新指令請參考 start-kubespray.sh "
+            }
+        );
+    index.add(
+            {
+                id:  9 ,
                 href: "\/zh-hant\/docs\/troubleshooting\/",
                 title: "Troubleshooting",
                 description: "安裝故障排除手冊",
@@ -1163,16 +1203,25 @@
         );
     index.add(
             {
-                id:  9 ,
-                href: "\/zh-hant\/docs\/getting-started\/config-adjustment\/",
-                title: "部署前參數調整",
+                id:  10 ,
+                href: "\/zh-hant\/docs\/getting-started\/config-adjustment-container\/",
+                title: "部署參數調整 (Image 交付)",
                 description: "安裝前的 Kubespray 部署參數調整",
                 content: " report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考"
             }
         );
     index.add(
             {
-                id:  10 ,
+                id:  11 ,
+                href: "\/zh-hant\/docs\/getting-started\/config-adjustment\/",
+                title: "部署參數調整 (Tar 交付)",
+                description: "安裝前的 Kubespray 部署參數調整",
+                content: " report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考"
+            }
+        );
+    index.add(
+            {
+                id:  12 ,
                 href: "\/zh-hant\/docs\/getting-started\/installation\/",
                 title: "安裝 \u0026 建置",
                 description: "開始安裝 Kubernetes 叢集",
@@ -1181,7 +1230,7 @@
         );
     index.add(
             {
-                id:  11 ,
+                id:  13 ,
                 href: "\/zh-hant\/docs\/getting-started\/upgrade\/",
                 title: "備份 \u0026 升級",
                 description: "開始升級 Kubernetes 叢集",
@@ -1190,7 +1239,7 @@
         );
     index.add(
             {
-                id:  12 ,
+                id:  14 ,
                 href: "\/zh-hant\/docs\/getting-started\/kubernetes-ports\/",
                 title: "Kubernetes 埠號",
                 description: "Kubernetes 所使用到的相關埠號",
@@ -1199,7 +1248,7 @@
         );
     index.add(
             {
-                id:  13 ,
+                id:  15 ,
                 href: "\/zh-hant\/docs\/",
                 title: "Documentation",
                 description: "Explore our guides and examples to deploy your Hugo site using the Lotus Docs theme.",
@@ -1208,7 +1257,7 @@
         );
     index.add(
             {
-                id:  14 ,
+                id:  16 ,
                 href: "\/zh-hant\/docs\/troubleshooting\/common\/",
                 title: "通用故障",
                 description: "開始安裝 Kubernetes 叢集",

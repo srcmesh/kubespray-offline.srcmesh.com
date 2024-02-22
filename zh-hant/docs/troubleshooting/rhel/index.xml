@@ -13,7 +13,7 @@
       <link>/zh-hant/docs/troubleshooting/rhel/common/</link>
       <pubDate>Fri, 25 Aug 2023 15:52:21 +0100</pubDate>
       <guid>/zh-hant/docs/troubleshooting/rhel/common/</guid>
-      <description>SSH 超時 linkRHEL 因為預設的設定問題會造成 SSH 超時，建議執行下列指令&#xA;cat &amp;gt; ~/.ssh/config &amp;lt;&amp;lt; EOF GSSAPIAuthentication no GSSAPIDelegateCredentials yes EOF 更多通用故障，請參考連結</description>
+      <description>SSH 超時 linkRHEL 因為預設的設定問題會造成 SSH 超時，建議執行下列指令&#xA;cat &amp;gt; ~/.ssh/config &amp;lt;&amp;lt; EOF GSSAPIAuthentication no GSSAPIDelegateCredentials no EOF 更多通用故障，請參考連結</description>
     </item>
   </channel>
 </rss>

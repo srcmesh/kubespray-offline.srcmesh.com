@@ -16,7 +16,7 @@
 
 <html lang="zh-Hant"><head>
     <meta charset="utf-8" />
-    <title>部署前參數調整 | Srcmesh</title>
+    <title>部署參數調整 (Tar 交付) | Srcmesh</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="安裝前的 Kubespray 部署參數調整">
     <meta name="keywords" content="Documentation, Hugo, Hugo Theme, Bootstrap" />
@@ -31,14 +31,14 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" crossorigin="use-credentials" href="/site.webmanifest">
-<meta property="og:title" content="部署前參數調整" />
+<meta property="og:title" content="部署參數調整 (Tar 交付)" />
 <meta property="og:description" content="安裝前的 Kubespray 部署參數調整" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/zh-hant/docs/getting-started/config-adjustment/" /><meta property="og:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_11782311640956948487.png"/><meta property="article:section" content="docs" />
+<meta property="og:url" content="/zh-hant/docs/getting-started/config-adjustment/" /><meta property="og:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_1762010178128952198.png"/><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2023-08-25T15:52:21+01:00" />
-<meta property="article:modified_time" content="2024-01-21T13:18:26+08:00" /><meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_11782311640956948487.png"/>
-<meta name="twitter:title" content="部署前參數調整"/>
+<meta property="article:modified_time" content="2024-02-21T09:16:02+08:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_1762010178128952198.png"/>
+<meta name="twitter:title" content="部署參數調整 (Tar 交付)"/>
 <meta name="twitter:description" content="安裝前的 Kubespray 部署參數調整"/>
 
     
@@ -152,12 +152,22 @@
                                     
                                         
                                         
-                                            <li class=" "><a class="sidebar-nested-link" href="/zh-hant/docs/getting-started/enter-kubespray-exe-env/">啟動 Kubespray 執行環境</a></li>
+                                            <li class=" "><a class="sidebar-nested-link" href="/zh-hant/docs/getting-started/enter-kubespray-exe-env-container/">啟動執行環境 (Image 交付)</a></li>
                                         
                                     
                                         
                                         
-                                            <li class="current "><a class="sidebar-nested-link" href="/zh-hant/docs/getting-started/config-adjustment/">部署前參數調整</a></li>
+                                            <li class=" "><a class="sidebar-nested-link" href="/zh-hant/docs/getting-started/enter-kubespray-exe-env/">啟動執行環境 (Tar 交付)</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class=" "><a class="sidebar-nested-link" href="/zh-hant/docs/getting-started/config-adjustment-container/">部署參數調整 (Image 交付)</a></li>
+                                        
+                                    
+                                        
+                                        
+                                            <li class="current "><a class="sidebar-nested-link" href="/zh-hant/docs/getting-started/config-adjustment/">部署參數調整 (Tar 交付)</a></li>
                                         
                                     
                                         
@@ -313,7 +323,7 @@
                     </button>
                     <ul class="dropdown-menu text-end">
                         
-    <li><a class="dropdown-item" href="https://nightly--ubiquitous-pudding-8cedc2.netlify.app/zh-hant/docs/troubleshooting/rhel/common/">Nightly</a></li>
+    <li><a class="dropdown-item" href="https://nightly--ubiquitous-pudding-8cedc2.netlify.app/zh-hant/docs/kubernetes-offline/pain-point/">Nightly</a></li>
     
 
     
@@ -398,7 +408,7 @@
             
         
             <li class="breadcrumb-item text-capitalize active" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                <span itemprop="name">部署前參數調整</span>
+                <span itemprop="name">部署參數調整 (Tar 交付)</span>
                 <meta itemprop="position" content='3' />
             </li>
         
@@ -468,7 +478,7 @@
                                             <div class="mb-0 d-flex">
                                                 
                                                 <h1 class="content-title mb-0">
-                                                    部署前參數調整
+                                                    部署參數調整 (Tar 交付)
                                                     
                                                 </h1>
                                             </div>
@@ -487,7 +497,7 @@
   report
   </span></div>
   
-  <div class="w-100"><p>以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考<a data-bs-delay="{&#34;hide&#34;:300,&#34;show&#34;:550}" data-bs-html="true" data-bs-title="<a href='/zh-hant/docs/getting-started/enter-kubespray-exe-env/'><p>GETTING STARTED</p><strong>啟動 Kubespray 執行環境</strong><br>載入所需套件以及啟動 Kubespray 執行環境</a>" data-bs-toggle="tooltip" href="/zh-hant/docs/getting-started/enter-kubespray-exe-env/">啟動 Kubespray 執行環境</a></p>
+  <div class="w-100"><p>以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考<a data-bs-delay="{&#34;hide&#34;:300,&#34;show&#34;:550}" data-bs-html="true" data-bs-title="<a href='/zh-hant/docs/getting-started/enter-kubespray-exe-env/'><p>GETTING STARTED</p><strong>啟動執行環境 (Tar 交付)</strong><br>載入所需套件以及啟動 Kubespray 執行環境</a>" data-bs-toggle="tooltip" href="/zh-hant/docs/getting-started/enter-kubespray-exe-env/">啟動 Kubespray 執行環境</a></p>
 </div>
   </div>
 
@@ -500,7 +510,7 @@
   
   <div class="w-100">設定檔只需要在第一次建置時修改同時寫回部署主機上，未來只要執行 <code>${HOME}/outputs/start-kubespray.sh</code> 就可以自動載入先前所有設定</div>
   </div></p>
-<h1 id="os-設定">OS 設定 <a href="#os-%e8%a8%ad%e5%ae%9a" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><p>請根據目標主機的 OS 選擇對應設定調整</p>
+<h1 id="os-設定">OS 設定 <a href="#os-%e8%a8%ad%e5%ae%9a" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><p>請根據<code>目標主機的 OS</code> 選擇對應設定調整</p>
 
 <nav>
 	<div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -513,14 +523,14 @@
 		
 
 		<a class="nav-link  active"
-		   id="bfdceaTab" data-bs-toggle="tab" data-bs-target="#bfdcea"
-		   type="button" role="tab" aria-controls="bfdcea" aria-selected="true">RHEL</a>
+		   id="acdefbTab" data-bs-toggle="tab" data-bs-target="#acdefb"
+		   type="button" role="tab" aria-controls="acdefb" aria-selected="true">RHEL</a>
 
 		
 
 		<a class="nav-link "
-		   id="dbacefTab" data-bs-toggle="tab" data-bs-target="#dbacef"
-		   type="button" role="tab" aria-controls="dbacef" aria-selected="true">Debian 12</a>
+		   id="bfadceTab" data-bs-toggle="tab" data-bs-target="#bfadce"
+		   type="button" role="tab" aria-controls="bfadce" aria-selected="true">Debian 12</a>
 
 		
 
@@ -536,7 +546,7 @@
 
 
 
-<div class="tab-pane fade show active" id="bfdcea" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="acdefb" role="tabpanel" aria-labelledby="nav-1">
 
 	<p>進入容器後，RHEL 因為預設的設定問題會造成ssh超時，建議執行下列指令</p>
 
@@ -554,10 +564,10 @@
   
 
   <div class="prism-codeblock ">
-  <pre id="0a0e5bf" class="language- ">
+  <pre id="38c4d95" class="language-bash ">
   <code>cat &gt; ~/.ssh/config &lt;&lt; EOF
 GSSAPIAuthentication no
-GSSAPIDelegateCredentials yes
+GSSAPIDelegateCredentials no
 EOF</code>
   </pre>
   </div>
@@ -570,7 +580,7 @@ EOF</code>
 
 
 
-<div class="tab-pane fade" id="dbacef" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="bfadce" role="tabpanel" aria-labelledby="nav-1">
 
 	<p>修正 Kubespray 官方設定，補上套件支援</p>
 
@@ -588,7 +598,7 @@ EOF</code>
   
 
   <div class="prism-codeblock ">
-  <pre id="ad745ec" class="language- ">
+  <pre id="ad745ec" class="language-bash ">
   <code>cat &gt; /kubespray/roles/kubernetes/preinstall/vars/debian-12.yml &lt;&lt; EOF
 ---
 required_pkgs:
@@ -626,7 +636,7 @@ EOF</code>
   
 
   <div class="prism-codeblock ">
-  <pre id="3620af2" class="language- ">
+  <pre id="3620af2" class="language-bash ">
   <code># Example: declare -a IPS=(192.168.1.2 192.168.1.3 192.168.1.4)
 declare -a IPS=(&lt;target-server-1-IP&gt; &lt;target-server-2-IP&gt; &lt;target-server-3-IP&gt;)
 
@@ -655,7 +665,7 @@ CONFIG_FILE=/inventory/hosts.yml python3 contrib/inventory_builder/inventory.py 
   
 
   <div class="prism-codeblock ">
-  <pre id="f42d642" class="language- ">
+  <pre id="f42d642" class="language-bash ">
   <code>cat &gt; /inventory/hosts.yml &lt;&lt; EOF
 all:
   vars:
@@ -694,7 +704,64 @@ EOF</code>
   </pre>
   </div>
 <h2 id="修改腳本執行時套件下載路徑">修改腳本執行時套件下載路徑 <a href="#%e4%bf%ae%e6%94%b9%e8%85%b3%e6%9c%ac%e5%9f%b7%e8%a1%8c%e6%99%82%e5%a5%97%e4%bb%b6%e4%b8%8b%e8%bc%89%e8%b7%af%e5%be%91" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h2><p>修改 <code>/inventory/group_vars/all/offline.yml</code> 內套件下載位置</p>
-<p>以下為調整指令範例 (請看下面解釋根據實際狀況調整，切勿 Copy/Paste)</p>
+<p>以下為調整指令<strong>範例</strong> (請看下面解釋根據實際狀況調整，切勿 Copy/Paste)</p>
+
+<nav>
+	<div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+		
+		
+		
+		
+
+		
+
+		<a class="nav-link  active"
+		   id="fabecdTab" data-bs-toggle="tab" data-bs-target="#fabecd"
+		   type="button" role="tab" aria-controls="fabecd" aria-selected="true">練習安裝之範例</a>
+
+		
+
+		<a class="nav-link "
+		   id="afcdebTab" data-bs-toggle="tab" data-bs-target="#afcdeb"
+		   type="button" role="tab" aria-controls="afcdeb" aria-selected="true">正式環境</a>
+
+		
+
+	</div>
+</nav>
+
+<div class="tab-content" id="nav-tab-content">
+
+	
+
+
+
+
+
+
+<div class="tab-pane fade show active" id="fabecd" role="tabpanel" aria-labelledby="nav-1">
+
+	
+
+
+
+
+
+
+
+  
+      <div class="prism-shortcode">
+      <pre id="1277ca6" class="language-bash line-numbers"
+        ><code class="language-bash"
+        >`L2`: 請更換為部署主機之 IP
+`L4`-`L6`: 請務必確認 `REGISTRY_HOST` 與 `REGISTRY_PORT` 是否與前面 Container Registry 設定相同
+`L2`-`L17`: 請務必確認 `REGISTRY_REPO` 是否與前面 Container Repository 設定相同
+</code></pre>
+      </div>
+  
+
+
 
 
 
@@ -703,7 +770,95 @@ EOF</code>
 
   
       <div class="prism-shortcode data-line">
-      <pre id="dbe4204" class="language-yml" data-line="2,4-6,12-17" data-start="1"
+      <pre id="d32adb8" class="language-yml" data-line="2,4-6,12-17" data-start="1"
+        ><code class="language-yml"
+        >cat &gt; /inventory/group_vars/all/offline.yml &lt;&lt; EOF
+http_server: &#34;http://&lt;部署主機 IP&gt;&#34;
+
+registry_host: &#34;&lt;REGISTRY_HOST&gt;:&lt;REGISTRY_PORT&gt;&#34;
+containerd_insecure_registries:
+    &#34;&lt;REGISTRY_HOST&gt;:&lt;REGISTRY_PORT&gt;&#34;: &#34;http://&lt;REGISTRY_HOST&gt;:&lt;REGISTRY_PORT&gt;&#34;
+
+files_repo: &#34;{{ http_server }}/files&#34;
+yum_repo: &#34;{{ http_server }}/rpms&#34;
+ubuntu_repo: &#34;{{ http_server }}/debs&#34;
+
+# Registry overrides
+kube_image_repo: &#34;{{ registry_host }}&#34;
+gcr_image_repo: &#34;{{ registry_host }}&#34;
+docker_image_repo: &#34;{{ registry_host }}&#34;
+quay_image_repo: &#34;{{ registry_host }}&#34;
+github_image_repo: &#34;{{ registry_host }}&#34;
+
+# Download URLs: See roles/download/defaults/main.yml of kubespray.
+kubeadm_download_url: &#34;{{ files_repo }}/kubernetes/{{ kube_version }}/kubeadm&#34;
+kubectl_download_url: &#34;{{ files_repo }}/kubernetes/{{ kube_version }}/kubectl&#34;
+kubelet_download_url: &#34;{{ files_repo }}/kubernetes/{{ kube_version }}/kubelet&#34;
+# etcd is optional if you **DON&#39;T** use etcd_deployment=host
+etcd_download_url: &#34;{{ files_repo }}/kubernetes/etcd/etcd-{{ etcd_version }}-linux-amd64.tar.gz&#34;
+cni_download_url: &#34;{{ files_repo }}/kubernetes/cni/cni-plugins-linux-{{ image_arch }}-{{ cni_version }}.tgz&#34;
+crictl_download_url: &#34;{{ files_repo }}/kubernetes/cri-tools/crictl-{{ crictl_version }}-{{ ansible_system | lower }}-{{ image_arch }}.tar.gz&#34;
+# If using Calico
+calicoctl_download_url: &#34;{{ files_repo }}/kubernetes/calico/{{ calico_ctl_version }}/calicoctl-linux-{{ image_arch }}&#34;
+# If using Calico with kdd
+calico_crds_download_url: &#34;{{ files_repo }}/kubernetes/calico/{{ calico_version }}.tar.gz&#34;
+# If using Cilium
+ciliumcli_download_url: &#34;{{ files_repo }}/cilium-linux-{{ image_arch }}.tar.gz&#34;
+
+runc_download_url: &#34;{{ files_repo }}/runc/{{ runc_version }}/runc.{{ image_arch }}&#34;
+nerdctl_download_url: &#34;{{ files_repo }}/nerdctl-{{ nerdctl_version }}-{{ ansible_system | lower }}-{{ image_arch }}.tar.gz&#34;
+containerd_download_url: &#34;{{ files_repo }}/containerd-{{ containerd_version }}-linux-{{ image_arch }}.tar.gz&#34;
+EOF
+
+</code></pre>
+      </div>
+  
+
+
+
+
+</div>
+
+
+
+
+
+
+<div class="tab-pane fade" id="afcdeb" role="tabpanel" aria-labelledby="nav-1">
+
+	
+
+
+
+
+
+
+
+  
+      <div class="prism-shortcode">
+      <pre id="65704b6" class="language-bash line-numbers"
+        ><code class="language-bash"
+        >`L2`: 請更換為公司內部 Container Registry 域名
+`L4`-`L6`: 
+    - 請務必確認 `REGISTRY_HOST` 與 `REGISTRY_PORT` 是否與前面 Registry 設定相同
+    - 如為 `HTTPS` Container Registry 請移除 L4-L6
+`L2`-`L17`:
+    - 請務必確認 `REGISTRY_REPO` 是否與前面 Repository 設定相同
+    - 通常建議為 `library` 的 Repository，例如 `registry.dummy.com/library`
+</code></pre>
+      </div>
+  
+
+
+
+
+
+
+
+
+  
+      <div class="prism-shortcode data-line">
+      <pre id="8668db1" class="language-yml" data-line="2,4-6,12-17" data-start="1"
         ><code class="language-yml"
         >cat &gt; /inventory/group_vars/all/offline.yml &lt;&lt; EOF
 http_server: &#34;http://&lt;部署主機 IP&gt;&#34;
@@ -747,11 +902,13 @@ EOF
       </div>
   
 
-<ul>
-<li><code>L2</code>: 請更換為部署主機之 IP</li>
-<li><code>L4</code>-<code>L6</code>: 請務必確認 <code>REGISTRY_HOST</code> 與 <code>REGISTRY_PORT</code> 是否與<a data-bs-delay="{&#34;hide&#34;:300,&#34;show&#34;:550}" data-bs-html="true" data-bs-title="<a href='/zh-hant/docs/getting-started/enter-kubespray-exe-env/'><p>GETTING STARTED</p><strong>啟動 Kubespray 執行環境</strong><br>載入所需套件以及啟動 Kubespray 執行環境</a>" data-bs-toggle="tooltip" href="/zh-hant/docs/getting-started/enter-kubespray-exe-env/#設定遠端-container-registry">前面 Container Repository 設定相同</a></li>
-<li><code>L2</code>-<code>L17</code>: 請務必確認 <code>REGISTRY_REPO</code> 是否與<a data-bs-delay="{&#34;hide&#34;:300,&#34;show&#34;:550}" data-bs-html="true" data-bs-title="<a href='/zh-hant/docs/getting-started/enter-kubespray-exe-env/'><p>GETTING STARTED</p><strong>啟動 Kubespray 執行環境</strong><br>載入所需套件以及啟動 Kubespray 執行環境</a>" data-bs-toggle="tooltip" href="/zh-hant/docs/getting-started/enter-kubespray-exe-env/#設定遠端-container-registry">前面 Container Repository 設定相同</a>。若為空值，請改為 <code>&quot;{{ registry_host }}&quot;</code></li>
-</ul>
+
+
+
+</div>
+
+
+</div>
 <h1 id="設定-kubernetes-cni">設定 Kubernetes CNI <a href="#%e8%a8%ad%e5%ae%9a-kubernetes-cni" class="anchor" aria-hidden="true"><i class="material-icons align-middle">link</i></a></h1><p>修改 <code>kube_network_plugin</code> 成所需的 CNI</p>
 
 
@@ -784,20 +941,20 @@ EOF
 		
 
 		<a class="nav-link  active"
-		   id="caedbfTab" data-bs-toggle="tab" data-bs-target="#caedbf"
-		   type="button" role="tab" aria-controls="caedbf" aria-selected="true">Cilium</a>
+		   id="fedacbTab" data-bs-toggle="tab" data-bs-target="#fedacb"
+		   type="button" role="tab" aria-controls="fedacb" aria-selected="true">Cilium</a>
 
 		
 
 		<a class="nav-link "
-		   id="cdeafbTab" data-bs-toggle="tab" data-bs-target="#cdeafb"
-		   type="button" role="tab" aria-controls="cdeafb" aria-selected="true">Calico</a>
+		   id="bedfacTab" data-bs-toggle="tab" data-bs-target="#bedfac"
+		   type="button" role="tab" aria-controls="bedfac" aria-selected="true">Calico</a>
 
 		
 
 		<a class="nav-link "
-		   id="bdcafeTab" data-bs-toggle="tab" data-bs-target="#bdcafe"
-		   type="button" role="tab" aria-controls="bdcafe" aria-selected="true">Flannel</a>
+		   id="adecfbTab" data-bs-toggle="tab" data-bs-target="#adecfb"
+		   type="button" role="tab" aria-controls="adecfb" aria-selected="true">Flannel</a>
 
 		
 
@@ -813,7 +970,7 @@ EOF
 
 
 
-<div class="tab-pane fade show active" id="caedbf" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="fedacb" role="tabpanel" aria-labelledby="nav-1">
 
 	<p>主流常見的 eBPF CNI 解決方案，需確認此次安裝版本 <a href="https://docs.cilium.io/en/stable/operations/system_requirements/" rel="external" target="_blank">Linux Kernel<svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M14 5c-.552 0-1-.448-1-1s.448-1 1-1h6c.552 0 1 .448 1 1v6c0 .552-.448 1-1 1s-1-.448-1-1v-3.586l-7.293 7.293c-.391.39-1.024.39-1.414 0-.391-.391-.391-1.024 0-1.414l7.293-7.293h-3.586zm-9 2c-.552 0-1 .448-1 1v11c0 .552.448 1 1 1h11c.552 0 1-.448 1-1v-4.563c0-.552.448-1 1-1s1 .448 1 1v4.563c0 1.657-1.343 3-3 3h-11c-1.657 0-3-1.343-3-3v-11c0-1.657 1.343-3 3-3h4.563c.552 0 1 .448 1 1s-.448 1-1 1h-4.563z"/></svg></a> 是否符合需求</p>
 
@@ -844,7 +1001,7 @@ EOF
 
 
 
-<div class="tab-pane fade" id="cdeafb" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="bedfac" role="tabpanel" aria-labelledby="nav-1">
 
 	<p>Kubespray 官方預設</p>
 
@@ -875,7 +1032,7 @@ EOF
 
 
 
-<div class="tab-pane fade" id="bdcafe" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="adecfb" role="tabpanel" aria-labelledby="nav-1">
 
 	<p>使用時，務必確認所有節點都有設定 <strong>Default Gateway</strong></p>
 
@@ -933,7 +1090,7 @@ EOF
   
 
   <div class="prism-codeblock ">
-  <pre id="47cba66" class="language- ">
+  <pre id="47cba66" class="language-bash ">
   <code>cat &gt;&gt; /inventory/group_vars/all/all.yml &lt;&lt; EOF
 rhel_enable_repos: false
 EOF</code>
@@ -955,7 +1112,7 @@ EOF</code>
   
 
   <div class="prism-codeblock ">
-  <pre id="9d6c016" class="language- ">
+  <pre id="9d6c016" class="language-bash ">
   <code># Can be docker_dns, host_resolvconf or none
 resolvconf_mode: none</code>
   </pre>
@@ -984,8 +1141,8 @@ resolvconf_mode: none</code>
 		
 
 		<a class="nav-link  active"
-		   id="bcdaefTab" data-bs-toggle="tab" data-bs-target="#bcdaef"
-		   type="button" role="tab" aria-controls="bcdaef" aria-selected="true">RHEL</a>
+		   id="dcbfaeTab" data-bs-toggle="tab" data-bs-target="#dcbfae"
+		   type="button" role="tab" aria-controls="dcbfae" aria-selected="true">RHEL</a>
 
 		
 
@@ -1001,7 +1158,7 @@ resolvconf_mode: none</code>
 
 
 
-<div class="tab-pane fade show active" id="bcdaef" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="dcbfae" role="tabpanel" aria-labelledby="nav-1">
 
 	<p>修正 <code>/inventory/group_vars/all/all.yml</code> 改成下列樣式</p>
 
@@ -1019,7 +1176,7 @@ resolvconf_mode: none</code>
   
 
   <div class="prism-codeblock ">
-  <pre id="36a7b7f" class="language- ">
+  <pre id="36a7b7f" class="language-bash ">
   <code>## Upstream dns servers
 upstream_dns_servers: []
 #  - 8.8.8.8
@@ -1188,11 +1345,11 @@ upstream_dns_servers: []
 
 	<div class="row flex-xl-nowrap ">
 	<div class="col-sm-6 pt-2 doc-next">
-		<a href="/zh-hant/docs/getting-started/enter-kubespray-exe-env/">
+		<a href="/zh-hant/docs/getting-started/config-adjustment-container/">
 			<div class="card h-100 my-1">
 				<div class="card-body py-2">
-                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> 啟動 Kubespray 執行環境</p>
-					<p class="card-text ms-2">載入所需套件以及啟動 Kubespray 執行環境</p>
+                    <p class="card-title fs-5 fw-semibold lh-base mb-0"><i class="material-icons align-middle">navigate_before</i> 部署參數調整 (Image 交付)</p>
+					<p class="card-text ms-2">安裝前的 Kubespray 部署參數調整</p>
 					
 				</div>
 			</div>
@@ -1473,6 +1630,20 @@ upstream_dns_servers: []
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
     
@@ -1521,7 +1692,7 @@ upstream_dns_servers: []
                 href: "\/zh-hant\/docs\/troubleshooting\/rhel\/common\/",
                 title: "通用故障",
                 description: "開始安裝 Kubernetes 叢集",
-                content: "SSH 超時 linkRHEL 因為預設的設定問題會造成 SSH 超時，建議執行下列指令\ncat \u003e ~/.ssh/config \u003c\u003c EOF GSSAPIAuthentication no GSSAPIDelegateCredentials yes EOF 更多通用故障，請參考"
+                content: "SSH 超時 linkRHEL 因為預設的設定問題會造成 SSH 超時，建議執行下列指令\ncat \u003e ~/.ssh/config \u003c\u003c EOF GSSAPIAuthentication no GSSAPIDelegateCredentials no EOF 更多通用故障，請參考"
             }
         );
     index.add(
@@ -1530,7 +1701,7 @@ upstream_dns_servers: []
                 href: "\/zh-hant\/docs\/getting-started\/setup-deploy-enviroment\/",
                 title: "準備部署環境",
                 description: "部署主機環境建置與前置設定",
-                content: " notifications 除「創建部署用帳號」需在全部主機操作外，以下指令皆請於部署主機上進行操作 部署主機安裝 link部署主機將用來執行 Kubespray 的環境，建議專機專用避免受其他外部因素影響。\n名詞解釋 link 部署主機：執行 Kubespray 腳本的主機 目標主機：欲安裝 Kubernetes 的主機 系統要求 link Linux 主機 (VM 即可) 腳本執行環境已經全面容器化，因此部署主機的作業系統可為 Ubuntu、Debian、RHEL，如希望萬無一失則建議採用與目標主機相同之系統 設定過程中會自動安裝 containerd 與 nerdctl 等容器執行環境，若部署主機上已有安裝相關套件，建議移除避免異常 由於套件與鏡像容量較大，建議硬碟空間需 \u003e 100GB 網路要求 link 部署主機與目標主機之間網路需直接連通，不經過任何堡壘機 創建部署用帳號 link需要在每台目標機器建立帳號以供 Kubespray 腳本用來安裝，且該帳號需滿足以下條件\n擁有 sudo 權限 開啟能以 Public Key 登入 產生 SSH Public Key Pair link在部署主機上產生 RSA Key Pair\nif [[ ! -e ~/.ssh/id_rsa.pub \u0026\u0026 ! -e ~/.ssh/id_rsa ]]; then ssh-keygen -N \"\" -t rsa fi 散佈 Public Key link把剛產生的 Public Key 安裝到所有目標主機上\nssh-copy-id @ 解壓縮離線安裝包檔 link將交付的打包檔 output.tar 放置到部署主機的登入帳號之家目錄，並解封至家目錄下\ntar -xf output.tar -C ${HOME}/ cd ${HOME}/outputs/ \u0026\u0026 chmod a+x *.sh "
+                content: " notifications 除「創建部署用帳號」需在全部主機操作外，以下指令皆請於部署主機上進行操作 部署主機安裝 link部署主機將用來執行 Kubespray 的環境，建議專機專用避免受其他外部因素影響。\n名詞解釋 link 部署主機：執行 Kubespray 腳本的主機 目標主機：欲安裝 Kubernetes 的主機 系統要求 link Linux 主機 (VM 即可) 腳本執行環境已經全面容器化，因此部署主機的作業系統可為 Ubuntu、Debian、RHEL，如希望萬無一失則建議採用與目標主機相同之系統 設定過程中會自動安裝 containerd 與 nerdctl 等容器執行環境，若部署主機上已有安裝相關套件，建議移除避免異常 如果為 Image 交付者，若部署主機上已有安裝相關套件，則無須調整 由於套件與鏡像容量較大，建議硬碟空間需 \u003e 100GB 網路要求 link 部署主機與目標主機之間網路需直接連通，不經過任何堡壘機 創建部署用帳號 link需要在每台目標機器建立帳號以供 Kubespray 腳本用來安裝，且該帳號需滿足以下條件\n擁有 sudo 權限 開啟能以 Public Key 登入 產生 SSH Public Key Pair link在部署主機上產生 RSA Key Pair\nif [[ ! -e ~/.ssh/id_rsa.pub \u0026\u0026 ! -e ~/.ssh/id_rsa ]]; then ssh-keygen -N \"\" -t rsa fi 散佈 Public Key link把剛產生的 Public Key 安裝到所有目標主機上\nssh-copy-id @ "
             }
         );
     index.add(
@@ -1545,15 +1716,24 @@ upstream_dns_servers: []
     index.add(
             {
                 id:  7 ,
-                href: "\/zh-hant\/docs\/getting-started\/enter-kubespray-exe-env\/",
-                title: "啟動 Kubespray 執行環境",
+                href: "\/zh-hant\/docs\/getting-started\/enter-kubespray-exe-env-container\/",
+                title: "啟動執行環境 (Image 交付)",
                 description: "載入所需套件以及啟動 Kubespray 執行環境",
-                content: " notifications 以下指令皆請於部署主機上進行操作 確認版本是否符合相符 link可以透過以下方式確認交付的離線安裝包版本\n# 請注意此時為剛解壓完成的步驟，尚未進入到 Kubespray 容器內 cat config.sh | grep VERSION 會看到類似下面範例輸出\n# 代表基於官方 v2.21.0 分支 (Kubernetes v1.25) 修改後交付的第 1 個版本 KUBESPRAY_VERSION=v2.21.0-1.25-1 # 代表此離線安裝包支援 Kubernetes 版本為 v1.25.16 KUBE_VERSION=v1.25.16 啟動安裝環境 link以下指令將解壓部署腳本，並以容器方式啟動所有安裝過程中所需的服務容器\ncd ${HOME}/outputs/ \u0026\u0026 ./extract-kubespray.sh (Optional) 如需手動移除舊有資料 sudo /usr/local/bin/nerdctl rm -f $(sudo /usr/local/bin/nerdctl ps -a -q) sudo /usr/local/bin/nerdctl rmi -f $(sudo /usr/local/bin/nerdctl images -a -q) sudo /usr/local/bin/nerdctl ps -a sudo /usr/local/bin/nerdctl images -a sudo rm -rf ${HOME}/mycluster/ ${HOME}/outputs/ 設定離線安裝之部署 Package Repo 與 Container Registry\n設定遠端 Container Registry link企業內部通常會有用來存放鏡像的 Container Registry (i.e Harbor, Quay)\n需要在部署前將此次所用的到鏡像推送到 Container Registry 儲存，避免後續鏡像因故消失無法重新自遠端下載。\ncd ${HOME}/outputs/ \u0026\u0026 vim config.sh 正式環境部署務必調整以下參數 (測試環境可以略過)\nREGISTRY_HOST=${REGISTRY_HOST:-\"localhost\"} REGISTRY_PORT=${REGISTRY_PORT:-35000} REGISTRY_REPO=${REGISTRY_REPO:-\"\"} REGISTRY_USER=${REGISTRY_USER:-\"\"} REGISTRY_PASSWORD=${REGISTRY_PASSWORD:-\"\"} 啟動相關服務 link report 以下指令會將套件與鏡像進行解壓縮將佔用大量硬碟空間，請務必確保主機上有至少 30GB 以上之空間 cd ${HOME}/outputs/ \u0026\u0026 ./setup-all.sh 自動化腳本內的流程驟說明 (無需手動執行) 設定防火牆 (RHEL)\nsudo firewall-cmd –zone=public –add-port=35000/tcp –permanent sudo firewall-cmd –zone=public –add-service=http –permanent sudo firewall-cmd –reload 安裝 containerd\n載入部署用的映像檔 - nginx / registry / kubespray\n啟動 Nginx\nstart-nginx.sh 在部署主機建立起 Web Service，讓目標主機可以連到此處下載對應的BINARY/DEB/RPM套件。 啟動 Image Registry\nstart-registry.sh 在部署主機建立起 Private Registry，讓目標主機可以連到此處下載對應的 Container Images。 載入 Kubernates Container Images into Local Private Registry\nload-push-all-images.sh 由於上一個步驟只是把 Private Registry 架設起來，裡面是沒有任何 Container Image 可供下載的。此步驟就是把 local 端的 Container Images 全部都匯入。 進入 Kubespray 執行環境 link以下指令會自動化掛載相關的路徑後進入 Kubespray 腳本執行環境的容器內\ncd ${HOME}/outputs/ \u0026\u0026 ./start-kubespray.sh 手動進入方式 最新指令請參考 start-kubespray.sh "
+                content: " report 此份文件是針對使用「Kubespray 容器鏡像」之操作指令 挑選版本 link Image Tag Kubernetes Ver. Kubespray Ver. v2.21.0-1.25.6-e86c0cf0-1 1.25.6 v2.21.0 v2.22.0-1.26.11-71b6fa13-1 1.26.11 v2.22.0 v2.23.0-1.27.7-07e19e54-1 1.27.7 v2.23.0 環境變數 link notifications 以下指令請於部署主機上進行操作 設定檔放置位置 link 沒有設定檔 已經有設定檔 export INVENTORY_DIR=${HOME}/mycluster mkdir -p ${INVENTORY_DIR} export INVENTORY_DIR=/path/to/your/inventory CNI Plugin 安裝位置 link部分情況下，主機上會出現已經 CNI Plugin 已經安裝的情形發生，因此必須宣告 CNI 二進制檔位置\nexport CNI_DIR=/path/to/cni/binary/directory 不知道 CNI 路徑時，請點擊看指令 如果不知道 CNI 二進制檔位置，需分別檢測以下資料夾\ncheck-cni.sh #!/bin/bash folders=( \"/usr/local/libexec/cni\" \"/usr/libexec/cni\" \"/usr/local/lib/cni\" \"/usr/lib/cni\" \"/opt/cni/bin\" ) file_name=\"bridge\" for folder in \"${folders[@]}\"; do file_path=\"$folder/$file_name\" if [[ -f \"$file_path\" ]]; then echo \"export CNI_DIR=$folder\" exit 0 fi done echo \"export CNI_DIR=\" 請複製並執行以下指令後，將會自動宣告 CNI_DIR 環境變數\n$(bash check-cni.sh) 主機 IP 地址 link使用 ip 指令取得主機 IP，如無該指令亦可直接指定\n# 1.2.3.4 僅作為佔位符 (placeholder) 之用，非真實地址 export HOST_IP=$(ip route get 1.2.3.4 | awk '{print $7}' | head -n 1) 進入 Kubespray 執行環境 link啟動執行環境並進入到容器內\n#!/bin/bash sudo /usr/local/bin/nerdctl run -d \\ --mount type=bind,source=\"${HOME}\"/\".ssh\",dst=/root/.ssh \\ --mount type=bind,source=\"${INVENTORY_DIR}\",dst=/inventory \\ -p 80:80 -p 35000:35000 \\ -e HOST_IP=${HOST_IP} \\ --name \"koffline\" $([ ! -z \"${CNI_DIR}\" ] \u0026\u0026 echo \"--cni-path=${CNI_DIR}\") \\ 進入到 Kubespray Offline 容器內\nsudo /usr/local/bin/nerdctl exec -it koffline bash "
             }
         );
     index.add(
             {
                 id:  8 ,
+                href: "\/zh-hant\/docs\/getting-started\/enter-kubespray-exe-env\/",
+                title: "啟動執行環境 (Tar 交付)",
+                description: "載入所需套件以及啟動 Kubespray 執行環境",
+                content: " notifications 以下指令皆請於部署主機上進行操作 解壓縮離線安裝包檔 link將交付的打包檔 output.tar 放置到部署主機的登入帳號之家目錄，並解封至家目錄下\ntar -xf output.tar -C ${HOME}/ cd ${HOME}/outputs/ \u0026\u0026 chmod a+x *.sh 確認版本是否符合相符 link可以透過以下方式確認交付的離線安裝包版本\n# 請注意此時為剛解壓完成的步驟，尚未進入到 Kubespray 容器內 cat config.sh | grep VERSION 會看到類似下面範例輸出\n# 代表基於官方 v2.21.0 分支 (Kubernetes v1.25) 修改後交付的第 1 個版本 KUBESPRAY_VERSION=v2.21.0-1.25-1 # 代表此離線安裝包支援 Kubernetes 版本為 v1.25.16 KUBE_VERSION=v1.25.16 啟動安裝環境 link以下指令將解壓部署腳本，並以容器方式啟動所有安裝過程中所需的服務容器\ncd ${HOME}/outputs/ \u0026\u0026 ./extract-kubespray.sh (Optional) 如需手動移除舊有資料 sudo /usr/local/bin/nerdctl rm -f $(sudo /usr/local/bin/nerdctl ps -a -q) sudo /usr/local/bin/nerdctl rmi -f $(sudo /usr/local/bin/nerdctl images -a -q) sudo /usr/local/bin/nerdctl ps -a sudo /usr/local/bin/nerdctl images -a sudo rm -rf ${HOME}/mycluster/ ${HOME}/outputs/ 設定離線安裝之部署 Package Repo 與 Container Registry\n設定遠端 Container Registry link企業內部通常會有用來存放鏡像的 Container Registry (i.e Harbor, Quay)。爲避免後續鏡像因故消失無法重新自遠端下載。需要在部署前將此次所用的到鏡像推送到 Container Registry 儲存\n正式環境部署務必調整以下參數 (安裝測試環境可以略過)\nexport REGISTRY_HOST=${REGISTRY_HOST:-\"localhost\"} export REGISTRY_PORT=${REGISTRY_PORT:-35000} export REGISTRY_REPO=${REGISTRY_REPO:-\"\"} export REGISTRY_USER=${REGISTRY_USER:-\"\"} export REGISTRY_PASSWORD=${REGISTRY_PASSWORD:-\"\"} CNI Plugin 安裝位置 link部分情況下，主機上會出現已經 CNI Plugin 已經安裝的情形發生，因此必須宣告 CNI 二進制檔位置\nexport CNI_DIR=/path/to/cni/binary/directory 不知道 CNI 路徑時，請點擊看指令 如果不知道 CNI 二進制檔位置，需分別檢測以下資料夾\ncheck-cni.sh #!/bin/bash folders=( \"/usr/local/libexec/cni\" \"/usr/libexec/cni\" \"/usr/local/lib/cni\" \"/usr/lib/cni\" \"/opt/cni/bin\" ) file_name=\"bridge\" for folder in \"${folders[@]}\"; do file_path=\"$folder/$file_name\" if [[ -f \"$file_path\" ]]; then echo \"export CNI_DIR=$folder\" exit 0 fi done echo \"export CNI_DIR=\" 請複製並執行以下指令後，將會自動宣告 CNI_DIR 環境變數\n$(bash check-cni.sh) 啟動相關服務 link report 以下指令會將套件與鏡像進行解壓縮將佔用大量硬碟空間，請務必確保主機上有至少 30GB 以上之空間 cd ${HOME}/outputs/ \u0026\u0026 ./setup-all.sh 自動化腳本內的流程驟說明 (無需手動執行) 設定防火牆 (RHEL)\nsudo firewall-cmd –zone=public –add-port=35000/tcp –permanent sudo firewall-cmd –zone=public –add-service=http –permanent sudo firewall-cmd –reload 安裝 containerd\n載入部署用的映像檔 - nginx / registry / kubespray\n啟動 Nginx\nstart-nginx.sh 在部署主機建立起 Web Service，讓目標主機可以連到此處下載對應的BINARY/DEB/RPM套件。 啟動 Image Registry\nstart-registry.sh 在部署主機建立起 Private Registry，讓目標主機可以連到此處下載對應的 Container Images。 載入 Kubernates Container Images into Local Private Registry\nload-push-all-images.sh 由於上一個步驟只是把 Private Registry 架設起來，裡面是沒有任何 Container Image 可供下載的。此步驟就是把 local 端的 Container Images 全部都匯入。 進入 Kubespray 執行環境 link以下指令會自動化掛載相關的路徑後進入 Kubespray 腳本執行環境的容器內\ncd ${HOME}/outputs/ \u0026\u0026 ./start-kubespray.sh 手動進入方式 最新指令請參考 start-kubespray.sh "
+            }
+        );
+    index.add(
+            {
+                id:  9 ,
                 href: "\/zh-hant\/docs\/troubleshooting\/",
                 title: "Troubleshooting",
                 description: "安裝故障排除手冊",
@@ -1562,16 +1742,25 @@ upstream_dns_servers: []
         );
     index.add(
             {
-                id:  9 ,
-                href: "\/zh-hant\/docs\/getting-started\/config-adjustment\/",
-                title: "部署前參數調整",
+                id:  10 ,
+                href: "\/zh-hant\/docs\/getting-started\/config-adjustment-container\/",
+                title: "部署參數調整 (Image 交付)",
                 description: "安裝前的 Kubespray 部署參數調整",
                 content: " report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考"
             }
         );
     index.add(
             {
-                id:  10 ,
+                id:  11 ,
+                href: "\/zh-hant\/docs\/getting-started\/config-adjustment\/",
+                title: "部署參數調整 (Tar 交付)",
+                description: "安裝前的 Kubespray 部署參數調整",
+                content: " report 以下指令操作請在佈署主機上的 Kubespray Container 內執行，如不知道如何進行請參考"
+            }
+        );
+    index.add(
+            {
+                id:  12 ,
                 href: "\/zh-hant\/docs\/getting-started\/installation\/",
                 title: "安裝 \u0026 建置",
                 description: "開始安裝 Kubernetes 叢集",
@@ -1580,7 +1769,7 @@ upstream_dns_servers: []
         );
     index.add(
             {
-                id:  11 ,
+                id:  13 ,
                 href: "\/zh-hant\/docs\/getting-started\/upgrade\/",
                 title: "備份 \u0026 升級",
                 description: "開始升級 Kubernetes 叢集",
@@ -1589,7 +1778,7 @@ upstream_dns_servers: []
         );
     index.add(
             {
-                id:  12 ,
+                id:  14 ,
                 href: "\/zh-hant\/docs\/getting-started\/kubernetes-ports\/",
                 title: "Kubernetes 埠號",
                 description: "Kubernetes 所使用到的相關埠號",
@@ -1598,7 +1787,7 @@ upstream_dns_servers: []
         );
     index.add(
             {
-                id:  13 ,
+                id:  15 ,
                 href: "\/zh-hant\/docs\/",
                 title: "Documentation",
                 description: "Explore our guides and examples to deploy your Hugo site using the Lotus Docs theme.",
@@ -1607,7 +1796,7 @@ upstream_dns_servers: []
         );
     index.add(
             {
-                id:  14 ,
+                id:  16 ,
                 href: "\/zh-hant\/docs\/troubleshooting\/common\/",
                 title: "通用故障",
                 description: "開始安裝 Kubernetes 叢集",

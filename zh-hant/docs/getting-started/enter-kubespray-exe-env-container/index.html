@@ -36,7 +36,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/zh-hant/docs/getting-started/enter-kubespray-exe-env-container/" /><meta property="og:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_8453493430453097478.png"/><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2023-08-25T15:52:21+01:00" />
-<meta property="article:modified_time" content="2024-02-22T01:47:59+08:00" /><meta name="twitter:card" content="summary_large_image"/>
+<meta property="article:modified_time" content="2024-02-24T12:53:14+08:00" /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="/opengraph/card-base-2_hu06b1a92291a380a0d2e0ec03dab66b2f_17642_filter_8453493430453097478.png"/>
 <meta name="twitter:title" content="啟動執行環境 (Image 交付)"/>
 <meta name="twitter:description" content="載入所需套件以及啟動 Kubespray 執行環境"/>
@@ -323,7 +323,7 @@
                     </button>
                     <ul class="dropdown-menu text-end">
                         
-    <li><a class="dropdown-item" href="https://nightly--ubiquitous-pudding-8cedc2.netlify.app/zh-hant/docs/kubernetes-offline/pain-point/">Nightly</a></li>
+    <li><a class="dropdown-item" href="https://nightly--ubiquitous-pudding-8cedc2.netlify.app/zh-hant/docs/getting-started/setup-deploy-enviroment/">Nightly</a></li>
     
 
     
@@ -492,7 +492,7 @@
 
 
 
-<table class="table table-sm table-striped">
+<table class="table table-responsive table-striped">
 <thead>
 <tr>
 <th>Image Tag</th>
@@ -541,14 +541,14 @@
 		
 
 		<a class="nav-link  active"
-		   id="cdbeafTab" data-bs-toggle="tab" data-bs-target="#cdbeaf"
-		   type="button" role="tab" aria-controls="cdbeaf" aria-selected="true">沒有設定檔</a>
+		   id="fbaedcTab" data-bs-toggle="tab" data-bs-target="#fbaedc"
+		   type="button" role="tab" aria-controls="fbaedc" aria-selected="true">沒有設定檔</a>
 
 		
 
 		<a class="nav-link "
-		   id="fecadbTab" data-bs-toggle="tab" data-bs-target="#fecadb"
-		   type="button" role="tab" aria-controls="fecadb" aria-selected="true">已經有設定檔</a>
+		   id="fcedbaTab" data-bs-toggle="tab" data-bs-target="#fcedba"
+		   type="button" role="tab" aria-controls="fcedba" aria-selected="true">已經有設定檔</a>
 
 		
 
@@ -564,7 +564,7 @@
 
 
 
-<div class="tab-pane fade show active" id="cdbeaf" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade show active" id="fbaedc" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -595,7 +595,7 @@ mkdir -p ${INVENTORY_DIR}</code>
 
 
 
-<div class="tab-pane fade" id="fecadb" role="tabpanel" aria-labelledby="nav-1">
+<div class="tab-pane fade" id="fcedba" role="tabpanel" aria-labelledby="nav-1">
 
 	
 
@@ -1251,7 +1251,7 @@ sudo /usr/local/bin/nerdctl run -d \
                 href: "\/zh-hant\/docs\/kubernetes-offline\/plan-tiers\/",
                 title: "服務訂閱方案介紹",
                 description: "Kubespray-Offline 服務訂閱介紹",
-                content: " 讓企業專注於高價值核心任務，我們是您的最佳後勤人員\n方案介紹 linkKubespray Offline 協助企業解決無暇關注版本異動或投注人力的問題，適合重視資訊安全且有離線安裝需求之企業推出的訂閱制服務\nCommunity link 離線安裝包 Kubespray * 安裝教學文件 Basic link 離線安裝包 Kubespray * 安裝教學文件 叢集升級路線規劃 工單支援 ** 資安 CVE 通知 Standard link 離線安裝包 Kubespray * 主流開源軟體 安裝教學文件 叢集升級路線規劃 工單支援 ** 資安 CVE 通知 交互式 CLI (2024 Q2) 評估報告 Kubernetes 版本升級影響評估 CVE 影響評估 Premium link 離線安裝包 Kubespray * 主流開源軟體 安裝教學文件 叢集升級路線規劃 工單支援 ** 資安 CVE 通知 交互式 CLI (2024 Q2) 評估報告 Kubernetes 版本升級影響評估 \u0026 解決方案規劃 CVE 影響評估 \u0026 解決方案規劃 客製分支版本維護 指定套件版本 客製化 Patch 管理與修正 方案詳細說明 link發佈週期 link 方案 固定發佈週期 CVE 緊急發佈 支援 Linux 發行版 描述 Community 12 月 X Ubuntu/Debian 最新 3 個 Kubernetes 版本 Basic 6/12 月 O Ubuntu/Debian/CentOS 最新 3 個 Kubernetes 版本 Standard 3/6/9/12 月 O Ubuntu/Debian/CentOS/RHEL 最新 5 個 Kubernetes 版本 Premium 隨需 O Ubuntu/Debian/CentOS/RHEL/Other 可指定任意版本 工單支援 link 方案 次數 (年) 反應時間 Community 0 - Basic 3 1 工作天內回覆 Standard 10 工作天內 4 小時回覆 Premium 20 工作天內 2 小時回覆 額外服務項目 link 代客叢集安裝、調試 代客軟體安裝 如為商用軟體，需自行準備原廠授權與安裝腳本。如無腳本需額外洽詢 代客叢集維運 - 5x8、7x24 顧問諮詢服務 客戶技術管理 (TAM) 我們支援的版本 link kubespray 版本 預設 K8s 版本 最低支援 K8S 版本 2.24.x 1.28.x 1.26.0 2.23.x 1.27.x 1.25.0 2.22.x 1.26.x 1.24.0 如希望支援版本未列在其中，您將需要訂閱 Premium 方案以獲得客製化服務\n如有相關需求，請來信洽詢 sales@srcmesh.com\n"
+                content: " 讓企業專注於高價值核心任務，我們是您的最佳後勤人員\n方案介紹 link協助企業解決無暇關注版本異動或投注人力的問題，適合重視資訊安全且有離線安裝需求之企業推出的訂閱制服務\n服務項目 社群 基礎 標準 高級 離線安裝鏡像 O O O O 安裝教學文件 O O O O 叢集升級路線規劃 X O O O 工單支援 X O O O 資安 CVE 通知 X O O O 交互式 CLI (2024 Q2) X X O O Kubernetes 版本升級 - 影響評估 X X O O CVE - 影響評估 X X O O Kubernetes 版本升級 - 解決方案規劃 X X X O CVE - 解決方案規劃 X X X O 客製分支版本維護 X X X O 發佈週期 link 方案 固定發佈週期 CVE 緊急發佈 支援 Linux 發行版 描述 Community 12 月 X Ubuntu/Debian 最新 3 個 Kubernetes 版本 Basic 6/12 月 O Ubuntu/Debian/CentOS 最新 3 個 Kubernetes 版本 Standard 3/6/9/12 月 O Ubuntu/Debian/CentOS/RHEL 最新 5 個 Kubernetes 版本 Premium 隨需 O Ubuntu/Debian/CentOS/RHEL/Other 可指定任意版本 工單支援 link 方案 次數 (年) 反應時間 Community 0 - Basic 3 1 工作天內回覆 Standard 10 工作天內 4 小時回覆 Premium 20 工作天內 2 小時回覆 額外服務項目 link 代客叢集安裝、調試 代客軟體安裝 如為商用軟體，需自行準備原廠授權與安裝腳本。如無腳本需額外洽詢 代客叢集維運 - 5x8、7x24 顧問諮詢服務 客戶技術管理 (TAM) 我們支援的版本 link kubespray 版本 預設 K8s 版本 最低支援 K8S 版本 2.24.x 1.28.x 1.26.0 2.23.x 1.27.x 1.25.0 2.22.x 1.26.x 1.24.0 如希望支援版本未列在其中，您將需要訂閱 Premium 方案以獲得客製化服務\n如有相關需求，請來信洽詢 sales@srcmesh.com\n"
             }
         );
     index.add(
